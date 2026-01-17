@@ -6,7 +6,9 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #fff;
+  color: #111;
 }
 
 /* Navbar */
@@ -14,9 +16,10 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #111;
-  color: white;
   z-index: 1000;
+  background-color: #111;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .nav-container {
@@ -26,12 +29,34 @@ body {
   padding: 1rem 2rem;
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 1.5rem;
+/* Logo with profile circle */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Menu toggle (hamburger) */
+.profile-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fff;
+  flex-shrink: 0;
+}
+
+.profile-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Hamburger menu */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -47,13 +72,14 @@ body {
   transition: 0.3s;
 }
 
-/* Rotate hamburger when open */
 .menu-toggle.open span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
+
 .menu-toggle.open span:nth-child(2) {
   opacity: 0;
 }
+
 .menu-toggle.open span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
@@ -70,14 +96,13 @@ body {
   transition: color 0.3s;
 }
 
-.nav-links li:hover,
 .nav-links li.active {
-  color: #f39c12;
+  color: #888; /* subtle gray highlight for active section */
 }
 
 /* Sections */
 main {
-  padding-top: 80px; /* space for navbar */
+  padding-top: 80px;
 }
 
 section {
@@ -87,17 +112,18 @@ section {
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  border-bottom: 1px solid #ccc;
 }
 
 h1 {
   margin-bottom: 1rem;
+  font-size: 2.5rem;
 }
 
 p {
   max-width: 600px;
   text-align: center;
   line-height: 1.6;
+  font-size: 1.1rem;
 }
 
 /* Responsive: Mobile */
@@ -121,5 +147,9 @@ p {
 
   .nav-links.active {
     display: flex;
+  }
+
+  .nav-links li {
+    font-size: 1.2rem;
   }
 }
