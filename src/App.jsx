@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [active, setActive] = useState("work");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleNavClick = (section) => {
+    setActive(section);
+    setMenuOpen(false); 
+    const el = document.getElementById(section);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const sections = ["work", "about", "contact", "resume"];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <nav className="navbar">
+        <div className="nav-container">
+          <div className="logo">Goran Milosevic</div>
+          <div
+            className={`menu-toggle ${menuOpen ? "open" : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+            {sections.map((section) => (
+              <li
+                key={section}
+                className={active === section ? "active" : ""}
+                onClick={() => handleNavClick(section)}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      <main>
+        {sections.map((section) => (
+          <section key={section} id={section}>
+            <h1>{section.charAt(0).toUpperCase() + section.slice(1)}</h1>
+            <p>Placeholder content for {section} section.</p>
+          </section>
+        ))}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
