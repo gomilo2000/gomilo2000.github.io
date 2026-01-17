@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import profilePic from "./assets/profile.jpg";
 
 function App() {
   const sections = ["work", "about", "contact", "resume"];
   const [active, setActive] = useState("work");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const navRefs = useRef({});
+  const indicatorRef = useRef(null);
 
-  // Scroll listener to update active section
+  // Update active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight / 3;
+      const scrollPos = window.scrollY + window.innerHeight / 2;
       for (let section of sections) {
         const el = document.getElementById(section);
         if (el) {
@@ -22,15 +23,24 @@ function App() {
         }
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Animate the active indicator
+  useEffect(() => {
+    const el = navRefs.current[active];
+    const indicator = indicatorRef.current;
+    if (el && indicator) {
+      const { offsetLeft, offsetWidth } = el;
+      indicator.style.transform = `translateX(${offsetLeft}px)`;
+      indicator.style.width = `${offsetWidth}px`;
+    }
+  }, [active]);
+
   const handleNavClick = (section) => {
     const el = document.getElementById(section);
     if (el) el.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
   };
 
   return (
@@ -44,35 +54,33 @@ function App() {
             <div className="name">Goran Milosevic</div>
           </div>
 
-          <div
-            className={`menu-toggle ${menuOpen ? "open" : ""}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
+          <div className="nav-links-container">
+            <ul className="nav-links">
+              {sections.map((section) => (
+                <li
+                  key={section}
+                  ref={(el) => (navRefs.current[section] = el)}
+                  className={active === section ? "active" : ""}
+                  onClick={() => handleNavClick(section)}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </li>
+              ))}
+            </ul>
+            <div className="nav-indicator" ref={indicatorRef}></div>
           </div>
-
-          <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-            {sections.map((section) => (
-              <li
-                key={section}
-                className={active === section ? "active" : ""}
-                onClick={() => handleNavClick(section)}
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </li>
-            ))}
-          </ul>
         </div>
       </nav>
 
       <main>
         {sections.map((section) => (
           <section key={section} id={section}>
-            <h1>{section.charAt(0).toUpperCase() + section.slice(1)}</h1>
-            <p>Placeholder content for {section} section.</p>
+            <div className="section-content">
+              <h1>{section.charAt(0).toUpperCase() + section.slice(1)}</h1>
+              <p>
+                This is placeholder content for the {section} section.
+              </p>
+            </div>
           </section>
         ))}
       </main>

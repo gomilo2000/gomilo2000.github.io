@@ -17,31 +17,28 @@ body {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #111;
-  color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  background-color: #fff; 
+  padding: 1rem 2.5rem;
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
 }
 
 /* Logo with profile circle */
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .profile-circle {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   overflow: hidden;
-  background-color: #fff;
   flex-shrink: 0;
 }
 
@@ -53,56 +50,51 @@ body {
 
 .name {
   font-weight: bold;
-  font-size: 1.2rem;
-}
-
-/* Hamburger menu */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.menu-toggle span {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background: white;
-  transition: 0.3s;
-}
-
-.menu-toggle.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.menu-toggle.open span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  font-size: 1.3rem;
+  color: #111;
 }
 
 /* Nav links */
+.nav-links-container {
+  position: relative;
+}
+
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .nav-links li {
   cursor: pointer;
-  transition: color 0.3s;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  color: #111;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-links li.active {
-  color: #888; /* subtle gray highlight for active section */
+  color: #fff;
 }
 
-/* Sections */
+/* Sliding indicator */
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  background-color: #111;
+  border-radius: 6px;
+  z-index: 0;
+  transition: transform 0.3s ease, width 0.3s ease;
+  pointer-events: none;
+}
+
+/* Main content */
 main {
-  padding-top: 80px;
+  padding-top: 100px; /* space for navbar */
 }
 
 section {
@@ -110,7 +102,6 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   padding: 2rem;
 }
 
@@ -121,35 +112,19 @@ h1 {
 
 p {
   max-width: 600px;
-  text-align: center;
   line-height: 1.6;
   font-size: 1.1rem;
+  color: #111;
 }
 
-/* Responsive: Mobile */
+/* Responsive */
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
-
   .nav-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: #111;
-    flex-direction: column;
-    align-items: center;
     gap: 1rem;
-    padding: 1rem 0;
-    display: none;
-  }
-
-  .nav-links.active {
-    display: flex;
   }
 
   .nav-links li {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    padding: 0.5rem 0.8rem;
   }
 }
