@@ -1,34 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 import profilePic from "./assets/profile.jpg";
 
 function App() {
-  const sections = ["work", "about", "contact", "resume"];
-  const [active, setActive] = useState("work");
-  const navRefs = useRef({});
+  const sections = ["WORK", "ABOUT", "CONTACT", "RESUME"];
+  const [active, setActive] = useState(0);
+  const navRefs = useRef([]);
   const indicatorRef = useRef(null);
 
-  // Update active section on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight / 2;
-      for (let section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const offsetTop = el.offsetTop;
-          const offsetHeight = el.offsetHeight;
-          if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
-            setActive(section);
-          }
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Animate the active indicator
-  useEffect(() => {
+  // Update indicator position and width
+  const updateIndicator = () => {
     const el = navRefs.current[active];
     const indicator = indicatorRef.current;
     if (el && indicator) {
@@ -36,34 +17,66 @@ function App() {
       indicator.style.transform = `translateX(${offsetLeft}px)`;
       indicator.style.width = `${offsetWidth}px`;
     }
-  }, [active]);
-
-  const handleNavClick = (section) => {
-    const el = document.getElementById(section);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Scroll to section
+  const handleClick = (index) => {
+    setActive(index);
+    const sectionEl = document.getElementById(sections[index]);
+    if (sectionEl) {
+      sectionEl.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Update indicator on active change
+  useEffect(() => {
+    updateIndicator();
+  }, [active]);
+
+  // Update indicator on window resize
+  useEffect(() => {
+    window.addEventListener("resize", updateIndicator);
+    return () => window.removeEventListener("resize", updateIndicator);
+  }, [active]);
+
+  // Update active based on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      let current = 0;
+      sections.forEach((id, index) => {
+        const sectionEl = document.getElementById(id);
+        if (sectionEl && sectionEl.offsetTop <= scrollPosition) {
+          current = index;
+        }
+      });
+      setActive(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div>
+    <div className="App">
       <nav className="navbar">
         <div className="nav-container">
           <div className="logo-container">
             <div className="profile-circle">
-              <img src={profilePic} alt="Profile" />
+              <img src={profilePic} alt="Profile" /> 
             </div>
-            <div className="name">Goran Milosevic</div>
+            <span className="name">GORAN MILOSEVIC</span>
           </div>
-
           <div className="nav-links-container">
             <ul className="nav-links">
-              {sections.map((section) => (
+              {sections.map((section, index) => (
                 <li
                   key={section}
-                  ref={(el) => (navRefs.current[section] = el)}
-                  className={active === section ? "active" : ""}
-                  onClick={() => handleNavClick(section)}
+                  ref={(el) => (navRefs.current[index] = el)}
+                  className={active === index ? "active" : ""}
+                  onClick={() => handleClick(index)}
                 >
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                  {section}
                 </li>
               ))}
             </ul>
@@ -74,13 +87,12 @@ function App() {
 
       <main>
         {sections.map((section) => (
-          <section key={section} id={section}>
-            <div className="section-content">
-              <h1>{section.charAt(0).toUpperCase() + section.slice(1)}</h1>
-              <p>
-                This is placeholder content for the {section} section.
-              </p>
-            </div>
+          <section id={section} key={section}>
+            <h1>{section.toUpperCase()}</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
           </section>
         ))}
       </main>
