@@ -64,7 +64,7 @@ function App() {
       <div className="content">
         <main>
           <Section id="ABOUT" title="ABOUT">
-            Hi, I'm Goran Milosevic, a fullstack developer with a bachelor’s degree
+            Hi, I'm Goran, a fullstack developer from Norway with a bachelor’s degree
             in Frontend and Mobile Development. I enjoy building modern web and
             mobile applications and continuously improving user experiences.
           </Section>
