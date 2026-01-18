@@ -7,6 +7,10 @@ import work1 from "./assets/work1.jpg";
 import work2 from "./assets/work2.jpg";
 import work3 from "./assets/work3.jpg";
 
+// Social icons
+import githubIcon from "./assets/github.svg";
+import linkedinIcon from "./assets/linkedin.svg";
+
 function App() {
   const sections = ["WORK", "ABOUT", "CONTACT", "RESUME"];
   const [active, setActive] = useState(0);
@@ -114,6 +118,31 @@ function App() {
             </section>
           ))}
       </main>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        <div className="footer-content">
+          <span>© 2026 Goran Milosevic</span>
+          <div className="social-icons">
+            <a
+              href="https://www.linkedin.com/in/goran-milosevic-849344229/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <img src={linkedinIcon} alt="LinkedIn" />
+            </a>
+            <a
+              href="https://github.com/gomilo2000"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <img src={githubIcon} alt="GitHub" />
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
