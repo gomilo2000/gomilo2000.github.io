@@ -9,6 +9,7 @@ body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   background-color: #fff;
   color: #111;
+  overflow-x: hidden;
 }
 
 /* Navbar */
@@ -17,7 +18,7 @@ body {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #fff; 
+  background-color: #fff;
   padding: 1rem 2.5rem;
 }
 
@@ -27,13 +28,11 @@ body {
   align-items: center;
 }
 
-/* Logo with profile circle */
 .logo-container {
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  justify-content: flex-start; /* hug left on desktop */
-  width: auto; /* natural width */
+  justify-content: flex-start;
 }
 
 .profile-circle {
@@ -41,7 +40,6 @@ body {
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .profile-circle img {
@@ -56,7 +54,6 @@ body {
   color: #111;
 }
 
-/* Nav links */
 .nav-links-container {
   position: relative;
 }
@@ -71,7 +68,7 @@ body {
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  font-weight: normal; 
+  font-weight: normal;
   color: #111;
   transition: all 0.3s;
   position: relative;
@@ -79,10 +76,9 @@ body {
 }
 
 .nav-links li.active {
-  color: #fff; /* text over active box */
+  color: #fff;
 }
 
-/* Sliding indicator */
 .nav-indicator {
   position: absolute;
   bottom: 0;
@@ -96,7 +92,7 @@ body {
 
 /* Main content */
 main {
-  padding-top: 100px; /* space for navbar */
+  padding-top: 100px;
 }
 
 section {
@@ -119,30 +115,58 @@ p {
   color: #111;
 }
 
+/* WORK GRID */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.work-card {
+  overflow: hidden;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.work-card:hover {
+  transform: scale(1.05);
+}
+
+.work-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.work-caption {
+  text-align: center;
+  margin-top: 0.5rem;
+  color: #111;
+  font-size: 1rem;
+}
+
 /* Responsive - mobile adjustments */
 @media (max-width: 768px) {
-  /* Center logo container on mobile */
   .logo-container {
     justify-content: center;
     width: 100%;
   }
 
-  /* Hide nav links and indicator */
   .nav-links-container {
     display: none;
   }
 
-  .nav-links,
-  .nav-indicator {
-    display: none;
+  section {
+    min-height: calc(100vh - 80px);
   }
 
-  section {
-    min-height: calc(100vh - 80px); /* adjust for smaller navbar */
+  .work-image {
+    height: 150px;
   }
-  
-  .nav-links li {
-    font-size: 1.1rem;
-    padding: 0.5rem 0.8rem;
+
+  .work-caption {
+    font-size: 0.9rem;
   }
 }
