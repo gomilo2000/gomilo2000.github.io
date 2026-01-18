@@ -187,11 +187,48 @@ p {
 
 /* Mobile */
 @media (max-width: 768px) {
+  /* Prevent horizontal scrolling */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Navbar: show only logo + name */
+  .navbar {
+    padding: 1rem;
+  }
+
   .nav-links-container {
     display: none;
   }
 
+  .nav-indicator {
+    display: none;
+  }
+
+  /* Center logo/name nicely */
+  .nav-container {
+    justify-content: center;
+  }
+
+  /* Layout spacing */
+  main {
+    padding-top: 80px; /* still reserve navbar space */
+  }
+
   section {
-    min-height: calc(100vh - 80px);
+    padding: 1.25rem;
+  }
+
+  /* Projects grid mobile fix */
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-card {
+    max-width: 100%;
+  }
+
+  .work-image {
+    height: 180px;
   }
 }
