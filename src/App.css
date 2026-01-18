@@ -5,11 +5,23 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+}
+
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   background-color: #fff;
   color: #111;
   overflow-x: hidden;
+}
+
+/* Root app container */
+.App {
+  width: 100%;
+  min-height: 100vh;
 }
 
 /* Navbar */
@@ -32,7 +44,6 @@ body {
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  justify-content: flex-start;
 }
 
 .profile-circle {
@@ -68,9 +79,7 @@ body {
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  font-weight: normal;
   color: #111;
-  transition: all 0.3s;
   position: relative;
   z-index: 1;
 }
@@ -79,6 +88,7 @@ body {
   color: #fff;
 }
 
+/* Active section indicator */
 .nav-indicator {
   position: absolute;
   bottom: 0;
@@ -91,6 +101,11 @@ body {
 }
 
 /* Main content */
+.content {
+  width: 100%;
+  max-width: none;
+}
+
 main {
   padding-top: 100px;
 }
@@ -112,10 +127,9 @@ p {
   max-width: 600px;
   line-height: 1.6;
   font-size: 1.1rem;
-  color: #111;
 }
 
-/* WORK GRID */
+/* Projects grid */
 .work-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -143,8 +157,6 @@ p {
 .work-caption {
   text-align: center;
   margin-top: 0.5rem;
-  color: #111;
-  font-size: 1rem;
 }
 
 /* Footer */
@@ -162,46 +174,24 @@ p {
   gap: 1rem;
 }
 
-.footer .social-icons {
+.social-icons {
   display: flex;
   gap: 1.5rem;
 }
 
-.footer .social-icons a img {
+.social-icons img {
   width: 28px;
   height: 28px;
   filter: invert(100%);
-  transition: transform 0.3s ease;
 }
 
-.footer .social-icons a img:hover {
-  transform: scale(1.1);
-}
-
-/* Responsive - mobile adjustments */
+/* Mobile */
 @media (max-width: 768px) {
-  .logo-container {
-    justify-content: center;
-    width: 100%;
-  }
-
   .nav-links-container {
     display: none;
   }
 
   section {
     min-height: calc(100vh - 80px);
-  }
-
-  .work-image {
-    height: 150px;
-  }
-
-  .work-caption {
-    font-size: 0.9rem;
-  }
-
-  .footer {
-    padding: 1rem 2rem;
   }
 }
