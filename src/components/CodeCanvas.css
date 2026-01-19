@@ -1,0 +1,19 @@
+.code-canvas {
+  width: 420px;
+  padding: 1.5rem;
+  background-color: #111;
+  color: #eaeaea;
+  border-radius: 12px;
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease;
+  will-change: transform;
+}
+
+.code-canvas pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+

@@ -1,8 +1,18 @@
-function Section({ id, title, children }) {
+function Section({ id, title, children, rightContent }) {
   return (
     <section id={id}>
-      <h1>{title}</h1>
-      <p>{children}</p>
+      <div className={`section-inner ${rightContent ? "has-right" : ""}`}>
+        <div className="section-text">
+          <h1>{title}</h1>
+          <p>{children}</p>
+        </div>
+
+        {rightContent && (
+          <div className="section-right">
+            {rightContent}
+          </div>
+        )}
+      </div>
     </section>
   );
 }
