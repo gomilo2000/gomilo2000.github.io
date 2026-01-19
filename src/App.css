@@ -153,8 +153,9 @@ section {
 }
 
 .section-right {
-  flex: 1 1 300px;
-  min-width: 0; /* allow shrinking */
+  flex: 0 0 400px;
+  min-width: 400; /* no shrinking */
+  margin-left: auto; 
 }
 
 /* Headings */
