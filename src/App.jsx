@@ -78,8 +78,8 @@ function App() {
           </Section>
 
           <Section id="CONTACT" title="CONTACT">
-            Feel free to reach out via email or connect with me on GitHub or
-            LinkedIn.
+            Feel free to reach out via email or connect with me on LinkedIn.
+            <br/><br/>gomilo2000@gmail.com 
           </Section>
         </main>
       </div>
