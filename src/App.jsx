@@ -4,6 +4,7 @@ import CodeCanvas from "./components/CodeCanvas";
 
 import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
+import Skills from "./components/Skills";
 import Section from "./components/Section";
 import Footer from "./components/Footer";
 
@@ -50,7 +51,7 @@ function App() {
       indicator.style.width = `${activeEl.offsetWidth}px`;
       indicator.style.transform = `translateX(${activeEl.offsetLeft}px)`;
     }
-  }, [active]);
+  }, [sections]);
 
   return (
     <div className="App">
@@ -75,8 +76,7 @@ function App() {
           </Section>
 
           <Section id="SKILLS" title="SKILLS">
-            JavaScript, TypeScript, React, React Native, HTML, CSS, Swift,
-            Kotlin, Node.js
+            <Skills />
           </Section>
 
           <Section id="CONTACT" title="CONTACT">
