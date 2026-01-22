@@ -70,7 +70,9 @@ function App() {
             mobile applications and continuously improving user experiences.
           </Section>
 
-          <Projects />
+          <Section id="PROJECTS" title="PROJECTS">
+            <Projects />
+          </Section>
 
           <Section id="SKILLS" title="SKILLS">
             JavaScript, TypeScript, React, React Native, HTML, CSS, Swift,
