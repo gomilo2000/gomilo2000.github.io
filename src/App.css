@@ -258,35 +258,85 @@ p {
 }
 
 /* ==============================
-   Projects
+   Projects Carousel
 ================================ */
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+.projects-carousel {
+  width: 100%;
   margin-top: 2rem;
 }
 
-.work-card {
-  border-radius: 6px;
+.carousel-window {
   overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+  border-radius: 12px;
 }
 
-.work-card:hover {
-  transform: scale(1.05);
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
 }
 
-.work-image {
+.carousel-slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.carousel-slide img {
   width: 100%;
-  height: 200px;
+  height: 420px;
   object-fit: cover;
+  display: block;
+  border-radius: 12px;
 }
 
-.work-caption {
-  text-align: center;
-  margin-top: 0.5rem;
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0)
+  );
+  color: white;
+}
+
+/* ==============================
+   Carousel navigation dots
+================================ */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  padding: 0;
+}
+
+.carousel-dot:hover {
+  transform: scale(1.2);
+}
+
+.carousel-dot.active {
+  background: #111;
+}
+
+/* Dark mode */
+[data-theme="dark"] .carousel-dot {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .carousel-dot.active {
+  background: #fff;
 }
 
 /* ==============================

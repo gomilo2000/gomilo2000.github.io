@@ -1,36 +1,88 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-// Work images
 import work1 from "../assets/work1.jpg";
 import work2 from "../assets/work2.jpg";
 import work3 from "../assets/work3.jpg";
 import work4 from "../assets/work4.jpg";
 
 const projects = [
-  { src: work1, alt: "Project 1", caption: "Project 1 description" },
-  { src: work2, alt: "Project 2", caption: "Project 2 description" },
-  { src: work3, alt: "Project 3", caption: "Project 3 description" },
-  { src: work4, alt: "Project 4", caption: "Project 4 description" },
+  {
+    src: work1,
+    title: "Project One",
+    description: "Short description of what this project does."
+  },
+  {
+    src: work2,
+    title: "Project Two",
+    description: "Short description of what this project does."
+  },
+  {
+    src: work3,
+    title: "Project Three",
+    description: "Short description of what this project does."
+  },
+  {
+    src: work4,
+    title: "Project Four",
+    description: "Short description of what this project does."
+  }
 ];
 
 const Projects = () => {
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const length = projects.length;
+
+  // Auto-rotate (pauses on hover)
+  useEffect(() => {
+    if (paused) return;
+
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [paused, length]);
+
   return (
     <>
       <p>Here are some projects I've worked on previously.</p>
 
-      <div className="work-grid">
-        {projects.map((project, index) => (
-          <div className="work-card" key={index}>
-            <img
-              src={project.src}
-              alt={project.alt}
-              className="work-image"
-            />
-            {project.caption && (
-              <p className="work-caption">{project.caption}</p>
-            )}
+      <div
+        className="projects-carousel"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="carousel-window">
+          <div
+            className="carousel-track"
+            style={{ transform: `translateX(-${current * 100}%)` }}
+          >
+            {projects.map((project, index) => (
+              <div className="carousel-slide" key={index}>
+                <img src={project.src} alt={project.title} />
+                <div className="carousel-caption">
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* Navigation dots */}
+        <div className="carousel-dots">
+          {projects.map((_, index) => (
+            <button
+              key={index}
+              className={`carousel-dot ${
+                current === index ? "active" : ""
+              }`}
+              onClick={() => setCurrent(index)}
+              aria-label={`Go to project ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </>
   );
