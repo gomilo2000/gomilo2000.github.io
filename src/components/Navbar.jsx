@@ -1,9 +1,18 @@
 import profilePic from "../assets/profile.jpg";
 
-function Navbar({ sections, active, navRefs, indicatorRef, onClick }) {
+function Navbar({
+  sections,
+  active,
+  navRefs,
+  indicatorRef,
+  onClick,
+  theme,
+  toggleTheme,
+}) {
   return (
     <nav className="navbar">
       <div className="nav-container">
+        {/* Logo / Name */}
         <div className="logo-container">
           <div className="profile-circle">
             <img src={profilePic} alt="Profile" />
@@ -11,6 +20,7 @@ function Navbar({ sections, active, navRefs, indicatorRef, onClick }) {
           <span className="name">GORAN MILOSEVIC</span>
         </div>
 
+        {/* Navigation */}
         <div className="nav-links-container">
           <ul className="nav-links">
             {sections.map((section, i) => (
@@ -24,8 +34,18 @@ function Navbar({ sections, active, navRefs, indicatorRef, onClick }) {
               </li>
             ))}
           </ul>
+
           <div className="nav-indicator" ref={indicatorRef} />
         </div>
+
+        {/* Theme toggle */}
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label="Toggle dark mode"
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
       </div>
     </nav>
   );

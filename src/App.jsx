@@ -13,6 +13,20 @@ import Section from "./components/Section";
 import Footer from "./components/Footer";
 
 function App() {
+
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   const sections = ["ABOUT", "PROJECTS", "SKILLS", "CONTACT"];
   const [active, setActive] = useState(0);
   const navRefs = useRef([]);
@@ -65,6 +79,8 @@ function App() {
         navRefs={navRefs}
         indicatorRef={indicatorRef}
         onClick={handleClick}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
 
       <div className="content">
