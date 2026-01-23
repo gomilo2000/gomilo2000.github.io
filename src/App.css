@@ -438,6 +438,13 @@ p {
   line-height: 1.65;
 }
 
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: 3rem;
+}
+
 /* ==============================
    Focus & Approach Card
 ================================ */
@@ -448,49 +455,74 @@ p {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   box-shadow: var(--card-shadow);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  opacity: 0;
+  transform: translateY(24px);
   transition:
-    transform 0.3s ease,
+    opacity 0.6s ease,
+    transform 0.6s ease,
     box-shadow 0.3s ease;
 }
 
+.focus-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .focus-card:hover {
-  transform: translateY(-4px);
   box-shadow: var(--card-shadow-hover);
 }
 
 .focus-title {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
+/* ==============================
+   Bullet list + stagger animation
+================================ */
 .focus-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 0.75rem;
+  gap: 0.9rem;
 }
 
 .focus-list li {
-  position: relative;
-  padding-left: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
   font-size: 0.95rem;
   line-height: 1.5;
+
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 
-.focus-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.6em;
+.focus-card.is-visible .focus-list li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==============================
+   Minimal icon
+================================ */
+.focus-icon {
   width: 6px;
   height: 6px;
+  margin-top: 0.55em;
   border-radius: 50%;
   background: var(--accent);
+  flex-shrink: 0;
 }
 
 /* ==============================

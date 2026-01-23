@@ -1,14 +1,50 @@
+import { useEffect, useRef, useState } from "react";
+
+const items = [
+  "Designing clean, readable interfaces with clear hierarchy",
+  "Building reusable, component-driven UIs in React",
+  "Using subtle motion to support UX, not distract",
+  "Ensuring layouts work across screen sizes and themes",
+  "Writing code that’s easy to understand and maintain"
+];
+
 function FocusCard() {
+  const cardRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (cardRef.current) observer.observe(cardRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="focus-card">
-      <h3 className="focus-title">Focus & Approach</h3>
+    <div
+      ref={cardRef}
+      className={`focus-card ${visible ? "is-visible" : ""}`}
+    >
+      <h3 className="focus-title">Focus &amp; Approach</h3>
 
       <ul className="focus-list">
-        <li>Clean, readable UI with clear hierarchy</li>
-        <li>Component-driven development in React</li>
-        <li>Subtle motion to enhance UX, not distract</li>
-        <li>Responsive and dark-mode friendly layouts</li>
-        <li>Writing maintainable, understandable code</li>
+        {items.map((text, index) => (
+          <li
+            key={text}
+            style={{ transitionDelay: `${index * 120}ms` }}
+          >
+            <span className="focus-icon" />
+            {text}
+          </li>
+        ))}
       </ul>
     </div>
   );
