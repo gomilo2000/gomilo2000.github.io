@@ -150,18 +150,45 @@ body {
 }
 
 .nav-links li.active {
-  color: #fff;
+  color: var(--bg);
+}
+
+[data-theme="dark"] .nav-links li.active {
+  color: #ffffff;
 }
 
 .nav-indicator {
   position: absolute;
   bottom: 0;
   height: 100%;
-  background-color: #111;
   border-radius: 6px;
   z-index: 0;
   transition: transform 0.3s ease, width 0.3s ease;
   pointer-events: none;
+}
+
+/* Light mode */
+[data-theme="light"] .nav-indicator {
+  background-color: #111;
+}
+
+/* Dark mode */
+[data-theme="dark"] .nav-indicator {
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ==============================
+   Navbar seperators
+================================ */
+[data-theme="dark"] .navbar {
+  background-color: var(--bg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="light"] .navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* ==============================
@@ -188,8 +215,11 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 4rem;
   flex-wrap: wrap;
+  will-change: opacity, transform;
 }
 
 .section-text {
@@ -369,6 +399,7 @@ p {
   color: var(--text);
   padding: 1.5rem 2.5rem;
   text-align: center;
+  position: relative;
 }
 
 .footer-content {
@@ -386,6 +417,20 @@ p {
 .social-icons img {
   width: 28px;
   height: 28px;
+  transition: opacity 0.2s ease;
+}
+
+.social-icons img:hover {
+  opacity: 0.75;
+}
+
+/* Light mode → dark icons */
+[data-theme="light"] .social-icons img {
+  filter: invert(0%);
+}
+
+/* Dark mode → light icons */
+[data-theme="dark"] .social-icons img {
   filter: invert(100%);
 }
 
@@ -401,6 +446,17 @@ p {
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ==============================
+   Footer separators
+================================ */
+[data-theme="light"] .footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* ==============================

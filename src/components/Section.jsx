@@ -12,7 +12,7 @@ function Section({ id, title, intro, children, rightContent }) {
           observer.disconnect();
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.4 }
     );
 
     if (ref.current) observer.observe(ref.current);
