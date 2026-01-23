@@ -1,43 +1,42 @@
 import React from "react";
 
 const skillGroups = [
-{
-title: "Frontend",
-skills: ["HTML5", "CSS", "JavaScript", "TypeScript", "React", "Vue"],
-},
-{
-title: "Mobile",
-skills: ["React Native", "Swift", "Kotlin", "Ionic"],
-},
-{
-title: "Backend (Basic)",
-skills: ["Java", "C#", "Python", "Node.js"],
-},
-{
-title: "Other / General",
-skills: ["Git", "REST APIs"],
-},
+  {
+    title: "Frontend",
+    skills: ["TypeScript", "JavaScript", "React", "Vue"],
+  },
+  {
+    title: "Mobile",
+    skills: ["React Native", "Swift", "Kotlin", "Ionic"],
+  },
+  {
+    title: "Styling & Markup",
+    skills: ["HTML5", "CSS"],
+  },
+  {
+    title: "Backend / Other",
+    skills: ["Java", "C#", "Python"],
+  },
 ];
 
+function Skills() {
+  return (
+    <div className="skills">
+      {skillGroups.map((group) => (
+        <div className="skill-group" key={group.title}>
+          <h3 className="skill-group-title">{group.title}</h3>
 
-const Skills = () => {
-return (
-<div className="skills-wrapper">
-{skillGroups.map((group) => (
-<div key={group.title} className="skills-group">
-<h3 className="skills-title">{group.title}</h3>
-<ul className="skills-list">
-{group.skills.map((skill) => (
-<li key={skill} className="skill-pill">
-{skill}
-</li>
-))}
-</ul>
-</div>
-))}
-</div>
-);
-};
-
+          <div className="skill-list">
+            {group.skills.map((skill) => (
+              <span className="skill-pill" key={skill}>
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default Skills;

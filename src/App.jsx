@@ -69,19 +69,32 @@ function App() {
 
       <div className="content">
         <main>
-          <Section id="ABOUT" title="ABOUT" rightContent={<CodeCanvas/>}>
+          <Section 
+            id="ABOUT" 
+            title="ABOUT" 
+            intro="A frontend-focused developer from Norway with a strong interest in building clean, user-friendly applications." 
+            rightContent={<CodeCanvas/>}>
             <About />
           </Section>
 
-          <Section id="PROJECTS" title="PROJECTS">
+          <Section 
+            id="PROJECTS" 
+            title="PROJECTS"
+            intro="A selection of projects that showcase my approach to design, structure, and problem-solving. Currently work in progress">
             <Projects />
           </Section>
 
-          <Section id="SKILLS" title="SKILLS">
+          <Section 
+            id="SKILLS" 
+            title="SKILLS" 
+            intro="Technologies and tools I've worked with across web, mobile and backend development.">
             <Skills />
           </Section>
 
-          <Section id="CONTACT" title="CONTACT">
+          <Section 
+            id="CONTACT" 
+            title="CONTACT"
+            intro="Ways to get in touch or learn more about my work.">
             <Contact />
           </Section>
         </main>
