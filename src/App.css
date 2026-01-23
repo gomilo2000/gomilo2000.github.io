@@ -238,7 +238,7 @@ section {
   margin-bottom: 2rem;
   font-size: 1.05rem;
   line-height: 1.6;
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 /* ==============================
@@ -372,6 +372,47 @@ p {
 .carousel-slide.active {
   opacity: 1;
   transform: scale(1);
+}
+
+/* ==============================
+   Project actions (icon buttons)
+================================ */
+.project-actions.top-right {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.project-actions.top-right a {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+  opacity: 0.75;
+}
+
+.project-actions.top-right a:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 0, 0, 0.85);
+  opacity: 1;
+}
+
+.project-actions.top-right svg {
+  width: 16px;
+  height: 16px;
+  fill: white;
+}
+
+/* Show clearly on hover */
+.carousel-slide:hover .project-actions.top-right a {
+  opacity: 1;
 }
 
 /* ==============================
