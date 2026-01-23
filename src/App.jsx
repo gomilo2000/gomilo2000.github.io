@@ -3,9 +3,13 @@ import "./App.css";
 import CodeCanvas from "./components/CodeCanvas";
 
 import Navbar from "./components/Navbar";
+
+import About from "./components/About";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
+import Contact from "./components/Contact";
 import Section from "./components/Section";
+
 import Footer from "./components/Footer";
 
 function App() {
@@ -66,9 +70,7 @@ function App() {
       <div className="content">
         <main>
           <Section id="ABOUT" title="ABOUT" rightContent={<CodeCanvas/>}>
-            Hi, I'm Goran, a fullstack developer from Norway with a bachelor’s degree
-            in Frontend and Mobile Development. I enjoy building modern web and
-            mobile applications and continuously improving user experiences.
+            <About />
           </Section>
 
           <Section id="PROJECTS" title="PROJECTS">
@@ -80,8 +82,7 @@ function App() {
           </Section>
 
           <Section id="CONTACT" title="CONTACT">
-            Feel free to reach out via email or connect with me on LinkedIn.
-            <br/><br/>gomilo2000@gmail.com 
+            <Contact />
           </Section>
         </main>
       </div>

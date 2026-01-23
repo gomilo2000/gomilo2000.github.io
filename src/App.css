@@ -230,6 +230,19 @@ p {
   filter: invert(100%);
 }
 
+/* About section */
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.about-text {
+  max-width: 600px;
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
 /* Skills section */
 .skills-wrapper {
   display: flex;
@@ -265,6 +278,61 @@ p {
   color: #fff;
   font-size: 0.95rem;
   font-family: 'Inter', Arial, sans-serif;
+}
+
+/* Contact section */
+.contact {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-intro {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.contact-email {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #111;
+  text-decoration: none;
+  border-bottom: 2px solid #111;
+  width: fit-content;
+}
+
+.contact-email:hover {
+  opacity: 0.7;
+}
+
+.contact-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.contact-links a {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  color: #111;
+}
+
+.contact-links a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contact {
+    gap: 1.25rem;
+  }
+
+  .contact-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }
 
 /* Mobile */
