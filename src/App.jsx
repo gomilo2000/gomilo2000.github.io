@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
-import CodeCanvas from "./components/CodeCanvas";
-
 import Navbar from "./components/Navbar";
+
+import FocusCard from "./components/FocusCard";
 
 import About from "./components/About";
 import Projects from "./components/Projects";
@@ -89,7 +89,7 @@ function App() {
             id="ABOUT" 
             title="ABOUT" 
             intro="A frontend-focused developer from Norway with a strong interest in building clean, user-friendly applications." 
-            rightContent={<CodeCanvas/>}>
+            rightContent={<FocusCard/>}>
             <About />
           </Section>
 
