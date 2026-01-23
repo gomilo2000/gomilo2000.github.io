@@ -242,11 +242,30 @@ section {
 }
 
 .section-intro {
-  max-width: 600px;
-  margin-bottom: 2rem;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  opacity: 0.65;
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+
+  font-size: 1.15rem;
+  line-height: 1.65;
+
+  color: var(--muted);
+  opacity: 1;
+
+  position: relative;
+}
+
+.section-intro::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0.25;
+  margin-bottom: 0.75rem;
+}
+
+.section-text h1 {
+  max-width: 700px;
 }
 
 /* ==============================
@@ -256,7 +275,7 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 p {
@@ -705,6 +724,16 @@ p {
     padding: 1.25rem;
   }
 
+  .section-intro {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .section-intro::before {
+    width: 28px;
+  }
+  
   .section-inner {
     flex-direction: column;
     gap: 1rem;
