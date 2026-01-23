@@ -1,4 +1,5 @@
 import profilePic from "../assets/profile.jpg";
+import ThemeToggle from "./ThemeToggle";
 
 function Navbar({
   sections,
@@ -37,15 +38,7 @@ function Navbar({
 
           <div className="nav-indicator" ref={indicatorRef} />
         </div>
-
-        {/* Theme toggle */}
-        <button
-          className="theme-toggle"
-          onClick={toggleTheme}
-          aria-label="Toggle dark mode"
-        >
-          {theme === "light" ? "🌙" : "☀️"}
-        </button>
+            <ThemeToggle toggleTheme={toggleTheme} />
       </div>
     </nav>
   );
