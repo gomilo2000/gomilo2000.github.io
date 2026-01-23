@@ -340,6 +340,41 @@ p {
 }
 
 /* ==============================
+   Tech tags
+================================ */
+.tech-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tech-tag {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+/* ==============================
+   Slide entrance animation
+================================ */
+.carousel-slide {
+  opacity: 0.5;
+  transform: scale(0.96);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==============================
    About
 ================================ */
 .about {

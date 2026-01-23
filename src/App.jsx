@@ -96,7 +96,7 @@ function App() {
           <Section 
             id="PROJECTS" 
             title="PROJECTS"
-            intro="A selection of projects that showcase my approach to design, structure, and problem-solving. Currently work in progress">
+            intro="A selection of projects that showcase my approach to design, structure, and problem-solving.">
             <Projects />
           </Section>
 

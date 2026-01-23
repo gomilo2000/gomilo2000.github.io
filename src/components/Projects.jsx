@@ -9,22 +9,26 @@ const projects = [
   {
     src: work1,
     title: "Project One",
-    description: "Short description of what this project does."
+    description: "Short description of what this project does.",
+    tech: ["React", "CSS", "API"]
   },
   {
     src: work2,
     title: "Project Two",
-    description: "Short description of what this project does."
+    description: "Short description of what this project does.",
+    tech: ["TypeScript", "React", "Node.js"]
   },
   {
     src: work3,
     title: "Project Three",
-    description: "Short description of what this project does."
+    description: "Short description of what this project does.",
+    tech: ["React Native", "Expo"]
   },
   {
     src: work4,
     title: "Project Four",
-    description: "Short description of what this project does."
+    description: "Short description of what this project does.",
+    tech: ["Vue", "Firebase"]
   }
 ];
 
@@ -33,7 +37,7 @@ const Projects = () => {
   const [paused, setPaused] = useState(false);
   const length = projects.length;
 
-  // Auto-rotate (pauses on hover)
+  // Auto-rotate
   useEffect(() => {
     if (paused) return;
 
@@ -59,11 +63,25 @@ const Projects = () => {
             style={{ transform: `translateX(-${current * 100}%)` }}
           >
             {projects.map((project, index) => (
-              <div className="carousel-slide" key={index}>
+              <div
+                className={`carousel-slide ${
+                  current === index ? "active" : ""
+                }`}
+                key={index}
+              >
                 <img src={project.src} alt={project.title} />
+
                 <div className="carousel-caption">
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
+
+                  <div className="tech-tags">
+                    {project.tech.map((tag) => (
+                      <span className="tech-tag" key={tag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
