@@ -2,39 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 
 import work1 from "../assets/work1.jpg";
 import work2 from "../assets/work2.jpg";
-import work3 from "../assets/work3.jpg";
-import work4 from "../assets/work4.jpg";
 
 const projects = [
   {
     src: work1,
-    title: "Project One",
-    description: "Short description of what this project does.",
-    tech: ["React", "CSS", "API"],
-    github: "https://gomilo2000.github.io/",
-    demo: "https://gomilo2000.github.io/"
+    title: "AtCampus",
+    description: "Colloquium Feature Process",
+    tech: ["React", "Tailwind CSS", "Figma"],
+    github: null,
+    demo: null
   },
   {
     src: work2,
-    title: "Project Two",
-    description: "Short description of what this project does.",
-    tech: ["TypeScript", "React"],
-    github: null,
-    demo: null
-  },
-  {
-    src: work3,
-    title: "Project Three",
-    description: "Short description of what this project does.",
-    tech: ["React Native", "Expo"],
-    github: null,
-    demo: null
-  },
-  {
-    src: work4,
-    title: "Project Four",
-    description: "Short description of what this project does.",
-    tech: ["Vue", "Firebase"],
+    title: "ReverseImageSearch App",
+    description: "ReverseImageSearch Android Application.",
+    tech: ["Android Studio", "Kotlin", "API"],
     github: null,
     demo: null
   }
@@ -80,7 +62,7 @@ const Projects = () => {
 
   return (
     <>
-      <p>Here are some projects I've worked on previously.</p>
+      <p>Here are a couple of projects I’ve worked on so far. This section is still growing, and I’ll be adding more as I continue to develop my skills and gain experience.</p>
 
       <div
         className="projects-carousel"
