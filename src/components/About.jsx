@@ -17,7 +17,7 @@ experiences.
 
 
 <p className="about-text">
-I’m especially comfortable working with React and TypeScript, and I like
+I’m especially comfortable working with React and JavaScript/TypeScript, and I like
 learning by building real projects and refining them over time.
 </p>
 </div>

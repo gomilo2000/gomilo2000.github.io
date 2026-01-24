@@ -141,6 +141,7 @@ const skillDetails = {
 
 function Skills() {
   const [activeSkill, setActiveSkill] = useState(null);
+  const [activeGroup, setActiveGroup] = useState(null);
 
   return (
     <div className="skills skills-with-panel">
@@ -149,7 +150,11 @@ function Skills() {
       ============================== */}
       <div className="skills-left">
         {skillGroups.map((group) => (
-          <div className="skill-group" key={group.title}>
+          <div
+            className="skill-group"
+            key={group.title}
+            data-group={group.title.toLowerCase()}
+          >
             <h3 className="skill-group-title">{group.title}</h3>
 
             <div className="skill-list">
@@ -157,8 +162,14 @@ function Skills() {
                 <span
                   className="skill-pill"
                   key={skill}
-                  onMouseEnter={() => setActiveSkill(skill)}
-                  onMouseLeave={() => setActiveSkill(null)}
+                  onMouseEnter={() => {
+                    setActiveSkill(skill);
+                    setActiveGroup(group.title.toLowerCase());
+                  }}
+                  onMouseLeave={() => {
+                    setActiveSkill(null);
+                    setActiveGroup(null);
+                  }}
                 >
                   {skill}
                 </span>
@@ -171,7 +182,10 @@ function Skills() {
       {/* =============================
           RIGHT: Interactive panel
       ============================== */}
-      <div className="skill-panel">
+      <div
+        className="skill-panel"
+        data-group={activeGroup || undefined}
+      >
         {!activeSkill && (
           <div className="skill-panel-idle">
             <p>Hover a skill to see how I use it.</p>
@@ -198,3 +212,4 @@ function Skills() {
 }
 
 export default Skills;
+
