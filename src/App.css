@@ -147,6 +147,18 @@ body {
   align-items: center;
 }
 
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -169,8 +181,8 @@ body {
 
 .name {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .nav-links-container {
@@ -181,9 +193,11 @@ body {
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
   gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-links li {

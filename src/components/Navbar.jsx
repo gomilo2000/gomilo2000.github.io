@@ -7,22 +7,25 @@ function Navbar({
   navRefs,
   indicatorRef,
   onClick,
-  theme,
   toggleTheme,
 }) {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        {/* Logo / Name */}
-        <div className="logo-container">
-          <div className="profile-circle">
-            <img src={profilePic} alt="Profile" />
+        {/* LEFT: Logo / Name / Theme Toggle */}
+        <div className="nav-left">
+          <div className="logo-container">
+            <div className="profile-circle">
+              <img src={profilePic} alt="Profile" />
+            </div>
+            <span className="name">GORAN MILOSEVIC</span>
           </div>
-          <span className="name">GORAN MILOSEVIC</span>
+
+          <ThemeToggle toggleTheme={toggleTheme} />
         </div>
 
-        {/* Navigation */}
-        <div className="nav-links-container">
+        {/* RIGHT: Navigation */}
+        <div className="nav-right">
           <ul className="nav-links">
             {sections.map((section, i) => (
               <li
@@ -38,7 +41,6 @@ function Navbar({
 
           <div className="nav-indicator" ref={indicatorRef} />
         </div>
-            <ThemeToggle toggleTheme={toggleTheme} />
       </div>
     </nav>
   );
