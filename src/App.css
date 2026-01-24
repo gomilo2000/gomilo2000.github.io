@@ -669,8 +669,13 @@ p {
 
 .skill-pill:hover {
   transform: translateY(-2px);
-  background-color: var(--accent);
-  color: var(--bg);
+  background-color: color-mix(
+    in srgb,
+    var(--skill-accent) 15%,
+    transparent
+  );
+  border-color: var(--skill-accent);
+  color: var(--skill-accent);
 }
 
 /* ==============================
@@ -805,6 +810,25 @@ p {
 .skill-panel[data-group] .skill-panel-title {
   color: var(--skill-accent);
   transition: color 0.25s ease;
+}
+
+/* ==============================
+   Skill group accent colors
+================================ */
+.skill-group[data-group="frontend"] {
+  --skill-accent: hsl(210, 60%, 55%);
+}
+
+.skill-group[data-group="mobile"] {
+  --skill-accent: hsl(150, 45%, 45%);
+}
+
+.skill-group[data-group="styling & markup"] {
+  --skill-accent: hsl(35, 65%, 55%);
+}
+
+.skill-group[data-group="backend / other"] {
+  --skill-accent: hsl(270, 40%, 55%);
 }
 
 /* ==============================
