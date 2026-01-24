@@ -669,6 +669,116 @@ p {
 }
 
 /* ==============================
+   Skills layout with panel
+================================ */
+.skills-with-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Left side never moves */
+.skills-left {
+  position: relative;
+}
+
+/* Right panel has FIXED visual footprint */
+.skill-panel {
+  position: relative;
+  min-height: 220px;
+  padding-left: 2rem;
+  padding-top: 0.2rem; /* fine-tuned alignment */
+  border-left: 1px solid var(--border-subtle);
+  display: block;
+}
+
+
+/* Idle & content occupy same space */
+.skill-panel-idle,
+.skill-panel-content {
+  width: 100%;
+  margin-top: 0;
+}
+
+/* Hide/show without affecting layout */
+.skill-panel-idle {
+  opacity: 0.6;
+}
+
+/* Panel content base */
+.skill-panel-content {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: skillPanelFadeIn 0.25s ease forwards;
+}
+
+/* Title styling */
+.skill-panel-title {
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Description */
+.skill-panel-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Bullet points */
+.skill-panel-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-panel-points li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0;
+  animation: skillPointFade 0.3s ease forwards;
+}
+
+/* Stagger bullets */
+.skill-panel-points li:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.skill-panel-points li:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.skill-panel-points li:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+/* Minimal bullet indicator */
+.skill-panel-points li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  opacity: 0.6;
+}
+
+/* Animations */
+@keyframes skillPanelFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes skillPointFade {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==============================
    Contact
 ================================ */
 .contact {
