@@ -50,7 +50,7 @@ export default function Nav() {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: 24,
-        padding: '18px 40px',
+        padding: '20px clamp(40px, 5.5vw, 72px)',
         position: 'sticky',
         top: 0,
         zIndex: 60,

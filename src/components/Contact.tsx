@@ -124,10 +124,10 @@ export default function Contact() {
       className="grid-2 galaxy-bg"
       style={{
         scrollMarginTop: 90,
-        padding: '90px 48px',
+        padding: '110px clamp(48px, 5.5vw, 80px)',
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
-        gap: 56,
+        gap: 80,
         alignItems: 'start',
         position: 'relative',
       }}
@@ -152,7 +152,7 @@ export default function Contact() {
       <div style={{ position: 'relative', zIndex: 2 }}>
         <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Contact</p>
         <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,44px)', fontWeight: 700, letterSpacing: '-.025em', color: '#ffffff', lineHeight: 1.06 }}>Let&apos;s build something great.</h2>
-        <p style={{ margin: '22px 0 0', fontSize: 18, lineHeight: 1.6, color: '#a5a8be', maxWidth: 420 }}>
+        <p style={{ margin: '22px 0 0', fontSize: 18, lineHeight: 1.6, color: '#a5a8be', maxWidth: 500 }}>
           Looking for my first developer role and open to frontend, mobile or fullstack opportunities. Feel free to reach out, I&apos;d love to hear from you.
         </p>
         <a href="mailto:gomilo2000@gmail.com" className="link-soft" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 28, fontSize: 18, fontWeight: 600, color: '#ffffff', textDecoration: 'none' }}>

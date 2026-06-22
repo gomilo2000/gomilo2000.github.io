@@ -9,13 +9,13 @@ const hazard: CSSProperties = { height: 6, background: 'repeating-linear-gradien
  */
 export default function Projects() {
   return (
-    <section id="projects" style={{ scrollMarginTop: 90, padding: '90px 48px', background: '#f5f5f7' }}>
+    <section id="projects" style={{ scrollMarginTop: 90, padding: '110px clamp(48px, 5.5vw, 80px)', background: '#f5f5f7' }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', marginBottom: 44 }}>
         <div>
           <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Work</p>
           <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>Selected projects</h2>
         </div>
-        <p style={{ margin: 0, fontSize: 17, color: '#5b6068', maxWidth: 380 }}>Fresh work is in progress, this section is getting a makeover.</p>
+        <p style={{ margin: 0, fontSize: 17, color: '#5b6068', maxWidth: 480 }}>Fresh work is in progress, this section is getting a makeover.</p>
       </div>
 
       <div style={{ position: 'relative', borderRadius: 22, overflow: 'hidden', border: '1px solid rgba(15,20,40,.08)', background: '#fff', boxShadow: '0 30px 60px -38px rgba(20,30,70,.30)' }}>
