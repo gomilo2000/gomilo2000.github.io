@@ -341,6 +341,7 @@ const categories = [
 
 export default function Skills() {
   const [selectedSkill, setSelectedSkill] = useState<string>('React')
+  const [activeTab, setActiveTab] = useState<string>('Frontend')
 
   const activeDetail = SKILL_DETAILS[selectedSkill] || SKILL_DETAILS['React']
   const activeSkillColor = SKILL_THEME[selectedSkill]?.color || '#1a73ff'
@@ -355,10 +356,39 @@ export default function Skills() {
         <div className="skills-layout" style={{ display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 32, alignItems: 'start' }}>
           
           {/* Left column: categories grid */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, minWidth: 0 }}>
+            {/* Mobile Category Tabs */}
+            <div className="skills-mobile-tabs">
+              {categories.map((cat) => {
+                const isActive = activeTab === cat.title
+                return (
+                  <button
+                    key={cat.title}
+                    onClick={() => {
+                      setActiveTab(cat.title)
+                      const targetSkill = cat.items[0]
+                      if (targetSkill) {
+                        setSelectedSkill(targetSkill)
+                      }
+                    }}
+                    className="skills-mobile-tab-btn"
+                    style={{
+                      borderColor: isActive ? 'transparent' : 'rgba(15,20,40,.06)',
+                      background: isActive ? activeSkillColor : '#f4f4f6',
+                      color: isActive ? '#fff' : '#56606c',
+                      boxShadow: isActive ? `0 8px 16px -6px ${activeSkillColor}60` : 'none',
+                    }}
+                  >
+                    {cat.title}
+                  </button>
+                )
+              })}
+            </div>
+
             {categories.map((cat) => (
               <div
                 key={cat.title}
+                className={`skills-category-card ${activeTab === cat.title ? 'active' : ''}`}
                 style={{
                   border: '1px solid rgba(15,20,40,.07)',
                   borderRadius: 18,
@@ -369,30 +399,44 @@ export default function Skills() {
                   overflow: 'hidden',
                 }}
               >
-                {/* Dynamic SVG Wave Background matching active color */}
+                {/* Dynamic SVG Tech Arcs matching active color (Concentric Rings style) */}
                 <svg
                   style={{
                     position: 'absolute',
-                    bottom: 0,
-                    right: 0,
-                    width: 160,
-                    height: 160,
+                    bottom: -20,
+                    right: -20,
+                    width: 140,
+                    height: 140,
                     zIndex: 0,
                     pointerEvents: 'none',
                   }}
-                  viewBox="0 0 200 200"
+                  viewBox="0 0 100 100"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path
-                    d="M 60,200 C 110,190 130,130 160,80 C 180,47 190,20 200,0 L 200,200 Z"
-                    fill={activeSkillColor}
-                    style={{ opacity: 0.08, transition: 'fill 0.4s ease' }}
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="80"
+                    stroke={activeSkillColor}
+                    strokeWidth="2"
+                    style={{ opacity: 0.08, transition: 'stroke 0.4s ease' }}
                   />
-                  <path
-                    d="M 90,200 C 130,195 150,150 175,110 C 190,80 195,50 200,20 L 200,200 Z"
-                    fill={activeSkillColor}
-                    style={{ opacity: 0.04, transition: 'fill 0.4s ease' }}
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="55"
+                    stroke={activeSkillColor}
+                    strokeWidth="2"
+                    style={{ opacity: 0.05, transition: 'stroke 0.4s ease' }}
+                  />
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="30"
+                    stroke={activeSkillColor}
+                    strokeWidth="2"
+                    style={{ opacity: 0.03, transition: 'stroke 0.4s ease' }}
                   />
                 </svg>
 

@@ -267,11 +267,8 @@ export default function About() {
             {facts.map(([label, value], i) => (
               <div
                 key={label}
+                className="about-fact-row"
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '17px 20px',
                   background: i % 2 === 1 ? '#f7f7f8' : '#fff',
                   borderTop: i === 0 ? 'none' : '1px solid rgba(15,20,40,.05)',
                 }}
