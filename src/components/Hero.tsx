@@ -84,8 +84,19 @@ const TECH_BADGES = [
   }
 ]
 
-export default function Hero() {
+interface HeroProps {
+  accentColor: string | null
+  setAccentColor: (color: string | null) => void
+}
+
+export default function Hero({ accentColor, setAccentColor }: HeroProps) {
   const [hoveredBadge, setHoveredBadge] = useState<number | null>(null)
+
+  const activeBadgeIndex = accentColor 
+    ? TECH_BADGES.findIndex(b => b.color === accentColor) 
+    : -1
+
+  const activeBadge = activeBadgeIndex !== -1 ? activeBadgeIndex : null
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
@@ -108,6 +119,8 @@ export default function Hero() {
         padding: '90px clamp(48px, 8vw, 160px) 110px',
         position: 'relative',
         overflow: 'hidden',
+        background: activeBadge !== null ? `color-mix(in srgb, ${TECH_BADGES[activeBadge].color} 8%, #fcfcfd)` : '#fcfcfd',
+        transition: 'background-color 0.4s ease',
       }}
     >
       <div>
@@ -164,12 +177,21 @@ export default function Hero() {
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', minHeight: 46 }}>
           {TECH_BADGES.map((badge, idx) => {
             const isHovered = hoveredBadge === idx
+            const isActive = activeBadge === idx
+            const showGlow = isHovered || isActive
             return (
               <div
                 key={badge.name}
                 className="tech-badge"
                 onMouseEnter={() => setHoveredBadge(idx)}
                 onMouseLeave={() => setHoveredBadge(null)}
+                onClick={() => {
+                  if (activeBadge === idx) {
+                    setAccentColor(null)
+                  } else {
+                    setAccentColor(badge.color)
+                  }
+                }}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -182,9 +204,9 @@ export default function Hero() {
                   fontSize: 14,
                   fontWeight: 600,
                   cursor: 'pointer',
-                  transform: isHovered ? 'scale(1.15) translateY(-4px)' : 'scale(1)',
-                  borderColor: isHovered ? badge.color : 'rgba(15,20,40,.06)',
-                  boxShadow: isHovered 
+                  transform: showGlow ? 'scale(1.15) translateY(-4px)' : 'scale(1)',
+                  borderColor: showGlow ? badge.color : 'rgba(15,20,40,.06)',
+                  boxShadow: showGlow 
                     ? `0 12px 24px -10px ${badge.color}80, 0 0 20px ${badge.color}35`
                     : '0 4px 12px -8px rgba(20,24,50,.15)',
                 }}
@@ -197,7 +219,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <PhoneScroller />
+      <PhoneScroller activeColor={activeBadge !== null ? TECH_BADGES[activeBadge].color : undefined} />
     </section>
   )
 }

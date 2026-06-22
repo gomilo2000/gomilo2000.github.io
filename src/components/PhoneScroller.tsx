@@ -41,9 +41,21 @@ function EmptyPhone() {
  * Screens are intentionally empty placeholders — real design previews drop in
  * here later, at which point this can become an interactive carousel.
  */
-export default function PhoneScroller() {
+interface PhoneScrollerProps {
+  activeColor?: string
+}
+
+export default function PhoneScroller({ activeColor }: PhoneScrollerProps) {
   const column: CSSProperties = { width: 214, overflow: 'hidden' }
   const track: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 18 }
+
+  const primaryGlowColor = activeColor
+    ? `color-mix(in srgb, color-mix(in srgb, ${activeColor} 70%, #000) 26%, transparent)`
+    : 'color-mix(in srgb, var(--accent) 26%, transparent)'
+
+  const secondaryGlowColor = activeColor
+    ? `color-mix(in srgb, color-mix(in srgb, ${activeColor} 70%, #000) 26%, transparent)`
+    : 'rgba(150,90,255,.26)'
 
   return (
     <div
@@ -58,7 +70,7 @@ export default function PhoneScroller() {
           height: 520,
           maxWidth: '120%',
           borderRadius: '50%',
-          background: 'radial-gradient(circle at 55% 45%, color-mix(in srgb, var(--accent) 26%, transparent), rgba(255,255,255,0) 68%)',
+          background: `radial-gradient(circle at 55% 45%, ${primaryGlowColor}, transparent 68%)`,
           top: 0,
           right: -30,
           filter: 'blur(8px)',
@@ -71,7 +83,7 @@ export default function PhoneScroller() {
           width: 210,
           height: 210,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(150,90,255,.26), rgba(150,90,255,0) 70%)',
+          background: `radial-gradient(circle, ${secondaryGlowColor}, transparent 70%)`,
           bottom: 10,
           left: '4%',
           filter: 'blur(12px)',

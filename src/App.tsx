@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { ACCENT, type StyleVars } from './theme'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
@@ -8,8 +9,10 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 export default function App() {
+  const [accentColor, setAccentColor] = useState<string | null>(null)
+
   const root: StyleVars = {
-    '--accent': ACCENT,
+    '--accent': accentColor || ACCENT,
     minHeight: '100vh',
     background: '#fcfcfd',
     padding: 0,
@@ -28,7 +31,7 @@ export default function App() {
         }}
       >
         <Nav />
-        <Hero />
+        <Hero accentColor={accentColor} setAccentColor={setAccentColor} />
         <About />
         <Projects />
         <Skills />
