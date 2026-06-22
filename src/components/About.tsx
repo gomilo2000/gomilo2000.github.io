@@ -60,6 +60,7 @@ const MAP_DOTS = [
 
 export default function About() {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null)
+  const [confettiTrigger, setConfettiTrigger] = useState(0)
 
   return (
     <section
@@ -124,7 +125,19 @@ export default function About() {
 
           <div style={{ display: 'flex', gap: 14, marginTop: 34, flexWrap: 'wrap' }}>
             <div
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--accent, #1a73ff)'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow = '0 12px 24px -10px rgba(26,115,255,0.15)'
+                setConfettiTrigger(p => p + 1)
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(15,20,40,.08)'
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
               style={{
+                position: 'relative',
                 flex: 1,
                 minWidth: 150,
                 padding: '20px 22px',
@@ -134,19 +147,63 @@ export default function About() {
                 cursor: 'default',
                 transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--accent, #1a73ff)'
-                e.currentTarget.style.transform = 'translateY(-2px)'
-                e.currentTarget.style.boxShadow = '0 12px 24px -10px rgba(26,115,255,0.15)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(15,20,40,.08)'
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
             >
               <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-.02em', color: '#14161a' }}>2024</div>
               <div style={{ marginTop: 4, fontSize: 14, color: '#9aa0a6' }}>IT Bachelor, graduated</div>
+              {confettiTrigger > 0 && (
+                <div key={confettiTrigger} style={{ position: 'absolute', inset: 0, overflow: 'visible', pointerEvents: 'none' }}>
+                  <style>{`
+                    @keyframes burst-particle {
+                      0% {
+                        transform: translate(0, 0) scale(1) rotate(0deg);
+                        opacity: 1;
+                      }
+                      50% {
+                        transform: translate(calc(var(--tx) * 0.5), calc(var(--ty) * 0.5 - 24px)) scale(0.8) rotate(180deg);
+                        opacity: 1;
+                      }
+                      100% {
+                        transform: translate(var(--tx), var(--ty)) scale(0) rotate(var(--rot));
+                        opacity: 0;
+                      }
+                    }
+                  `}</style>
+                  {Array.from({ length: 16 }).map((_, i) => {
+                    const angle = (i / 16) * 360 + (Math.random() * 20 - 10)
+                    const distance = 40 + Math.random() * 50
+                    const delay = Math.random() * 0.08
+                    const size = 5 + Math.random() * 5
+                    const color = ['#ff2a2a', '#ff9a00', '#ffea00', '#00ff1a', '#00eaff', '#a000ff', '#ff00d0'][Math.floor(Math.random() * 7)]
+                    const isCircle = Math.random() > 0.5
+                    
+                    const angleRad = (angle * Math.PI) / 180
+                    const tx = `${Math.cos(angleRad) * distance}px`
+                    const ty = `${Math.sin(angleRad) * distance + 10}px` 
+                    const rot = `${360 + Math.random() * 360}deg`
+
+                    return (
+                      <div
+                        key={i}
+                        style={{
+                          position: 'absolute',
+                          left: '50%',
+                          top: '40%',
+                          width: size,
+                          height: size,
+                          borderRadius: isCircle ? '50%' : '2px',
+                          backgroundColor: color,
+                          animation: `burst-particle 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) ${delay}s forwards`,
+                          pointerEvents: 'none',
+                          zIndex: 10,
+                          ['--tx' as any]: tx,
+                          ['--ty' as any]: ty,
+                          ['--rot' as any]: rot,
+                        }}
+                      />
+                    )
+                  })}
+                </div>
+              )}
             </div>
 
             <div
