@@ -15,7 +15,7 @@ export default function Projects() {
           <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Work</p>
           <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>Selected projects</h2>
         </div>
-        <p style={{ margin: 0, fontSize: 17, color: '#5b6068', maxWidth: 380 }}>Fresh work is in progress — this section is getting a makeover.</p>
+        <p style={{ margin: 0, fontSize: 17, color: '#5b6068', maxWidth: 380 }}>Fresh work is in progress, this section is getting a makeover.</p>
       </div>
 
       <div style={{ position: 'relative', borderRadius: 22, overflow: 'hidden', border: '1px solid rgba(15,20,40,.08)', background: '#fff', boxShadow: '0 30px 60px -38px rgba(20,30,70,.30)' }}>

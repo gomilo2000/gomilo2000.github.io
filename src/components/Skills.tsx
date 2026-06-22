@@ -157,170 +157,203 @@ export default function Skills() {
   const activeDetail = SKILL_DETAILS[selectedSkill] || SKILL_DETAILS['React']
 
   return (
-    <section id="skills" style={{ scrollMarginTop: 90, padding: '90px 48px' }}>
-      <div style={{ marginBottom: 44 }}>
-        <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Skills</p>
-        <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>What I work with</h2>
-      </div>
+    <section
+      id="skills"
+      style={{
+        scrollMarginTop: 90,
+        position: 'relative',
+        borderRadius: 28,
+        backgroundImage: 'url(/skills-bg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        overflow: 'hidden',
+        transform: 'translateZ(0)',
+        WebkitTransform: 'translateZ(0)',
+      }}
+    >
+      {/* Semi-transparent blur overlay */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'rgba(252, 252, 254, 0.86)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          zIndex: 1,
+        }}
+      />
 
-      <div className="skills-layout" style={{ display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 32, alignItems: 'start' }}>
-        
-        {/* Left column: categories grid */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-          {categories.map((cat) => (
-            <div
-              key={cat.title}
-              style={{
-                border: '1px solid rgba(15,20,40,.07)',
-                borderRadius: 18,
-                padding: '24px 24px 28px',
-                background: '#fff',
-                boxShadow: '0 4px 14px -10px rgba(0,0,0,0.05)',
-              }}
-            >
-              <h3 style={{ margin: '0 0 16px', fontSize: 16, fontWeight: 700, color: '#14161a' }}>{cat.title}</h3>
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                {cat.items.map((item) => {
-                  const isActive = selectedSkill === item
-                  return (
-                    <button
-                      key={item}
-                      onClick={() => setSelectedSkill(item)}
-                      style={{
-                        border: '1px solid transparent',
-                        fontSize: 14,
-                        fontWeight: 600,
-                        color: isActive ? '#fff' : '#3c434c',
-                        background: isActive ? 'var(--accent)' : '#f4f4f6',
-                        padding: '10px 16px',
-                        borderRadius: 12,
-                        cursor: 'pointer',
-                        transform: isActive ? 'scale(1.04)' : 'scale(1)',
-                        borderColor: isActive ? 'var(--accent)' : 'transparent',
-                        boxShadow: isActive ? '0 8px 20px -8px var(--accent)' : 'none',
-                        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) e.currentTarget.style.background = '#e9e9eb'
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) e.currentTarget.style.background = '#f4f4f6'
-                      }}
-                    >
-                      {item}
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
-          ))}
+      {/* The actual grid layout */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 2,
+          padding: '90px 48px',
+        }}
+      >
+        <div style={{ marginBottom: 44 }}>
+          <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Skills</p>
+          <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>What I work with</h2>
         </div>
 
-        {/* Right column: detailed description sidebar */}
-        <div
-          style={{
-            position: 'sticky',
-            top: 100,
-            border: '1px solid rgba(15,20,40,.08)',
-            borderRadius: 20,
-            padding: 32,
-            background: '#fff',
-            boxShadow: '0 24px 50px -32px rgba(20,30,70,.2)',
-            minHeight: 380,
-          }}
-        >
-          {/* Key prop triggers re-mount on change, re-running the entry animation */}
-          <div key={activeDetail.title} className="skills-sidebar-fade" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span
+        <div className="skills-layout" style={{ display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 32, alignItems: 'start' }}>
+          
+          {/* Left column: categories grid */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+            {categories.map((cat) => (
+              <div
+                key={cat.title}
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  background: 'color-mix(in srgb, var(--accent) 11%, #fff)',
-                  color: 'var(--accent)',
-                  fontSize: 11,
-                  fontWeight: 700,
-                  letterSpacing: '.1em',
-                  textTransform: 'uppercase',
-                  padding: '6px 12px',
-                  borderRadius: 99,
+                  border: '1px solid rgba(15,20,40,.07)',
+                  borderRadius: 18,
+                  padding: '24px 24px 28px',
+                  background: '#fff',
+                  boxShadow: '0 4px 14px -10px rgba(0,0,0,0.05)',
                 }}
               >
-                Skill Profile
-              </span>
-              
-              {activeDetail.verified ? (
+                <h3 style={{ margin: '0 0 16px', fontSize: 16, fontWeight: 700, color: '#14161a' }}>{cat.title}</h3>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                  {cat.items.map((item) => {
+                    const isActive = selectedSkill === item
+                    return (
+                      <button
+                        key={item}
+                        onClick={() => setSelectedSkill(item)}
+                        style={{
+                          border: '1px solid transparent',
+                          fontSize: 14,
+                          fontWeight: 600,
+                          color: isActive ? '#fff' : '#3c434c',
+                          background: isActive ? 'var(--accent)' : '#f4f4f6',
+                          padding: '10px 16px',
+                          borderRadius: 12,
+                          cursor: 'pointer',
+                          transform: isActive ? 'scale(1.04)' : 'scale(1)',
+                          borderColor: isActive ? 'var(--accent)' : 'transparent',
+                          boxShadow: isActive ? '0 8px 20px -8px var(--accent)' : 'none',
+                          transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isActive) e.currentTarget.style.background = '#e9e9eb'
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isActive) e.currentTarget.style.background = '#f4f4f6'
+                        }}
+                      >
+                        {item}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right column: detailed description sidebar */}
+          <div
+            style={{
+              position: 'sticky',
+              top: 100,
+              border: '1px solid rgba(15,20,40,.08)',
+              borderRadius: 20,
+              padding: 32,
+              background: '#fff',
+              boxShadow: '0 24px 50px -32px rgba(20,30,70,.2)',
+              minHeight: 380,
+            }}
+          >
+            {/* Key prop triggers re-mount on change, re-running the entry animation */}
+            <div key={activeDetail.title} className="skills-sidebar-fade" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: 4,
-                    background: '#e6f4ea',
-                    color: '#137333',
+                    background: 'color-mix(in srgb, var(--accent) 11%, #fff)',
+                    color: 'var(--accent)',
                     fontSize: 11,
                     fontWeight: 700,
+                    letterSpacing: '.1em',
+                    textTransform: 'uppercase',
                     padding: '6px 12px',
                     borderRadius: 99,
                   }}
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Verified
+                  Skill Profile
                 </span>
-              ) : (
-                <span
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    background: '#f1f3f4',
-                    color: '#5f6368',
-                    fontSize: 11,
-                    fontWeight: 700,
-                    padding: '6px 12px',
-                    borderRadius: 99,
-                  }}
-                >
-                  Design Tool
-                </span>
-              )}
-            </div>
-
-            <div>
-              <h3 style={{ margin: '8px 0 2px', fontSize: 24, fontWeight: 800, color: '#111418' }}>
-                {activeDetail.title}
-              </h3>
-              <div style={{ fontSize: 13, color: '#9aa0a6', fontWeight: 600 }}>
-                Level: {activeDetail.level}
+                
+                {activeDetail.verified ? (
+                  <span
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      background: '#e6f4ea',
+                      color: '#137333',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      padding: '6px 12px',
+                      borderRadius: 99,
+                    }}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Verified
+                  </span>
+                ) : (
+                  <span
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      background: '#f1f3f4',
+                      color: '#5f6368',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      padding: '6px 12px',
+                      borderRadius: 99,
+                    }}
+                  >
+                    Design Tool
+                  </span>
+                )}
               </div>
-            </div>
 
-            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#56606c' }}>
-              {activeDetail.description}
-            </p>
-
-            <div style={{ marginTop: 8 }}>
-              <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#9aa0a6', marginBottom: 12 }}>
-                Key Competencies
+              <div>
+                <h3 style={{ margin: '8px 0 2px', fontSize: 24, fontWeight: 800, color: '#111418' }}>
+                  {activeDetail.title}
+                </h3>
+                <div style={{ fontSize: 13, color: '#9aa0a6', fontWeight: 600 }}>
+                  Level: {activeDetail.level}
+                </div>
               </div>
-              <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {activeDetail.checklist.map((item) => (
-                  <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14.5, color: '#3c434c', lineHeight: 1.4 }}>
-                    <span style={{ display: 'inline-flex', marginTop: 3, color: 'var(--accent)' }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+
+              <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#56606c' }}>
+                {activeDetail.description}
+              </p>
+
+              <div style={{ marginTop: 8 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#9aa0a6', marginBottom: 12 }}>
+                  Key Competencies
+                </div>
+                <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {activeDetail.checklist.map((item) => (
+                    <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14.5, color: '#3c434c', lineHeight: 1.4 }}>
+                      <span style={{ display: 'inline-flex', marginTop: 3, color: 'var(--accent)' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </section>
   )
 }
-

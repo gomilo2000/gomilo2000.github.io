@@ -27,6 +27,8 @@ export default function About() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         overflow: 'hidden',
+        transform: 'translateZ(0)',
+        WebkitTransform: 'translateZ(0)',
       }}
     >
       {/* Semi-transparent blur overlay */}
@@ -61,7 +63,7 @@ export default function About() {
             I&apos;m a 26-year-old developer from Eastern Norway with an IT bachelor in Frontend &amp; Mobile development from Kristiania University College. I&apos;ve worked across frontend, mobile, and some backend, and I genuinely enjoy taking an idea all the way to a finished, intuitive product.
           </p>
           <p style={{ ...body, margin: '18px 0 0' }}>
-            I&apos;m motivated by building technology that makes a real difference in everyday life, and I&apos;m eager to keep learning, contributing, and growing — both as a developer and as a person.
+            I&apos;m motivated by building technology that makes a real difference in everyday life, and I&apos;m eager to keep learning, contributing, and growing, both as a developer and as a person.
           </p>
 
           <div style={{ display: 'flex', gap: 14, marginTop: 34, flexWrap: 'wrap' }}>
