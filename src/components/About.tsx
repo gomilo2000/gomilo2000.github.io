@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
 
 const eyebrow: CSSProperties = { margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }
 const heading: CSSProperties = { margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }
@@ -15,7 +15,52 @@ const languages = ['Norwegian · Native', 'English · Fluent', 'Serbian', 'Croat
 
 const chip: CSSProperties = { fontSize: 14, fontWeight: 500, color: '#3c434c', background: '#f4f4f6', padding: '8px 14px', borderRadius: 9 }
 
+const MAP_DOTS = [
+  // Greenland
+  { x: 4, y: 0, region: 'other' }, { x: 5, y: 0, region: 'other' },
+  // Scandinavia (Norway)
+  { x: 7, y: 0, region: 'norway' }, { x: 8, y: 0, region: 'norway' },
+  
+  // North America (representing English speaking region)
+  { x: 1, y: 1, region: 'english' }, { x: 2, y: 1, region: 'english' }, { x: 3, y: 1, region: 'english' },
+  { x: 0, y: 2, region: 'english' }, { x: 1, y: 2, region: 'english' }, { x: 2, y: 2, region: 'english' }, { x: 3, y: 2, region: 'english' },
+  { x: 1, y: 3, region: 'english' }, { x: 2, y: 3, region: 'english' }, { x: 3, y: 3, region: 'english' },
+  { x: 2, y: 4, region: 'english' },
+  
+  // UK / Ireland (English speaking region)
+  { x: 6, y: 1, region: 'english' },
+  
+  // Europe (other)
+  { x: 7, y: 1, region: 'other' },
+  { x: 6, y: 2, region: 'other' }, { x: 7, y: 2, region: 'other' },
+  
+  // Balkans (Serbian, Croatian, Bosnian)
+  { x: 8, y: 2, region: 'balkans' },
+  
+  // South America
+  { x: 3, y: 5, region: 'other' }, { x: 4, y: 5, region: 'other' },
+  { x: 3, y: 6, region: 'other' }, { x: 4, y: 6, region: 'other' },
+  { x: 4, y: 7, region: 'other' },
+  
+  // Africa
+  { x: 7, y: 4, region: 'other' }, { x: 8, y: 4, region: 'other' },
+  { x: 7, y: 5, region: 'other' }, { x: 8, y: 5, region: 'other' }, { x: 9, y: 5, region: 'other' },
+  { x: 8, y: 6, region: 'other' },
+  
+  // Asia / Russia
+  { x: 9, y: 1, region: 'other' }, { x: 10, y: 1, region: 'other' }, { x: 11, y: 1, region: 'other' }, { x: 12, y: 1, region: 'other' }, { x: 13, y: 1, region: 'other' },
+  { x: 9, y: 2, region: 'other' }, { x: 10, y: 2, region: 'other' }, { x: 11, y: 2, region: 'other' }, { x: 12, y: 2, region: 'other' }, { x: 13, y: 2, region: 'other' },
+  { x: 9, y: 3, region: 'other' }, { x: 10, y: 3, region: 'other' }, { x: 11, y: 3, region: 'other' }, { x: 12, y: 3, region: 'other' },
+  { x: 10, y: 4, region: 'other' }, { x: 11, y: 4, region: 'other' }, { x: 12, y: 4, region: 'other' },
+  
+  // Australia
+  { x: 12, y: 6, region: 'other' }, { x: 13, y: 6, region: 'other' },
+  { x: 12, y: 7, region: 'other' }, { x: 13, y: 7, region: 'other' },
+]
+
 export default function About() {
+  const [hoveredRegion, setHoveredRegion] = useState<string | null>(null)
+
   return (
     <section
       id="about"
@@ -78,11 +123,49 @@ export default function About() {
           </p>
 
           <div style={{ display: 'flex', gap: 14, marginTop: 34, flexWrap: 'wrap' }}>
-            <div style={{ flex: 1, minWidth: 150, padding: '20px 22px', border: '1px solid rgba(15,20,40,.08)', borderRadius: 16, background: '#fff' }}>
+            <div
+              style={{
+                flex: 1,
+                minWidth: 150,
+                padding: '20px 22px',
+                border: '1.5px solid rgba(15,20,40,.08)',
+                borderRadius: 16,
+                background: '#fff',
+                cursor: 'default',
+                transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--accent, #1a73ff)'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow = '0 12px 24px -10px rgba(26,115,255,0.15)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(15,20,40,.08)'
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
+            >
               <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-.02em', color: '#14161a' }}>2024</div>
               <div style={{ marginTop: 4, fontSize: 14, color: '#9aa0a6' }}>IT Bachelor, graduated</div>
             </div>
-            <div style={{ flex: 1, minWidth: 150, padding: '20px 22px', border: '1px solid rgba(15,20,40,.08)', borderRadius: 16, background: '#fff' }}>
+
+            <div
+              onMouseEnter={() => setHoveredRegion('all')}
+              onMouseLeave={() => setHoveredRegion(null)}
+              style={{
+                flex: 1,
+                minWidth: 150,
+                padding: '20px 22px',
+                border: '1.5px solid rgba(15,20,40,.08)',
+                borderRadius: 16,
+                background: '#fff',
+                cursor: 'default',
+                transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+                borderColor: hoveredRegion === 'all' ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.08)',
+                boxShadow: hoveredRegion === 'all' ? '0 12px 24px -10px rgba(26,115,255,0.15)' : 'none',
+                transform: hoveredRegion === 'all' ? 'translateY(-2px)' : 'translateY(0)',
+              }}
+            >
               <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-.02em', color: '#14161a' }}>5</div>
               <div style={{ marginTop: 4, fontSize: 14, color: '#9aa0a6' }}>languages spoken</div>
             </div>
@@ -109,10 +192,86 @@ export default function About() {
             ))}
           </div>
 
-          <div style={{ border: '1px solid rgba(15,20,40,.08)', borderRadius: 18, padding: '22px 22px 24px', background: '#fff' }}>
+          <div
+            style={{
+              border: '1px solid rgba(15,20,40,.08)',
+              borderRadius: 18,
+              padding: '22px 22px 24px',
+              background: '#fff',
+              transition: 'all 0.25s ease',
+              borderColor: hoveredRegion !== null ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.08)',
+              boxShadow: hoveredRegion !== null ? '0 12px 28px -12px rgba(26,115,255,0.12)' : 'none',
+            }}
+          >
             <p style={{ margin: '0 0 14px', fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#9aa0a6' }}>Languages</p>
-            <div style={{ display: 'flex', gap: 9, flexWrap: 'wrap' }}>
-              {languages.map((l) => <span key={l} style={chip}>{l}</span>)}
+            
+            <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', gap: 9, flexWrap: 'wrap', flex: '1 1 200px' }}>
+                {languages.map((l) => {
+                  const isNorwegian = l.startsWith('Norwegian')
+                  const isEnglish = l.startsWith('English')
+                  const isBalkans = l === 'Serbian' || l === 'Croatian' || l === 'Bosnian'
+                  
+                  let targetRegion = 'other'
+                  if (isNorwegian) targetRegion = 'norway'
+                  else if (isEnglish) targetRegion = 'english'
+                  else if (isBalkans) targetRegion = 'balkans'
+
+                  const isHighlighted = hoveredRegion === targetRegion || (hoveredRegion === 'all' && targetRegion !== 'other')
+
+                  return (
+                    <span
+                      key={l}
+                      onMouseEnter={() => setHoveredRegion(targetRegion)}
+                      onMouseLeave={() => setHoveredRegion(null)}
+                      style={{
+                        ...chip,
+                        cursor: 'default',
+                        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                        background: isHighlighted ? 'var(--accent, #1a73ff)' : '#f4f4f6',
+                        color: isHighlighted ? '#fff' : '#3c434c',
+                        transform: isHighlighted ? 'scale(1.05)' : 'scale(1)',
+                      }}
+                    >
+                      {l}
+                    </span>
+                  )
+                })}
+              </div>
+              
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '0 0 auto', margin: '0 auto' }}>
+                <svg width="180" height="96" viewBox="0 0 180 96" fill="none" style={{ overflow: 'visible' }}>
+                  {MAP_DOTS.map((dot, idx) => {
+                    const isNorway = dot.region === 'norway'
+                    const isEnglish = dot.region === 'english'
+                    const isBalkans = dot.region === 'balkans'
+
+                    let isActive = false
+                    if (hoveredRegion === 'all') {
+                      isActive = isNorway || isEnglish || isBalkans
+                    } else if (hoveredRegion === 'norway') {
+                      isActive = isNorway
+                    } else if (hoveredRegion === 'english') {
+                      isActive = isEnglish
+                    } else if (hoveredRegion === 'balkans') {
+                      isActive = isBalkans
+                    }
+
+                    return (
+                      <circle
+                        key={idx}
+                        cx={dot.x * 12 + 6}
+                        cy={dot.y * 12 + 6}
+                        r={isActive ? 4.2 : 3}
+                        fill={isActive ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.08)'}
+                        style={{
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        }}
+                      />
+                    )
+                  })}
+                </svg>
+              </div>
             </div>
           </div>
         </div>
