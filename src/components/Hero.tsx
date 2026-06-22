@@ -37,12 +37,13 @@ const TECH_BADGES = [
     )
   },
   {
-    name: 'Vue',
-    color: '#42b883',
+    name: 'C#',
+    color: '#854cc7',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path d="M12 21L1.5 3h4.5L12 13.5 18 3h4.5L12 21Z" fill="#42b883" />
-        <path d="M12 17L5 4.5h3L12 13l4-8.5h3L12 17Z" fill="#35495e" />
+        <rect x="2" y="2" width="20" height="20" rx="4" fill="#854cc7" />
+        <path d="M11 8c-2 0-3.5 1.5-3.5 4s1.5 4 3.5 4c1.2 0 2.2-.6 2.8-1.5l-1.5-1c-.3.5-.7.7-1.3.7-1 0-1.7-.8-1.7-2.2s.7-2.2 1.7-2.2c.6 0 1 .2 1.3.7l1.5-1C13.2 8.6 12.2 8 11 8Z" fill="#fff" />
+        <path d="M14 9.5h5v1h-5v-1ZM14 12.5h5v1h-5v-1ZM15.5 8.5h1v6h-1v-6ZM17.5 8.5h1v6h-1v-6Z" fill="#fff" />
       </svg>
     )
   },
@@ -52,6 +53,22 @@ const TECH_BADGES = [
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
         <path d="M2 19c6-1 10-6 11-10 1 3 3 5 5 6-3-5-3-11-2-12-3 2-6 5-8 9-2 2-3 4-6 7ZM22 22C14 20 8 13 9 7c1 3 2 5 4 6-2-4-1-8 1-9-1 2-2 4-2 6 2 0 6-3 8-7-2 4-2 8 0 11 1-2 2-3 2-5-1 4-1 9-2 11ZM12 21c-5-2-7-6-6-9 1 2 2 3 4 4-2-3-2-6-1-7-1 2-1 3-1 5 1 0 4-2 6-5-1 3-1 6 0 8 1-1 2-2 2-4-1 3-1 6-2 8Z" fill="#f05138" />
+      </svg>
+    )
+  },
+  {
+    name: 'Kotlin',
+    color: '#7f52ff',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <defs>
+          <linearGradient id="kotlin-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#7F52FF" />
+            <stop offset="50%" stopColor="#C711E1" />
+            <stop offset="100%" stopColor="#E2445C" />
+          </linearGradient>
+        </defs>
+        <path d="M24 0H0v24h24L12 12Z" fill="url(#kotlin-grad)" />
       </svg>
     )
   },
@@ -70,15 +87,6 @@ const TECH_BADGES = [
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
         <path d="M2.3 10.7l9 9c.4.4 1 .4 1.4 0l9-9c.4-.4.4-1 0-1.4l-9-9c-.4-.4-1-.4-1.4 0l-9 9c-.4.4-.4 1 0 1.4zm9.3-5.3h1v5.1c.5.3.9.8.9 1.4 0 1-.8 1.8-1.8 1.8s-1.8-.8-1.8-1.8c0-.6.3-1.1.9-1.4V5.4z" fill="#f05032" />
-      </svg>
-    )
-  },
-  {
-    name: 'Python',
-    color: '#3776ab',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2c-2.7 0-2.5 1.2-2.5 1.2v1.6h5v.7h-5v2.8h-2.2S3 8 3 10.7s2.3 2.5 2.3 2.5h1.4v-2c0-1.4 1.2-2.5 2.5-2.5h5V5.5S14.7 2 12 2ZM12 22c2.7 0 2.5-1.2 2.5-1.2v-1.6h-5v-.7h5v-2.8h2.2S21 16 21 13.3s-2.3-2.5-2.3-2.5h-1.4v2c0 1.4-1.2 2.5-2.5 2.5h-5v3.2S9.3 22 12 22Z" fill="#3776ab" />
       </svg>
     )
   }

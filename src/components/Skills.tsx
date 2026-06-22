@@ -205,7 +205,14 @@ const SKILL_THEME: Record<string, { color: string; icon: React.ReactNode }> = {
     color: '#7F52FF',
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-        <path d="M24 24H0V0h24L12 12Z" fill="#7F52FF" />
+        <defs>
+          <linearGradient id="kotlin-grad-skills" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#7F52FF" />
+            <stop offset="50%" stopColor="#C711E1" />
+            <stop offset="100%" stopColor="#E2445C" />
+          </linearGradient>
+        </defs>
+        <path d="M24 0H0v24h24L12 12Z" fill="url(#kotlin-grad-skills)" />
       </svg>
     )
   },
@@ -229,11 +236,12 @@ const SKILL_THEME: Record<string, { color: string; icon: React.ReactNode }> = {
     )
   },
   'C#': {
-    color: '#239120',
+    color: '#854cc7',
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-        <rect width="24" height="24" rx="4" fill="#239120" />
-        <path d="M16 10h-2v-2h-2v2H9v2h3v2H9v2h3v2h2v-2h2v-2h-2v-2h2v-2zm-4 4h-2v-2h2v2z" fill="#fff" />
+        <rect x="2" y="2" width="20" height="20" rx="4" fill="#854cc7" />
+        <path d="M11 8c-2 0-3.5 1.5-3.5 4s1.5 4 3.5 4c1.2 0 2.2-.6 2.8-1.5l-1.5-1c-.3.5-.7.7-1.3.7-1 0-1.7-.8-1.7-2.2s.7-2.2 1.7-2.2c.6 0 1 .2 1.3.7l1.5-1C13.2 8.6 12.2 8 11 8Z" fill="#fff" />
+        <path d="M14 9.5h5v1h-5v-1ZM14 12.5h5v1h-5v-1ZM15.5 8.5h1v6h-1v-6ZM17.5 8.5h1v6h-1v-6Z" fill="#fff" />
       </svg>
     )
   },

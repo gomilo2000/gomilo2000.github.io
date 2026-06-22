@@ -83,28 +83,29 @@ export default function PhoneScroller({ activeColor }: PhoneScrollerProps) {
         <div
           style={{
             position: 'absolute',
-            width: 520,
-            height: 520,
-            maxWidth: '120%',
+            width: 500,
+            height: 500,
             borderRadius: '50%',
-            background: `radial-gradient(circle at 55% 45%, ${primaryGlowColor}, transparent 68%)`,
-            top: 0,
-            right: -30,
-            filter: 'blur(8px)',
+            background: `radial-gradient(circle, ${primaryGlowColor}, transparent 65%)`,
+            top: 'calc(50% - 250px)',
+            left: 'calc(50% - 250px)',
+            filter: 'blur(30px)',
             animation: 'cc-glow 7s ease-in-out infinite',
+            pointerEvents: 'none',
           }}
         />
         <div
           style={{
             position: 'absolute',
-            width: 210,
-            height: 210,
+            width: 240,
+            height: 240,
             borderRadius: '50%',
-            background: `radial-gradient(circle, ${secondaryGlowColor}, transparent 70%)`,
-            bottom: 10,
-            left: '4%',
-            filter: 'blur(12px)',
+            background: `radial-gradient(circle, ${secondaryGlowColor}, transparent 60%)`,
+            bottom: 30,
+            left: '15%',
+            filter: 'blur(25px)',
             animation: 'cc-glow 9s ease-in-out infinite reverse',
+            pointerEvents: 'none',
           }}
         />
 
