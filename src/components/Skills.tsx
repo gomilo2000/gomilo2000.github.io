@@ -365,10 +365,39 @@ export default function Skills() {
                   padding: '24px 24px 28px',
                   background: '#fff',
                   boxShadow: '0 4px 14px -10px rgba(0,0,0,0.05)',
+                  position: 'relative',
+                  overflow: 'hidden',
                 }}
               >
-                <h3 style={{ margin: '0 0 16px', fontSize: 16, fontWeight: 700, color: '#14161a' }}>{cat.title}</h3>
-                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                {/* Dynamic SVG Wave Background matching active color */}
+                <svg
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    width: 160,
+                    height: 160,
+                    zIndex: 0,
+                    pointerEvents: 'none',
+                  }}
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M 60,200 C 110,190 130,130 160,80 C 180,47 190,20 200,0 L 200,200 Z"
+                    fill={activeSkillColor}
+                    style={{ opacity: 0.08, transition: 'fill 0.4s ease' }}
+                  />
+                  <path
+                    d="M 90,200 C 130,195 150,150 175,110 C 190,80 195,50 200,20 L 200,200 Z"
+                    fill={activeSkillColor}
+                    style={{ opacity: 0.04, transition: 'fill 0.4s ease' }}
+                  />
+                </svg>
+
+                <h3 style={{ margin: '0 0 16px', fontSize: 16, fontWeight: 700, color: '#14161a', position: 'relative', zIndex: 1 }}>{cat.title}</h3>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
                   {cat.items.map((item) => {
                     const isActive = selectedSkill === item
                     const brandColor = SKILL_THEME[item]?.color || '#1a73ff'
