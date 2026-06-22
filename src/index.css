@@ -101,6 +101,12 @@ body {
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
+@media (max-width: 1023px) {
+  .tech-badge-indicator {
+    display: none !important;
+  }
+}
+
 .skills-icon-card {
   transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
