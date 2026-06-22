@@ -157,53 +157,8 @@ export default function Skills() {
   const activeDetail = SKILL_DETAILS[selectedSkill] || SKILL_DETAILS['React']
 
   return (
-    <section
-      id="skills"
-      style={{
-        scrollMarginTop: 90,
-        position: 'relative',
-        borderRadius: 28,
-        overflow: 'hidden',
-        background: '#fcfcfd',
-        transform: 'translateZ(0)',
-        WebkitTransform: 'translateZ(0)',
-      }}
-    >
-      {/* Blurred background image container scaled to prevent edge artifacts */}
-      <div
-        style={{
-          position: 'absolute',
-          top: -10,
-          left: -10,
-          right: -10,
-          bottom: -10,
-          backgroundImage: 'url(/skills-bg.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'blur(10px)',
-          transform: 'scale(1.08)',
-          zIndex: 0,
-        }}
-      />
-      {/* Semi-transparent tint overlay on top of the blur */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(252, 252, 254, 0.86)',
-          zIndex: 1,
-        }}
-      />
-
-      {/* The actual grid layout */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          padding: '90px 48px',
-        }}
-      >
-        <div style={{ marginBottom: 44 }}>
+    <section id="skills" style={{ scrollMarginTop: 90, padding: '90px 48px' }}>
+      <div style={{ marginBottom: 44 }}>
           <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Skills</p>
           <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>What I work with</h2>
         </div>
@@ -365,7 +320,6 @@ export default function Skills() {
           </div>
 
         </div>
-      </div>
     </section>
   )
 }
