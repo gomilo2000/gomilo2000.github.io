@@ -4,7 +4,7 @@ const link: CSSProperties = { fontSize: 14, color: '#56606c', textDecoration: 'n
 
 export default function Footer() {
   return (
-    <footer style={{ padding: '48px clamp(48px, 5.5vw, 80px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', borderTop: '1px solid rgba(15,20,40,.06)', borderRadius: '0 0 28px 28px' }}>
+    <footer style={{ padding: '60px clamp(48px, 8vw, 160px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', borderTop: '1px solid rgba(15,20,40,.06)' }}>
       <div>
         <span style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 16, fontWeight: 600, color: '#14161a' }}>
           Goran Milosevic

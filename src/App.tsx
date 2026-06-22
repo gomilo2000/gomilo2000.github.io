@@ -11,8 +11,8 @@ export default function App() {
   const root: StyleVars = {
     '--accent': ACCENT,
     minHeight: '100vh',
-    background: '#d8d8da',
-    padding: 'clamp(12px,2.2vw,30px)',
+    background: '#fcfcfd',
+    padding: 0,
     display: 'flex',
     justifyContent: 'center',
   }
@@ -22,10 +22,8 @@ export default function App() {
       <main
         style={{
           width: '100%',
-          maxWidth: 1520,
+          maxWidth: '100%',
           background: '#fcfcfd',
-          borderRadius: 28,
-          boxShadow: '0 40px 90px -50px rgba(20,24,50,.40), 0 2px 10px rgba(0,0,0,.04)',
           position: 'relative',
         }}
       >

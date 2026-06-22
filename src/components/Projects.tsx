@@ -9,7 +9,7 @@ const hazard: CSSProperties = { height: 6, background: 'repeating-linear-gradien
  */
 export default function Projects() {
   return (
-    <section id="projects" style={{ scrollMarginTop: 90, padding: '110px clamp(48px, 5.5vw, 80px)', background: '#f5f5f7' }}>
+    <section id="projects" style={{ scrollMarginTop: 90, padding: '130px clamp(48px, 8vw, 160px)', background: '#f5f5f7' }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', marginBottom: 44 }}>
         <div>
           <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Work</p>

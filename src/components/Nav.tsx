@@ -50,7 +50,7 @@ export default function Nav() {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: 24,
-        padding: '20px clamp(40px, 5.5vw, 72px)',
+        padding: '24px clamp(48px, 8vw, 160px)',
         position: 'sticky',
         top: 0,
         zIndex: 60,
@@ -58,7 +58,6 @@ export default function Nav() {
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
         borderBottom: '1px solid rgba(15,20,40,.05)',
-        borderRadius: '28px 28px 0 0',
       }}
     >
       <a

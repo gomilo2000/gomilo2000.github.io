@@ -157,7 +157,7 @@ export default function Skills() {
   const activeDetail = SKILL_DETAILS[selectedSkill] || SKILL_DETAILS['React']
 
   return (
-    <section id="skills" style={{ scrollMarginTop: 90, padding: '110px clamp(48px, 5.5vw, 80px)' }}>
+    <section id="skills" style={{ scrollMarginTop: 90, padding: '130px clamp(48px, 8vw, 160px)' }}>
       <div style={{ marginBottom: 44 }}>
           <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Skills</p>
           <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>What I work with</h2>

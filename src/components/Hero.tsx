@@ -103,9 +103,9 @@ export default function Hero() {
         scrollMarginTop: 90,
         display: 'grid',
         gridTemplateColumns: '1.05fr .95fr',
-        gap: 52,
+        gap: 80,
         alignItems: 'center',
-        padding: '72px clamp(48px, 5.5vw, 80px) 90px',
+        padding: '90px clamp(48px, 8vw, 160px) 110px',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -132,7 +132,7 @@ export default function Hero() {
           Hi, I&apos;m <span style={{ color: 'var(--accent)' }}>Goran</span>.
         </h1>
 
-        <p style={{ margin: '24px 0 0', maxWidth: 540, fontSize: 18, lineHeight: 1.55, color: '#5b6068' }}>
+        <p style={{ margin: '24px 0 0', maxWidth: 640, fontSize: 18, lineHeight: 1.55, color: '#5b6068' }}>
           Junior fullstack developer from Norway, building intuitive products across web and mobile.
         </p>
 

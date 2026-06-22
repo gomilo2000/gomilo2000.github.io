@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react'
 
 const eyebrow: CSSProperties = { margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }
 const heading: CSSProperties = { margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }
-const body: CSSProperties = { fontSize: 18, lineHeight: 1.65, color: '#5b6068', maxWidth: 580 }
+const body: CSSProperties = { fontSize: 18, lineHeight: 1.65, color: '#5b6068', maxWidth: 680 }
 
 const facts: [string, string][] = [
   ['Location', 'Askim, Norway'],
@@ -22,7 +22,6 @@ export default function About() {
       style={{
         scrollMarginTop: 90,
         position: 'relative',
-        borderRadius: 28,
         overflow: 'hidden',
         background: '#fcfcfd',
         transform: 'translateZ(0)',
@@ -61,10 +60,10 @@ export default function About() {
         style={{
           position: 'relative',
           zIndex: 2,
-          padding: '110px clamp(48px, 5.5vw, 80px)',
+          padding: '130px clamp(48px, 8vw, 160px)',
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: 80,
+          gap: 120,
           alignItems: 'start',
         }}
       >
