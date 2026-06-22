@@ -12,13 +12,39 @@ export default function Projects() {
     <section id="projects" style={{ scrollMarginTop: 90, padding: '130px clamp(48px, 8vw, 160px)', background: '#f5f5f7' }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', marginBottom: 44 }}>
         <div>
-          <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Work</p>
+          <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Projects</p>
           <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>Selected projects</h2>
         </div>
         <p style={{ margin: 0, fontSize: 17, color: '#5b6068', maxWidth: 480 }}>Fresh work is in progress, this section is getting a makeover.</p>
       </div>
 
       <div style={{ position: 'relative', borderRadius: 22, overflow: 'hidden', border: '1px solid rgba(15,20,40,.08)', background: '#fff', boxShadow: '0 30px 60px -38px rgba(20,30,70,.30)' }}>
+        {/* Under construction tape on the left side */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: 16,
+            background: 'repeating-linear-gradient(135deg, #f6c700, #f6c700 10px, #1b1b1b 10px, #1b1b1b 20px)',
+            zIndex: 10,
+            boxShadow: '2px 0 8px rgba(0,0,0,0.15)',
+          }}
+        />
+        {/* Under construction tape on the right side */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            right: 0,
+            width: 16,
+            background: 'repeating-linear-gradient(135deg, #f6c700, #f6c700 10px, #1b1b1b 10px, #1b1b1b 20px)',
+            zIndex: 10,
+            boxShadow: '-2px 0 8px rgba(0,0,0,0.15)',
+          }}
+        />
         <div style={{ padding: '72px 40px 76px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', background: 'radial-gradient(circle at 50% -10%, #fafafb, #fff 70%)' }}>
           {/* hard hat in soft disc */}
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 26 }}>

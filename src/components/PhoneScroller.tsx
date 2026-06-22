@@ -46,7 +46,7 @@ interface PhoneScrollerProps {
 }
 
 export default function PhoneScroller({ activeColor }: PhoneScrollerProps) {
-  const column: CSSProperties = { width: 214, overflow: 'hidden' }
+  const column: CSSProperties = { width: 214 }
   const track: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 18 }
 
   const primaryGlowColor = activeColor
@@ -60,36 +60,77 @@ export default function PhoneScroller({ activeColor }: PhoneScrollerProps) {
   return (
     <div
       className="hero-visual"
-      style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 480, overflow: 'hidden' }}
+      style={{
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: 480,
+        overflow: 'hidden',
+      }}
     >
-      {/* glows */}
+      {/* Masked content wrapper */}
       <div
         style={{
           position: 'absolute',
-          width: 520,
-          height: 520,
-          maxWidth: '120%',
-          borderRadius: '50%',
-          background: `radial-gradient(circle at 55% 45%, ${primaryGlowColor}, transparent 68%)`,
-          top: 0,
-          right: -30,
-          filter: 'blur(8px)',
-          animation: 'cc-glow 7s ease-in-out infinite',
+          inset: 0,
+          overflow: 'hidden',
+          maskImage: 'linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent)',
+          WebkitMaskImage: 'linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent)',
         }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          width: 210,
-          height: 210,
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${secondaryGlowColor}, transparent 70%)`,
-          bottom: 10,
-          left: '4%',
-          filter: 'blur(12px)',
-          animation: 'cc-glow 9s ease-in-out infinite reverse',
-        }}
-      />
+      >
+        {/* glows */}
+        <div
+          style={{
+            position: 'absolute',
+            width: 520,
+            height: 520,
+            maxWidth: '120%',
+            borderRadius: '50%',
+            background: `radial-gradient(circle at 55% 45%, ${primaryGlowColor}, transparent 68%)`,
+            top: 0,
+            right: -30,
+            filter: 'blur(8px)',
+            animation: 'cc-glow 7s ease-in-out infinite',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            width: 210,
+            height: 210,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${secondaryGlowColor}, transparent 70%)`,
+            bottom: 10,
+            left: '4%',
+            filter: 'blur(12px)',
+            animation: 'cc-glow 9s ease-in-out infinite reverse',
+          }}
+        />
+
+        {/* tilted belt */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            transform: 'rotate(-9deg) scale(1.05)',
+            display: 'flex',
+            gap: 18,
+            justifyContent: 'center',
+          }}
+        >
+          <div style={column}>
+            <div style={{ ...track, animation: 'he-up 20s linear infinite' }}>
+              {Array.from({ length: 4 }).map((_, i) => <EmptyPhone key={i} />)}
+            </div>
+          </div>
+          <div style={{ ...column, marginTop: -46 }}>
+            <div style={{ ...track, animation: 'he-down 24s linear infinite' }}>
+              {Array.from({ length: 4 }).map((_, i) => <EmptyPhone key={i} />)}
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* status pill */}
       <span
@@ -118,31 +159,6 @@ export default function PhoneScroller({ activeColor }: PhoneScrollerProps) {
         </span>
         Previews coming soon
       </span>
-
-      {/* tilted belt */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          transform: 'rotate(-9deg) scale(1.05)',
-          display: 'flex',
-          gap: 18,
-          justifyContent: 'center',
-          maskImage: 'linear-gradient(180deg,transparent,#000 13%,#000 87%,transparent)',
-          WebkitMaskImage: 'linear-gradient(180deg,transparent,#000 13%,#000 87%,transparent)',
-        }}
-      >
-        <div style={column}>
-          <div style={{ ...track, animation: 'he-up 20s linear infinite' }}>
-            {Array.from({ length: 4 }).map((_, i) => <EmptyPhone key={i} />)}
-          </div>
-        </div>
-        <div style={{ ...column, marginTop: -46 }}>
-          <div style={{ ...track, animation: 'he-down 24s linear infinite' }}>
-            {Array.from({ length: 4 }).map((_, i) => <EmptyPhone key={i} />)}
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
