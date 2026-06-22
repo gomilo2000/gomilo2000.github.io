@@ -166,13 +166,12 @@ export default function About() {
                         transform: translate(var(--tx), var(--ty)) scale(0) rotate(var(--rot));
                         opacity: 0;
                       }
-                    }
-                  `}</style>
+                                      `}</style>
                   {Array.from({ length: 16 }).map((_, i) => {
                     const angle = (i / 16) * 360 + (Math.random() * 20 - 10)
-                    const distance = 40 + Math.random() * 50
+                    const distance = 40 + Math.random() * 60
                     const delay = Math.random() * 0.08
-                    const size = 5 + Math.random() * 5
+                    const size = 9 + Math.random() * 9
                     const color = ['#ff2a2a', '#ff9a00', '#ffea00', '#00ff1a', '#00eaff', '#a000ff', '#ff00d0'][Math.floor(Math.random() * 7)]
                     const isCircle = Math.random() > 0.5
                     
@@ -200,6 +199,40 @@ export default function About() {
                           ['--rot' as any]: rot,
                         }}
                       />
+                    )
+                  })}
+                  {Array.from({ length: 2 }).map((_, i) => {
+                    const angle = -90 + (i === 0 ? -25 : 25)
+                    const distance = 60 + Math.random() * 30
+                    const delay = 0.05 + Math.random() * 0.1
+                    const size = 26
+                    
+                    const angleRad = (angle * Math.PI) / 180
+                    const tx = `${Math.cos(angleRad) * distance}px`
+                    const ty = `${Math.sin(angleRad) * distance + 10}px` 
+                    const rot = `${360 + (i === 0 ? -45 : 45)}deg`
+
+                    return (
+                      <div
+                        key={`emoji-${i}`}
+                        style={{
+                          position: 'absolute',
+                          left: '50%',
+                          top: '40%',
+                          fontSize: size,
+                          lineHeight: 1,
+                          animation: `burst-particle 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) ${delay}s forwards`,
+                          pointerEvents: 'none',
+                          zIndex: 11,
+                          marginLeft: '-13px',
+                          marginTop: '-13px',
+                          ['--tx' as any]: tx,
+                          ['--ty' as any]: ty,
+                          ['--rot' as any]: rot,
+                        }}
+                      >
+                        🥳
+                      </div>
                     )
                   })}
                 </div>
