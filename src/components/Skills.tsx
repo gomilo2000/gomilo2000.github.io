@@ -163,22 +163,34 @@ export default function Skills() {
         scrollMarginTop: 90,
         position: 'relative',
         borderRadius: 28,
-        backgroundImage: 'url(/skills-bg.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
         overflow: 'hidden',
+        background: '#fcfcfd',
         transform: 'translateZ(0)',
         WebkitTransform: 'translateZ(0)',
       }}
     >
-      {/* Semi-transparent blur overlay */}
+      {/* Blurred background image container scaled to prevent edge artifacts */}
+      <div
+        style={{
+          position: 'absolute',
+          top: -10,
+          left: -10,
+          right: -10,
+          bottom: -10,
+          backgroundImage: 'url(/skills-bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(10px)',
+          transform: 'scale(1.08)',
+          zIndex: 0,
+        }}
+      />
+      {/* Semi-transparent tint overlay on top of the blur */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background: 'rgba(252, 252, 254, 0.86)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
           zIndex: 1,
         }}
       />
