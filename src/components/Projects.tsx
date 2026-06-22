@@ -19,8 +19,6 @@ export default function Projects() {
       </div>
 
       <div style={{ position: 'relative', borderRadius: 22, overflow: 'hidden', border: '1px solid rgba(15,20,40,.08)', background: '#fff', boxShadow: '0 30px 60px -38px rgba(20,30,70,.30)' }}>
-        <div style={hazard} />
-
         <div style={{ padding: '72px 40px 76px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', background: 'radial-gradient(circle at 50% -10%, #fafafb, #fff 70%)' }}>
           {/* hard hat in soft disc */}
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 26 }}>
@@ -43,7 +41,7 @@ export default function Projects() {
           </span>
           <h3 style={{ margin: '18px 0 0', fontSize: 'clamp(26px,3vw,36px)', fontWeight: 800, letterSpacing: '-.02em', color: '#14161a' }}>Pardon the dust</h3>
           <p style={{ margin: '16px 0 0', maxWidth: 460, fontSize: 17, lineHeight: 1.6, color: '#5b6068' }}>
-            I&apos;m wrapping up a few fresh projects right now. Check back soon — new case studies are landing here shortly.
+            I&apos;m wrapping up a few fresh projects right now. Check back soon.
           </p>
 
           {/* build progress */}
@@ -57,8 +55,6 @@ export default function Projects() {
             </div>
           </div>
         </div>
-
-        <div style={hazard} />
       </div>
     </section>
   )
