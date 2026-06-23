@@ -117,7 +117,7 @@ export default function About() {
           <p style={eyebrow}>About</p>
           <h2 style={heading}>More about me</h2>
           <p style={{ ...body, margin: '24px 0 0' }}>
-            I&apos;m a 26-year-old developer from Eastern Norway with an IT bachelor in Frontend &amp; Mobile development from Kristiania University College. I&apos;ve worked across frontend, mobile, and some backend, and I genuinely enjoy taking an idea all the way to a finished, intuitive product.
+            I&apos;m a 26-year-old developer from Norway with an IT bachelor in Frontend &amp; Mobile development from Kristiania University College. I&apos;ve worked across frontend, mobile, and some backend, and I genuinely enjoy taking an idea all the way to a finished, intuitive product.
           </p>
           <p style={{ ...body, margin: '18px 0 0' }}>
             I&apos;m motivated by building technology that makes a real difference in everyday life, and I&apos;m eager to keep learning, contributing, and growing, both as a developer and as a person.
