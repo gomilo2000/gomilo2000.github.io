@@ -42,10 +42,11 @@ function EmptyPhone() {
  * here later, at which point this can become an interactive carousel.
  */
 interface PhoneScrollerProps {
+  language?: 'en' | 'no'
   activeColor?: string
 }
 
-export default function PhoneScroller({ activeColor }: PhoneScrollerProps) {
+export default function PhoneScroller({ language = 'en', activeColor }: PhoneScrollerProps) {
   const column: CSSProperties = { width: 214 }
   const track: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 18 }
 
@@ -158,7 +159,7 @@ export default function PhoneScroller({ activeColor }: PhoneScrollerProps) {
           <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: '#f6c700', opacity: 0.6, animation: 'cc-ping 1.6s cubic-bezier(0,0,.2,1) infinite' }} />
           <span style={{ position: 'relative', width: 8, height: 8, borderRadius: '50%', background: '#e6b800' }} />
         </span>
-        Previews coming soon
+        {language === 'en' ? 'Previews coming soon' : 'Forhåndsvisninger kommer snart'}
       </span>
     </div>
   )

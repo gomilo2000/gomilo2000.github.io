@@ -93,11 +93,24 @@ const TECH_BADGES = [
 ]
 
 interface HeroProps {
+  language: 'en' | 'no'
   accentColor: string | null
   setAccentColor: (color: string | null) => void
 }
 
-export default function Hero({ accentColor, setAccentColor }: HeroProps) {
+export default function Hero({ language, accentColor, setAccentColor }: HeroProps) {
+  const t = {
+    role: language === 'en' ? 'Junior Developer · Fullstack' : 'Juniorutvikler · Fullstack',
+    title: language === 'en' ? "Hi, I'm " : "Hei, jeg er ",
+    subtitle: language === 'en' 
+      ? 'Junior fullstack developer from Norway, building intuitive products across web and mobile.'
+      : 'Junior fullstack-utvikler fra Norge, som bygger intuitive produkter for web og mobil.',
+    projectsBtn: language === 'en' ? 'View my projects' : 'Se mine prosjekter',
+    contactBtn: language === 'en' ? 'Get in touch' : 'Ta kontakt',
+    techTitle: language === 'en' ? 'Tech I work with' : 'Teknologi jeg bruker',
+    clickMe: language === 'en' ? 'click me' : 'klikk meg'
+  }
+
   const [hoveredBadge, setHoveredBadge] = useState<number | null>(null)
   const [topRowLastIdx, setTopRowLastIdx] = useState<number | null>(null)
   const badgeRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -179,15 +192,15 @@ export default function Hero({ accentColor, setAccentColor }: HeroProps) {
             borderRadius: 999,
           }}
         >
-          Junior Developer · Fullstack
+          {t.role}
         </span>
 
         <h1 style={{ margin: '24px 0 0', fontSize: 'clamp(38px,5vw,66px)', lineHeight: 1.02, fontWeight: 800, letterSpacing: '-.035em', color: '#0f1115' }}>
-          Hi, I&apos;m <span style={{ color: 'var(--accent)' }}>Goran</span>.
+          {t.title}<span style={{ color: 'var(--accent)' }}>Goran</span>.
         </h1>
 
         <p style={{ margin: '24px 0 0', maxWidth: 640, fontSize: 18, lineHeight: 1.55, color: '#5b6068' }}>
-          Junior fullstack developer from Norway, building intuitive products across web and mobile.
+          {t.subtitle}
         </p>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginTop: 34 }}>
@@ -197,7 +210,7 @@ export default function Hero({ accentColor, setAccentColor }: HeroProps) {
             className="btn-dark"
             style={{ display: 'inline-flex', alignItems: 'center', gap: 11, background: '#111418', color: '#fff', fontSize: 16, fontWeight: 500, padding: '16px 26px', borderRadius: 14, textDecoration: 'none', boxShadow: '0 12px 28px -12px rgba(0,0,0,.65)' }}
           >
-            View my projects
+            {t.projectsBtn}
             <ArrowRight />
           </a>
           <a
@@ -206,13 +219,13 @@ export default function Hero({ accentColor, setAccentColor }: HeroProps) {
             className="btn-ghost"
             style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: '#14161a', fontSize: 16, fontWeight: 500, padding: '16px 6px', textDecoration: 'none' }}
           >
-            Get in touch
+            {t.contactBtn}
             <ArrowRight />
           </a>
         </div>
 
         <p style={{ margin: '56px 0 16px', fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#9aa0a6' }}>
-          Tech I work with
+          {t.techTitle}
         </p>
         
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', minHeight: 46 }}>
@@ -298,7 +311,7 @@ export default function Hero({ accentColor, setAccentColor }: HeroProps) {
                         display: 'inline-block',
                       }}
                     >
-                      click me
+                      {t.clickMe}
                     </span>
                   </div>
                 )}
@@ -308,7 +321,7 @@ export default function Hero({ accentColor, setAccentColor }: HeroProps) {
         </div>
       </div>
 
-      <PhoneScroller activeColor={activeBadge !== null ? TECH_BADGES[activeBadge].color : undefined} />
+      <PhoneScroller language={language} activeColor={activeBadge !== null ? TECH_BADGES[activeBadge].color : undefined} />
     </section>
   )
 }

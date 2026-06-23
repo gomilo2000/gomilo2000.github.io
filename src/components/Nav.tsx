@@ -1,9 +1,22 @@
 import { useState, useEffect } from 'react'
 import { DownloadIcon } from '../theme'
 
-export default function Nav() {
+interface NavProps {
+  language: 'en' | 'no'
+}
+
+export default function Nav({ language }: NavProps) {
   const [activeSection, setActiveSection] = useState('about')
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const t = {
+    about: language === 'en' ? 'About' : 'Om meg',
+    projects: language === 'en' ? 'Projects' : 'Prosjekter',
+    skills: language === 'en' ? 'Skills' : 'Ferdigheter',
+    contact: language === 'en' ? 'Contact' : 'Kontakt',
+    resume: language === 'en' ? 'Resume' : 'CV',
+    resumeFile: language === 'en' ? '/Goran_Milosevic_CV.pdf' : '/Goran_Milosevic_CV_Norsk.pdf'
+  }
 
   useEffect(() => {
     const sections = ['about', 'projects', 'skills', 'contact']
@@ -77,70 +90,73 @@ export default function Nav() {
         </span>
       </a>
 
-      {/* Desktop View Navigation Links (Hidden on Mobile) */}
-      <div className="desktop-only" style={{ alignItems: 'center', gap: 36 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
-          <a href="#about" onClick={(e) => handleSmoothScroll(e, 'about')} className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}>About</a>
-          <a href="#projects" onClick={(e) => handleSmoothScroll(e, 'projects')} className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`}>Projects</a>
-          <a href="#skills" onClick={(e) => handleSmoothScroll(e, 'skills')} className={`nav-link ${activeSection === 'skills' ? 'active' : ''}`}>Skills</a>
-          <a href="#contact" onClick={(e) => handleSmoothScroll(e, 'contact')} className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`}>Contact</a>
+      {/* Right side controls row */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+        {/* Desktop View Navigation Links (Hidden on Mobile) */}
+        <div className="desktop-only" style={{ alignItems: 'center', gap: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
+            <a href="#about" onClick={(e) => handleSmoothScroll(e, 'about')} className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}>{t.about}</a>
+            <a href="#projects" onClick={(e) => handleSmoothScroll(e, 'projects')} className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`}>{t.projects}</a>
+            <a href="#skills" onClick={(e) => handleSmoothScroll(e, 'skills')} className={`nav-link ${activeSection === 'skills' ? 'active' : ''}`}>{t.skills}</a>
+            <a href="#contact" onClick={(e) => handleSmoothScroll(e, 'contact')} className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`}>{t.contact}</a>
+          </div>
+          <a
+            href={t.resumeFile}
+            download={t.resumeFile.substring(1)}
+            className="btn-resume"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 9,
+              background: '#111418',
+              color: '#fff',
+              fontSize: 15,
+              fontWeight: 500,
+              padding: '11px 20px',
+              borderRadius: 13,
+              textDecoration: 'none',
+              boxShadow: '0 6px 18px -8px rgba(0,0,0,.6)',
+            }}
+          >
+            {t.resume}
+            <DownloadIcon />
+          </a>
         </div>
-        <a
-          href="/Goran_Milosevic_CV.pdf"
-          download="Goran_Milosevic_CV.pdf"
-          className="btn-resume"
+
+        {/* Mobile Hamburger Button Toggle (Visible on Mobile) */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="mobile-only"
           style={{
-            display: 'inline-flex',
+            background: 'none',
+            border: 'none',
+            color: '#14161a',
+            cursor: 'pointer',
+            padding: 8,
+            display: 'flex',
             alignItems: 'center',
-            gap: 9,
-            background: '#111418',
-            color: '#fff',
-            fontSize: 15,
-            fontWeight: 500,
-            padding: '11px 20px',
-            borderRadius: 13,
-            textDecoration: 'none',
-            boxShadow: '0 6px 18px -8px rgba(0,0,0,.6)',
+            justifyContent: 'center',
           }}
         >
-          Resume
-          <DownloadIcon />
-        </a>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            {menuOpen ? (
+              <path d="M18 6L6 18M6 6l12 12" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
-
-      {/* Mobile Hamburger Button Toggle (Visible on Mobile) */}
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="mobile-only"
-        style={{
-          background: 'none',
-          border: 'none',
-          color: '#14161a',
-          cursor: 'pointer',
-          padding: 8,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          {menuOpen ? (
-            <path d="M18 6L6 18M6 6l12 12" />
-          ) : (
-            <path d="M4 6h16M4 12h16M4 18h16" />
-          )}
-        </svg>
-      </button>
 
       {/* Mobile Menu Dropdown Panel */}
       <div className={`mobile-nav-dropdown ${menuOpen ? 'open' : ''}`}>
-        <a href="#about" onClick={(e) => handleSmoothScroll(e, 'about')} className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} style={{ fontSize: 16, width: 'max-content' }}>About</a>
-        <a href="#projects" onClick={(e) => handleSmoothScroll(e, 'projects')} className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`} style={{ fontSize: 16, width: 'max-content' }}>Projects</a>
-        <a href="#skills" onClick={(e) => handleSmoothScroll(e, 'skills')} className={`nav-link ${activeSection === 'skills' ? 'active' : ''}`} style={{ fontSize: 16, width: 'max-content' }}>Skills</a>
-        <a href="#contact" onClick={(e) => handleSmoothScroll(e, 'contact')} className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`} style={{ fontSize: 16, width: 'max-content' }}>Contact</a>
+        <a href="#about" onClick={(e) => handleSmoothScroll(e, 'about')} className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} style={{ fontSize: 16, width: 'max-content' }}>{t.about}</a>
+        <a href="#projects" onClick={(e) => handleSmoothScroll(e, 'projects')} className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`} style={{ fontSize: 16, width: 'max-content' }}>{t.projects}</a>
+        <a href="#skills" onClick={(e) => handleSmoothScroll(e, 'skills')} className={`nav-link ${activeSection === 'skills' ? 'active' : ''}`} style={{ fontSize: 16, width: 'max-content' }}>{t.skills}</a>
+        <a href="#contact" onClick={(e) => handleSmoothScroll(e, 'contact')} className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`} style={{ fontSize: 16, width: 'max-content' }}>{t.contact}</a>
         <a
-          href="/Goran_Milosevic_CV.pdf"
-          download="Goran_Milosevic_CV.pdf"
+          href={t.resumeFile}
+          download={t.resumeFile.substring(1)}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -156,12 +172,10 @@ export default function Nav() {
             marginTop: 8,
           }}
         >
-          Resume
+          {t.resume}
           <DownloadIcon />
         </a>
       </div>
     </nav>
   )
 }
-
-

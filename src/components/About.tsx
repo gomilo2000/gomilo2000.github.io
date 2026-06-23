@@ -58,9 +58,38 @@ const MAP_DOTS = [
   { x: 12, y: 7, region: 'other' }, { x: 13, y: 7, region: 'other' },
 ]
 
-export default function About() {
+interface AboutProps {
+  language: 'en' | 'no'
+}
+
+export default function About({ language }: AboutProps) {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null)
   const [confettiTrigger, setConfettiTrigger] = useState(0)
+
+  const t = {
+    eyebrow: language === 'en' ? 'About' : 'Om meg',
+    heading: language === 'en' ? 'More about me' : 'Mer om meg',
+    para1: language === 'en' 
+      ? "I'm a 26-year-old developer from Norway with an IT bachelor in Frontend & Mobile development from Kristiania University College. I've worked across frontend, mobile, and some backend, and I genuinely enjoy taking an idea all the way to a finished, intuitive product."
+      : "Jeg er en 26 år gammel utvikler fra Norge med en IT-bachelor i frontend- og mobilutvikling fra Høyskolen Kristiania. Jeg har erfaring med frontend, mobil, og noe backend, og jeg trives veldig godt med å ta en idé hele veien til et ferdig, intuitivt produkt.",
+    para2: language === 'en'
+      ? "I'm motivated by building technology that makes a real difference in everyday life, and I'm eager to keep learning, contributing, and growing, both as a developer and as a person."
+      : "Jeg motiveres av å bygge teknologi som utgjør en reell forskjell i hverdagen, og jeg er ivrig etter å fortsette å lære, bidra og vokse, både som utvikler og som person.",
+    gradLabel: language === 'en' ? 'IT Bachelor, graduated' : 'IT-bachelor, uteksaminert',
+    langLabel: language === 'en' ? 'languages spoken' : 'språk',
+    languagesTitle: language === 'en' ? 'Languages' : 'Språk',
+  }
+
+  const localizedFacts: [string, string][] = [
+    [language === 'en' ? 'Location' : 'Sted', language === 'en' ? 'Askim, Norway' : 'Askim, Norge'],
+    [language === 'en' ? 'Focus' : 'Fokus', language === 'en' ? 'Frontend & Mobile' : 'Frontend & Mobil'],
+    [language === 'en' ? 'Education' : 'Utdanning', language === 'en' ? 'Kristiania University College' : 'Høyskolen Kristiania'],
+    [language === 'en' ? 'Currently' : 'Status', language === 'en' ? 'Open to opportunities' : 'Åpen for muligheter'],
+  ]
+
+  const localizedLanguages = language === 'en' 
+    ? ['Norwegian · Native', 'English · Fluent', 'Serbian', 'Croatian', 'Bosnian']
+    : ['Norsk · Morsmål', 'Engelsk · Flytende', 'Serbisk', 'Kroatisk', 'Bosnisk']
 
   return (
     <section
@@ -114,13 +143,13 @@ export default function About() {
         }}
       >
         <div>
-          <p style={eyebrow}>About</p>
-          <h2 style={heading}>More about me</h2>
+          <p style={eyebrow}>{t.eyebrow}</p>
+          <h2 style={heading}>{t.heading}</h2>
           <p style={{ ...body, margin: '24px 0 0' }}>
-            I&apos;m a 26-year-old developer from Norway with an IT bachelor in Frontend &amp; Mobile development from Kristiania University College. I&apos;ve worked across frontend, mobile, and some backend, and I genuinely enjoy taking an idea all the way to a finished, intuitive product.
+            {t.para1}
           </p>
           <p style={{ ...body, margin: '18px 0 0' }}>
-            I&apos;m motivated by building technology that makes a real difference in everyday life, and I&apos;m eager to keep learning, contributing, and growing, both as a developer and as a person.
+            {t.para2}
           </p>
 
           <div style={{ display: 'flex', gap: 14, marginTop: 34, flexWrap: 'wrap' }}>
@@ -149,7 +178,7 @@ export default function About() {
               }}
             >
               <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-.02em', color: '#14161a' }}>2024</div>
-              <div style={{ marginTop: 4, fontSize: 14, color: '#9aa0a6' }}>IT Bachelor, graduated</div>
+              <div style={{ marginTop: 4, fontSize: 14, color: '#9aa0a6' }}>{t.gradLabel}</div>
               {confettiTrigger > 0 && (
                 <div key={confettiTrigger} style={{ position: 'absolute', inset: 0, overflow: 'visible', pointerEvents: 'none' }}>
                   <style>{`
@@ -257,14 +286,14 @@ export default function About() {
               }}
             >
               <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-.02em', color: '#14161a' }}>5</div>
-              <div style={{ marginTop: 4, fontSize: 14, color: '#9aa0a6' }}>languages spoken</div>
+              <div style={{ marginTop: 4, fontSize: 14, color: '#9aa0a6' }}>{t.langLabel}</div>
             </div>
           </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           <div style={{ border: '1px solid rgba(15,20,40,.08)', borderRadius: 18, overflow: 'hidden', background: '#fff' }}>
-            {facts.map(([label, value], i) => (
+            {localizedFacts.map(([label, value], i) => (
               <div
                 key={label}
                 className="about-fact-row"
@@ -290,14 +319,14 @@ export default function About() {
               boxShadow: hoveredRegion !== null ? '0 12px 28px -12px rgba(26,115,255,0.12)' : 'none',
             }}
           >
-            <p style={{ margin: '0 0 14px', fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#9aa0a6' }}>Languages</p>
+            <p style={{ margin: '0 0 14px', fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#9aa0a6' }}>{t.languagesTitle}</p>
             
             <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', gap: 9, flexWrap: 'wrap', flex: '1 1 200px' }}>
-                {languages.map((l) => {
-                  const isNorwegian = l.startsWith('Norwegian')
-                  const isEnglish = l.startsWith('English')
-                  const isBalkans = l === 'Serbian' || l === 'Croatian' || l === 'Bosnian'
+                {localizedLanguages.map((l) => {
+                  const isNorwegian = l.startsWith('Norwegian') || l.startsWith('Norsk')
+                  const isEnglish = l.startsWith('English') || l.startsWith('Engelsk')
+                  const isBalkans = l === 'Serbian' || l === 'Croatian' || l === 'Bosnian' || l === 'Serbisk' || l === 'Kroatisk' || l === 'Bosnisk'
                   
                   let targetRegion = 'other'
                   if (isNorwegian) targetRegion = 'norway'

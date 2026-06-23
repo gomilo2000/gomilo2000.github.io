@@ -7,15 +7,30 @@ const hazard: CSSProperties = { height: 6, background: 'repeating-linear-gradien
  * studies are being prepared. Swap this panel for a grid of project cards
  * when the work is ready to show.
  */
-export default function Projects() {
+interface ProjectsProps {
+  language: 'en' | 'no'
+}
+
+export default function Projects({ language }: ProjectsProps) {
+  const t = {
+    eyebrow: language === 'en' ? 'Projects' : 'Prosjekter',
+    heading: language === 'en' ? 'Selected projects' : 'Utvalgte prosjekter',
+    sideText: language === 'en' ? 'Fresh work is in progress, this section is getting a makeover.' : 'Nye prosjekter er på vei, denne delen blir pusset opp.',
+    underConstruction: language === 'en' ? 'Under construction' : 'Under konstruksjon',
+    dustTitle: language === 'en' ? 'Pardon the dust' : 'Beklager rotet',
+    dustText: language === 'en' ? "I'm wrapping up a few fresh projects right now. Check back soon." : 'Jeg ferdigstiller noen spennende prosjekter akkurat nå. Kom innom igjen snart.',
+    buildingTitle: language === 'en' ? 'Building case studies' : 'Bygger prosjekter',
+    progressStatus: language === 'en' ? 'in progress' : 'pågår',
+  }
+
   return (
     <section id="projects" style={{ scrollMarginTop: 90, padding: '130px clamp(48px, 8vw, 160px)', background: '#f5f5f7' }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', marginBottom: 44 }}>
         <div>
-          <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Projects</p>
-          <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>Selected projects</h2>
+          <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>{t.eyebrow}</p>
+          <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>{t.heading}</h2>
         </div>
-        <p style={{ margin: 0, fontSize: 17, color: '#5b6068', maxWidth: 480 }}>Fresh work is in progress, this section is getting a makeover.</p>
+        <p style={{ margin: 0, fontSize: 17, color: '#5b6068', maxWidth: 480 }}>{t.sideText}</p>
       </div>
 
       <div style={{ position: 'relative', borderRadius: 22, overflow: 'hidden', border: '1px solid rgba(15,20,40,.08)', background: '#fff', boxShadow: '0 30px 60px -38px rgba(20,30,70,.30)' }}>
@@ -63,18 +78,18 @@ export default function Projects() {
           </div>
 
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12, fontWeight: 700, letterSpacing: '.16em', textTransform: 'uppercase', color: '#a07c00', background: '#fef6d6', border: '1px solid #f3e4a8', padding: '7px 15px', borderRadius: 999 }}>
-            Under construction
+            {t.underConstruction}
           </span>
-          <h3 style={{ margin: '18px 0 0', fontSize: 'clamp(26px,3vw,36px)', fontWeight: 800, letterSpacing: '-.02em', color: '#14161a' }}>Pardon the dust</h3>
+          <h3 style={{ margin: '18px 0 0', fontSize: 'clamp(26px,3vw,36px)', fontWeight: 800, letterSpacing: '-.02em', color: '#14161a' }}>{t.dustTitle}</h3>
           <p style={{ margin: '16px 0 0', maxWidth: 460, fontSize: 17, lineHeight: 1.6, color: '#5b6068' }}>
-            I&apos;m wrapping up a few fresh projects right now. Check back soon.
+            {t.dustText}
           </p>
-
+ 
           {/* build progress */}
           <div style={{ width: '100%', maxWidth: 380, marginTop: 34 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 9 }}>
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#3c434c' }}>Building case studies</span>
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#9aa0a6', fontFamily: "ui-monospace,'SF Mono',Menlo,monospace" }}>in&nbsp;progress</span>
+              <span style={{ fontSize: 13, fontWeight: 600, color: '#3c434c' }}>{t.buildingTitle}</span>
+              <span style={{ fontSize: 13, fontWeight: 600, color: '#9aa0a6', fontFamily: "ui-monospace,'SF Mono',Menlo,monospace" }}>{t.progressStatus}</span>
             </div>
             <div style={{ position: 'relative', height: 9, borderRadius: 999, background: '#ececed', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', inset: '0 auto 0 0', height: '100%', borderRadius: 999, background: 'linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #fff))', animation: 'cc-build 2.6s ease-in-out infinite' }} />

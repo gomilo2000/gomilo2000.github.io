@@ -25,7 +25,37 @@ function CheckIcon() {
   )
 }
 
-export default function Contact() {
+interface ContactProps {
+  language: 'en' | 'no'
+}
+
+export default function Contact({ language }: ContactProps) {
+  const t = {
+    eyebrow: language === 'en' ? 'Contact' : 'Kontakt',
+    heading: language === 'en' ? "Let's build something great." : 'La oss bygge noe stort sammen.',
+    subtext: language === 'en'
+      ? "Looking for my first developer role and open to frontend, mobile or fullstack opportunities. Feel free to reach out, I'd love to hear from you."
+      : "Søker min første utviklerjobb og er åpen for frontend-, mobil- eller fullstack-muligheter. Ta gjerne kontakt, jeg vil gjerne høre fra deg.",
+    labelName: language === 'en' ? 'Name' : 'Navn',
+    labelEmail: language === 'en' ? 'Email' : 'E-post',
+    labelMessage: language === 'en' ? 'Message' : 'Melding',
+    placeholderName: language === 'en' ? 'Your name' : 'Ditt navn',
+    placeholderEmail: language === 'en' ? 'you@email.com' : 'deg@epost.no',
+    placeholderMessage: language === 'en' ? 'Tell me about your project...' : 'Fortell meg om prosjektet ditt...',
+    btnSend: language === 'en' ? 'Send message' : 'Send melding',
+    btnSent: language === 'en' ? 'Message Sent!' : 'Melding sendt!',
+    toastSuccess: language === 'en' ? 'Form submitted successfully!' : 'Skjemaet ble sendt!',
+    
+    // validation errors
+    errNameRequired: language === 'en' ? 'Name is required' : 'Navn er påkrevd',
+    errNameLength: language === 'en' ? 'Name must be at least 2 characters' : 'Navnet må være minst 2 tegn',
+    errEmailRequired: language === 'en' ? 'Email is required' : 'E-post er påkrevd',
+    errEmailInvalid: language === 'en' ? 'Please enter a valid email address' : 'Vennligst oppgi en gyldig e-postadresse',
+    errMessageRequired: language === 'en' ? 'Message is required' : 'Melding er påkrevd',
+    errMessageLength: language === 'en' ? 'Message must be at least 10 characters' : 'Meldingen må være minst 10 tegn',
+    subject: language === 'en' ? 'Portfolio enquiry from' : 'Henvendelse fra portefølje fra',
+  }
+
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [errors, setErrors] = useState({ name: '', email: '', message: '' })
   const [touched, setTouched] = useState({ name: false, email: false, message: false })
@@ -36,21 +66,21 @@ export default function Contact() {
     let errorMsg = ''
     if (fieldName === 'name') {
       if (!value.trim()) {
-        errorMsg = 'Name is required'
+        errorMsg = t.errNameRequired
       } else if (value.trim().length < 2) {
-        errorMsg = 'Name must be at least 2 characters'
+        errorMsg = t.errNameLength
       }
     } else if (fieldName === 'email') {
       if (!value.trim()) {
-        errorMsg = 'Email is required'
+        errorMsg = t.errEmailRequired
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        errorMsg = 'Please enter a valid email address'
+        errorMsg = t.errEmailInvalid
       }
     } else if (fieldName === 'message') {
       if (!value.trim()) {
-        errorMsg = 'Message is required'
+        errorMsg = t.errMessageRequired
       } else if (value.trim().length < 10) {
-        errorMsg = 'Message must be at least 10 characters'
+        errorMsg = t.errMessageLength
       }
     }
     setErrors(prev => ({ ...prev, [fieldName]: errorMsg }))
@@ -82,11 +112,11 @@ export default function Contact() {
       setIsSent(true)
 
       // Wire this up to email mailto trigger
-      const subject = encodeURIComponent(`Portfolio enquiry from ${form.name}`)
+      const subject = encodeURIComponent(`${t.subject} ${form.name}`)
       const body = encodeURIComponent(`${form.message}\n\n- ${form.name} (${form.email})`)
       
       // Trigger toast
-      setToast({ message: 'Form submitted successfully!', leaving: false })
+      setToast({ message: t.toastSuccess, leaving: false })
 
       // Clear Form state
       setForm({ name: '', email: '', message: '' })
@@ -150,10 +180,10 @@ export default function Contact() {
       )}
 
       <div style={{ position: 'relative', zIndex: 2 }}>
-        <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Contact</p>
-        <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,44px)', fontWeight: 700, letterSpacing: '-.025em', color: '#ffffff', lineHeight: 1.06 }}>Let&apos;s build something great.</h2>
+        <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>{t.eyebrow}</p>
+        <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,44px)', fontWeight: 700, letterSpacing: '-.025em', color: '#ffffff', lineHeight: 1.06 }}>{t.heading}</h2>
         <p style={{ margin: '22px 0 0', fontSize: 18, lineHeight: 1.6, color: '#a5a8be', maxWidth: 600 }}>
-          Looking for my first developer role and open to frontend, mobile or fullstack opportunities. Feel free to reach out, I&apos;d love to hear from you.
+          {t.subtext}
         </p>
         <a href="mailto:gomilo2000@gmail.com" className="link-soft" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 28, fontSize: 18, fontWeight: 600, color: '#ffffff', textDecoration: 'none' }}>
           gomilo2000@gmail.com
@@ -179,11 +209,11 @@ export default function Contact() {
       >
         <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           <div style={fieldGroup}>
-            <label style={label}>Name</label>
+            <label style={label}>{t.labelName}</label>
             <input
               className="field"
               type="text"
-              placeholder="Your name"
+              placeholder={t.placeholderName}
               value={form.name}
               onChange={(e) => handleChange('name', e.target.value)}
               onBlur={() => handleBlur('name')}
@@ -192,11 +222,11 @@ export default function Contact() {
             {touched.name && errors.name && <div style={errorStyle}>{errors.name}</div>}
           </div>
           <div style={fieldGroup}>
-            <label style={label}>Email</label>
+            <label style={label}>{t.labelEmail}</label>
             <input
               className="field"
               type="email"
-              placeholder="you@email.com"
+              placeholder={t.placeholderEmail}
               value={form.email}
               onChange={(e) => handleChange('email', e.target.value)}
               onBlur={() => handleBlur('email')}
@@ -205,11 +235,11 @@ export default function Contact() {
             {touched.email && errors.email && <div style={errorStyle}>{errors.email}</div>}
           </div>
           <div style={fieldGroup}>
-            <label style={label}>Message</label>
+            <label style={label}>{t.labelMessage}</label>
             <textarea
               className="field"
               rows={4}
-              placeholder="Tell me about your project..."
+              placeholder={t.placeholderMessage}
               value={form.message}
               onChange={(e) => handleChange('message', e.target.value)}
               onBlur={() => handleBlur('message')}
@@ -242,12 +272,12 @@ export default function Contact() {
           >
             {isSent ? (
               <>
-                Message Sent!
+                {t.btnSent}
                 <CheckIcon />
               </>
             ) : (
               <>
-                Send message
+                {t.btnSend}
                 <ArrowRight />
               </>
             )}

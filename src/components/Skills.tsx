@@ -332,25 +332,144 @@ const SKILL_THEME: Record<string, { color: string; icon: React.ReactNode }> = {
   }
 }
 
-const categories = [
-  { title: 'Frontend', items: ['JavaScript', 'TypeScript', 'React', 'Vue'] },
-  { title: 'Mobile', items: ['React Native', 'Swift', 'Kotlin', 'Ionic'] },
-  { title: 'Backend & DB', items: ['Java', 'C#', 'Python', 'SQL'] },
-  { title: 'Tools & Styling', items: ['HTML5', 'Tailwind', 'Figma', 'Canva', 'Git / GitHub', 'REST APIs', 'Agile'] },
-]
+const SKILL_DETAILS_NO: Record<string, Partial<SkillDetail>> = {
+  'JavaScript': {
+    level: 'Avansert / Kjerne',
+    description: 'Ekspert på moderne JavaScript (ES6+), asynkrone mønstre, DOM-manipulering og nettleserens livssyklus.',
+    checklist: ['Asynkront & Promises (Async/Await)', 'Funksjonell programmering & closures', 'Event Loop & ytelsesoptimalisering']
+  },
+  'TypeScript': {
+    level: 'Avansert',
+    description: 'Sterk forståelse for typesikkerhet og designmønstre. Erfaren med konfigurasjon av compiler-innstillinger, strukturell typing, generics og egne utility-typer.',
+    checklist: ['Avanserte Generics & Mapped Types', 'Strikte innstillinger for type-checking', 'Integrasjon med Webpack & Vite']
+  },
+  'React': {
+    level: 'Avansert / Hovedfokus',
+    description: 'Utviklet en rekke React-webapplikasjoner med global tilstandshåndtering, responsive layouter og ytelsesoptimalisering.',
+    checklist: ['Egendefinerte Hooks & Context API', 'Virtual DOM Ytelsesoptimalisering', 'Komponentbasert design & arkitektur']
+  },
+  'Vue': {
+    level: 'Middels',
+    description: 'Erfaring med å utvikle interaktive weblayouter ved bruk av Vue 3 Composition API, Vuex og Vue Router.',
+    checklist: ['Vue 3 Composition API', 'SFC (Single File Components)', 'Tilstandshåndtering med Pinia']
+  },
+  'React Native': {
+    level: 'Avansert / Spesialisering',
+    description: 'Dyp kunnskap om kryssplattform mobilutvikling for iOS og Android. Erfaring med Expo, native moduler og UI-layouter.',
+    checklist: ['Kryssplattform UI-tilpasning', 'Håndtering av Expo & Native bygg', 'Integrasjon av enhetssensorer og lagring']
+  },
+  'Swift': {
+    level: 'Kompetent',
+    description: 'Erfaring med native iOS-utvikling ved bruk av Swift og SwiftUI. Forstår Apples Human Interface Guidelines og publisering i App Store.',
+    checklist: ['SwiftUI Deklarative layouter', 'MVC & MVVM Designmønstre', 'Nettverk med CoreData & URLSession']
+  },
+  'Kotlin': {
+    level: 'Kompetent',
+    description: 'Utviklet native Android-applikasjoner med Kotlin og Jetpack Compose. God forståelse for Coroutines og Material Design-elementer.',
+    checklist: ['Jetpack Compose UI', 'Kotlin Coroutines for asynkroen oppgaver', 'Android SDK & Gradle bygg']
+  },
+  'Ionic': {
+    level: 'Middels',
+    description: 'Utvikling av hybride mobilapper ved bruk av Capacitor og webteknologi (React/Vue) wrapper-konfigurasjoner.',
+    checklist: ['Capacitor Runtime-konfigurasjon', 'Hybride Native enhetsbroer', 'Ionic UI Webkomponent-layouter']
+  },
+  'Java': {
+    level: 'Kompetent',
+    description: 'Akademisk og prosjekterfaring med backend-utvikling ved bruk av Java, OOP-mønstre og Spring Boot.',
+    checklist: ['Objektorientert programmering (OOP)', 'Spring Boot REST-kontrollere', 'Enhetstesting med JUnit']
+  },
+  'C#': {
+    level: 'Kompetent',
+    description: 'Utviklet backend-API-er og enkle spill ved bruk av C#, .NET Framework og Unity.',
+    checklist: ['.NET Core API-håndtering', 'Entity Framework (EF Core) databasehåndtering', 'Asynkron programmering']
+  },
+  'Python': {
+    level: 'Kompetent',
+    description: 'Bygd dataskript, web-scraping motorer og enkel backend-routing ved bruk av Flask, Django og skriptrutiner.',
+    checklist: ['Skripting & Web-scraping (BeautifulSoup)', 'Flask API-utvikling', 'Dataprosessering med Pandas']
+  },
+  'SQL': {
+    level: 'Avansert',
+    description: 'Erfaren med relasjonsdatabaser, optimalisering av komplekse spørringer, joins og databaseskjemaer i PostgreSQL og MySQL.',
+    checklist: ['Databaseskjema & normalisering', 'Komplekse Joins & prosedyrer', 'Indeksering & ytelsesoptimalisering av spørringer']
+  },
+  'HTML5': {
+    level: 'Ekspert',
+    description: 'Svært god kontroll på semantisk koding og responsivt design. Omfattende kunnskap om Flexbox, CSS Grid og egne animasjoner.',
+    checklist: ['Semantisk web & universell utforming', 'Flexbox & CSS Grid design', 'Responsive Media Queries']
+  },
+  'Tailwind': {
+    level: 'Avansert',
+    description: 'Svært effektiv med utility-first layouter, egendefinert konfigurasjon, varianter og responsiv styling.',
+    checklist: ['Tilpasning av Tailwind-konfig', 'Responsive Utility-klasser', 'Mørk modus & egne temaer']
+  },
+  'Figma': {
+    level: 'Kompetent',
+    description: 'Brukt Figma til prototyping av nettsidelayouter, mobile wireframes og interaktive designskisser.',
+    checklist: ['UI-skisser & prototyping', 'Bruk av komponentbiblioteker', 'Oppretting av vektorressurser']
+  },
+  'Canva': {
+    level: 'Kompetent',
+    description: 'Laget grafikk for sosiale medier, CV-er og markedsføringsmateriell for nettsider.',
+    checklist: ['Bannere til sosiale medier', 'Vektorlayouter & ressurser', 'Presentasjonsdesign']
+  },
+  'Git / GitHub': {
+    level: 'Avansert',
+    description: 'Erfaring med samarbeid via Git, pull requests, løsing av merge-konflikter og publisering av GitHub Pages.',
+    checklist: ['Git Rebase & forgreningsstrategier', 'GitHub Actions CI/CD-arbeidsflyt', 'Konflikthåndtering & kodeomtaler']
+  },
+  'REST APIs': {
+    level: 'Avansert',
+    description: 'Designet og integrert RESTful API-er. Erfaren med JSON-data, egne ruter, parametere og CORS-konfigurasjoner.',
+    checklist: ['API Endpoint-routing & JSON-mapping', 'Token-basert autentisering (JWT)', 'Tilpasning av Axios & Fetch-klienter']
+  },
+  'Agile': {
+    level: 'Kompetent',
+    description: 'Erfaring med Scrum-sprints, daglige standups, backlog-prioritering og samarbeid på Jira-tavler.',
+    checklist: ['Scrum rammeverk & sprintplanlegging', 'Koordinering på Jira / Trello-tavler', 'Kodeomtaler & kontinuerlig leveranse']
+  }
+}
 
-export default function Skills() {
+interface SkillsProps {
+  language: 'en' | 'no'
+}
+
+export default function Skills({ language }: SkillsProps) {
   const [selectedSkill, setSelectedSkill] = useState<string>('React')
   const [activeTab, setActiveTab] = useState<string>('Frontend')
 
-  const activeDetail = SKILL_DETAILS[selectedSkill] || SKILL_DETAILS['React']
+  const baseDetail = SKILL_DETAILS[selectedSkill] || SKILL_DETAILS['React']
+  const activeDetail = language === 'en' 
+    ? baseDetail 
+    : {
+        ...baseDetail,
+        ...(SKILL_DETAILS_NO[selectedSkill] || {})
+      }
+
   const activeSkillColor = SKILL_THEME[selectedSkill]?.color || '#1a73ff'
+
+  const categories = [
+    { id: 'Frontend', title: 'Frontend', items: ['JavaScript', 'TypeScript', 'React', 'Vue'] },
+    { id: 'Mobile', title: language === 'en' ? 'Mobile' : 'Mobil', items: ['React Native', 'Swift', 'Kotlin', 'Ionic'] },
+    { id: 'Backend & DB', title: 'Backend & DB', items: ['Java', 'C#', 'Python', 'SQL'] },
+    { id: 'Tools & Styling', title: language === 'en' ? 'Tools & Styling' : 'Verktøy & Styling', items: ['HTML5', 'Tailwind', 'Figma', 'Canva', 'Git / GitHub', 'REST APIs', 'Agile'] },
+  ]
+
+  const t = {
+    eyebrow: language === 'en' ? 'Skills' : 'Ferdigheter',
+    heading: language === 'en' ? 'What I work with' : 'Hva jeg jobber med',
+    sidebarProfile: language === 'en' ? 'Skill Profile' : 'Kompetanseprofil',
+    sidebarVerified: language === 'en' ? 'Verified' : 'Verifisert',
+    sidebarDesignTool: language === 'en' ? 'Design Tool' : 'Designverktøy',
+    sidebarLevel: language === 'en' ? 'Level:' : 'Nivå:',
+    sidebarKeyCompetencies: language === 'en' ? 'Key Competencies' : 'Kjernekompetanse',
+  }
 
   return (
     <section id="skills" style={{ scrollMarginTop: 90, padding: '130px clamp(48px, 8vw, 160px)' }}>
       <div style={{ marginBottom: 44 }}>
-          <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Skills</p>
-          <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>What I work with</h2>
+          <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>{t.eyebrow}</p>
+          <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>{t.heading}</h2>
         </div>
 
         <div className="skills-layout" style={{ display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 32, alignItems: 'start' }}>
@@ -360,12 +479,12 @@ export default function Skills() {
             {/* Mobile Category Tabs */}
             <div className="skills-mobile-tabs">
               {categories.map((cat) => {
-                const isActive = activeTab === cat.title
+                const isActive = activeTab === cat.id
                 return (
                   <button
-                    key={cat.title}
+                    key={cat.id}
                     onClick={() => {
-                      setActiveTab(cat.title)
+                      setActiveTab(cat.id)
                       const targetSkill = cat.items[0]
                       if (targetSkill) {
                         setSelectedSkill(targetSkill)
@@ -387,8 +506,8 @@ export default function Skills() {
 
             {categories.map((cat) => (
               <div
-                key={cat.title}
-                className={`skills-category-card ${activeTab === cat.title ? 'active' : ''}`}
+                key={cat.id}
+                className={`skills-category-card ${activeTab === cat.id ? 'active' : ''}`}
                 style={{
                   border: '1px solid rgba(15,20,40,.07)',
                   borderRadius: 18,
@@ -541,7 +660,7 @@ export default function Skills() {
                     borderRadius: 99,
                   }}
                 >
-                  Skill Profile
+                  {t.sidebarProfile}
                 </span>
                 
                 {activeDetail.verified ? (
@@ -561,7 +680,7 @@ export default function Skills() {
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    Verified
+                    {t.sidebarVerified}
                   </span>
                 ) : (
                   <span
@@ -576,7 +695,7 @@ export default function Skills() {
                       borderRadius: 99,
                     }}
                   >
-                    Design Tool
+                    {t.sidebarDesignTool}
                   </span>
                 )}
               </div>
@@ -586,7 +705,7 @@ export default function Skills() {
                   {activeDetail.title}
                 </h3>
                 <div style={{ fontSize: 13, color: '#9aa0a6', fontWeight: 600 }}>
-                  Level: {activeDetail.level}
+                  {t.sidebarLevel} {activeDetail.level}
                 </div>
               </div>
 
@@ -596,7 +715,7 @@ export default function Skills() {
 
               <div style={{ marginTop: 8 }}>
                 <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#9aa0a6', marginBottom: 12 }}>
-                  Key Competencies
+                  {t.sidebarKeyCompetencies}
                 </div>
                 <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {activeDetail.checklist.map((item) => (
