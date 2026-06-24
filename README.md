@@ -1,6 +1,7 @@
 # Goran Milosevic
 
 A personal portfolio site built with **React + TypeScript + Vite**.
+Can be found at https://gomilo2000.github.io/
 
 ## Run locally
 
