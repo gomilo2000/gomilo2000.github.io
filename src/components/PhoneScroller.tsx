@@ -68,11 +68,9 @@ interface PhoneScrollerProps {
 const col1Images: (string | undefined)[] = [
   '/project1/askimtreningssenter_phone1.png',
   undefined,
-  undefined,
 ]
 
 const col2Images: (string | undefined)[] = [
-  undefined,
   undefined,
   undefined,
 ]
