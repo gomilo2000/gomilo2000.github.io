@@ -81,6 +81,7 @@ export default function Nav({ language }: NavProps) {
         <img
           src="/meg.jpg"
           alt="Goran Milosevic"
+          draggable={false}
           className="desktop-only"
           style={{ width: 42, height: 42, borderRadius: '50%', objectFit: 'cover', boxShadow: '0 0 0 2px #fff, 0 2px 6px rgba(0,0,0,.14)' }}
         />

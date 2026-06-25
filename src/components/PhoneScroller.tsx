@@ -39,6 +39,7 @@ function EmptyPhone({ imageSrc }: { imageSrc?: string }) {
           <img
             src={imageSrc}
             alt="Phone preview"
+            draggable={false}
             style={{
               width: '100%',
               height: '100%',

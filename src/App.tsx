@@ -76,7 +76,7 @@ export default function App() {
               transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
           >
-            <img src="/gb.svg" alt="English" style={{ width: 20, height: 20, borderRadius: '50%', objectFit: 'cover' }} />
+            <img src="/gb.svg" alt="English" draggable={false} style={{ width: 20, height: 20, borderRadius: '50%', objectFit: 'cover' }} />
             <span style={{ opacity: language === 'en' ? 1 : 0.6 }}>EN</span>
           </button>
           <button
@@ -97,7 +97,7 @@ export default function App() {
               transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
           >
-            <img src="/no.svg" alt="Norsk" style={{ width: 20, height: 20, borderRadius: '50%', objectFit: 'cover' }} />
+            <img src="/no.svg" alt="Norsk" draggable={false} style={{ width: 20, height: 20, borderRadius: '50%', objectFit: 'cover' }} />
             <span style={{ opacity: language === 'no' ? 1 : 0.6 }}>NO</span>
           </button>
         </div>
