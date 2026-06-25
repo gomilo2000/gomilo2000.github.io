@@ -26,11 +26,29 @@ const island: CSSProperties = {
   background: '#0e1018',
 }
 
-function EmptyPhone() {
+function EmptyPhone({ imageSrc }: { imageSrc?: string }) {
   return (
     <div style={phone}>
-      <div style={screen}>
-        <div style={island} />
+      <div
+        style={{
+          ...screen,
+          background: imageSrc ? '#0e1018' : 'repeating-linear-gradient(45deg,#e7e8ea 0 9px,#f1f2f4 9px 18px)',
+        }}
+      >
+        {imageSrc ? (
+          <img
+            src={imageSrc}
+            alt="Phone preview"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              display: 'block',
+            }}
+          />
+        ) : (
+          <div style={{ ...island, zIndex: 1 }} />
+        )}
       </div>
     </div>
   )
@@ -45,6 +63,21 @@ interface PhoneScrollerProps {
   language?: 'en' | 'no'
   activeColor?: string
 }
+
+const col1Images: (string | undefined)[] = [
+  '/project1/askimtreningssenter_phone1.png',
+  undefined,
+  undefined,
+]
+
+const col2Images: (string | undefined)[] = [
+  undefined,
+  undefined,
+  undefined,
+]
+
+const col1Track = [...col1Images, ...col1Images]
+const col2Track = [...col2Images, ...col2Images]
 
 export default function PhoneScroller({ language = 'en', activeColor }: PhoneScrollerProps) {
   const column: CSSProperties = { width: 214 }
@@ -123,12 +156,16 @@ export default function PhoneScroller({ language = 'en', activeColor }: PhoneScr
         >
           <div style={column}>
             <div style={{ ...track, animation: 'he-up 20s linear infinite' }}>
-              {Array.from({ length: 4 }).map((_, i) => <EmptyPhone key={i} />)}
+              {col1Track.map((imgSrc, i) => (
+                <EmptyPhone key={i} imageSrc={imgSrc} />
+              ))}
             </div>
           </div>
           <div style={{ ...column, marginTop: -46 }}>
             <div style={{ ...track, animation: 'he-down 24s linear infinite' }}>
-              {Array.from({ length: 4 }).map((_, i) => <EmptyPhone key={i} />)}
+              {col2Track.map((imgSrc, i) => (
+                <EmptyPhone key={i} imageSrc={imgSrc} />
+              ))}
             </div>
           </div>
         </div>
@@ -159,7 +196,7 @@ export default function PhoneScroller({ language = 'en', activeColor }: PhoneScr
           <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: '#f6c700', opacity: 0.6, animation: 'cc-ping 1.6s cubic-bezier(0,0,.2,1) infinite' }} />
           <span style={{ position: 'relative', width: 8, height: 8, borderRadius: '50%', background: '#e6b800' }} />
         </span>
-        {language === 'en' ? 'Previews coming soon' : 'Forhåndsvisninger kommer snart'}
+        {language === 'en' ? 'More previews coming soon' : 'Flere forhåndsvisninger kommer snart'}
       </span>
     </div>
   )
