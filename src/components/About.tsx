@@ -111,7 +111,7 @@ export default function About({ language }: AboutProps) {
           left: -10,
           right: -10,
           bottom: -10,
-          backgroundImage: 'url(/about-bg.png)',
+          backgroundImage: 'url(/about-bg.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           filter: 'blur(10px)',

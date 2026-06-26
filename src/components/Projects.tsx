@@ -23,30 +23,32 @@ const ASKIM_PROJECT: ProjectData = {
     no: 'Utvalgt prosjekt · Nettside',
   },
   desc: {
-    en: 'A modern, high-performance landing page designed as a concept to replace the website of a 24/7 fitness center in Askim, Norway.',
-    no: 'En moderne landingsside med høy ytelse, designet som et konsept for å erstatte nettstedet til Askim Treningssenter.',
+    en: 'A modern, high-performance landing page designed for a 24/7 fitness center in Askim, Norway.',
+    no: 'En moderne landingsside med høy ytelse, designet for et døgnåpent treningssenter i Askim, Norge.',
   },
   tech: ['React', 'TypeScript', 'Vite', 'Vanilla CSS', 'Responsive UI'],
   details: {
     overview: {
-      en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      no: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      en: 'I personally contacted the owner of the fitness center to propose modernizing and redesigning their existing website. After securing permission to pitch suggestions and improvements, I designed and developed this landing page as the final product of exactly that conversation.',
+      no: 'Jeg tok personlig kontakt med eieren av treningssenteret for å foreslå en modernisering og re-design av deres eksisterende nettside. Etter å ha fått tillatelse til å komme med forslag og forbedringer, designet og utviklet jeg denne landingssiden som det endelige resultatet av akkurat den samtalen.',
     },
     features: {
       en: [
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        'Ut enim ad minim veniam, quis nostrud exercitation.',
+        'Sleek, modern design that elevates the gym\'s brand identity and provides a premium user experience.',
+        'Interactive "blade" component where all four floors are lined up side-by-side; hovering over a floor expands it dynamically and pushes the others aside, eliminating endless scrolling.',
+        'Redesigned cards that clearly display what the gym has to offer.',
+        'Dynamic carousel right below the offering cards showcasing all additional services and activities the gym has to offer.',
       ],
       no: [
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        'Ut enim ad minim veniam, quis nostrud exercitation.',
+        'Tidsriktig og moderne design som løfter treningssenterets merkevare og gir en førsteklasses brukeropplevelse.',
+        'Interaktiv "blade"-komponent der alle fire etasjene er stilt opp side om side; ved å holde musepekeren over en etasje utvides den og skyver de andre til siden, noe som gir et kompakt oppsett og fjerner behovet for endeløs scrolling.',
+        'Forbedrede kort som tydelig viser hva treningssenteret har å tilby.',
+        'Dynamisk karusell rett under informasjonskortene som viser alle andre tilbud og aktiviteter ved treningssenteret.',
       ],
     },
     challenges: {
-      en: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      no: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      en: 'A key challenge was working with the existing website\'s image assets, which varied significantly in size, aspect ratio, and quality. To make them fit cohesively without distortion, I utilized CSS layout techniques like object-fit styling, aspect-ratio containers, and modern fallback card designs to unify the visual style. For future projects, this highlighted the value of requesting or personally capturing high-quality, standardized photography from the start.',
+      no: 'En av de største utfordringene var å jobbe med de eksisterende bilderessursene, som varierte mye i størrelse, bildeforhold og kvalitet. For å få dem til å passe sammen uten forvrengning, brukte jeg CSS-teknikker som object-fit, faste bildeforhold for containere og moderne fallbacks for å skape en helhetlig visuell stil. Dette viste verdien av å be om, eller selv ta, høyoppløselige og standardiserte bilder fra starten av i fremtidige prosjekter.',
     },
     repo: {
       en: 'The repository for this project is private but can be provided upon request.',
