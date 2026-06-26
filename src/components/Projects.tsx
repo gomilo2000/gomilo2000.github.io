@@ -128,7 +128,7 @@ export default function Projects({ language }: ProjectsProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       setMockupSlide((prev) => (prev + 1) % DESKTOP_SLIDES.length)
-    }, 3000)
+    }, 4500)
     return () => clearInterval(interval)
   }, [])
 
@@ -354,7 +354,7 @@ export default function Projects({ language }: ProjectsProps) {
                   height: '100%',
                   objectFit: 'cover',
                   objectPosition: 'top',
-                  animation: 'fade-in 0.6s ease-in-out forwards',
+                  animation: 'fade-in 1.2s ease-in-out forwards',
                 }}
               />
             </div>
