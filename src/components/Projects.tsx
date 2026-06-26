@@ -123,14 +123,6 @@ export default function Projects({ language }: ProjectsProps) {
   const [activeSlide, setActiveSlide] = useState(0)
   const [isZoomed, setIsZoomed] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [mockupSlide, setMockupSlide] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMockupSlide((prev) => (prev + 1) % DESKTOP_SLIDES.length)
-    }, 4500)
-    return () => clearInterval(interval)
-  }, [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -345,17 +337,10 @@ export default function Projects({ language }: ProjectsProps) {
             {/* Screen */}
             <div style={{ flex: 1, background: '#000', overflow: 'hidden', position: 'relative' }}>
               <img
-                key={mockupSlide}
-                src={DESKTOP_SLIDES[mockupSlide]}
+                src="/project1/askimtreningssenter_desktop1.png"
                 alt="Askim Treningssenter Desktop"
                 draggable={false}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'top',
-                  animation: 'fade-in 1.2s ease-in-out forwards',
-                }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
               />
             </div>
           </div>
