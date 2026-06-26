@@ -122,6 +122,22 @@ export default function Projects({ language }: ProjectsProps) {
   const [hovered, setHovered] = useState(false)
   const [activeSlide, setActiveSlide] = useState(0)
   const [isZoomed, setIsZoomed] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 860
+      setIsMobile(mobile)
+      if (mobile) {
+        setIsExpanded(false)
+      }
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   useEffect(() => {
     if (!isZoomed) return
@@ -178,7 +194,11 @@ export default function Projects({ language }: ProjectsProps) {
 
       {/* Featured Project Card (Askim Treningssenter) */}
       <div
-        onClick={() => setIsExpanded((prev) => !prev)}
+        onClick={() => {
+          if (!isMobile) {
+            setIsExpanded((prev) => !prev)
+          }
+        }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="project-card-container"
@@ -187,15 +207,15 @@ export default function Projects({ language }: ProjectsProps) {
           borderRadius: 24,
           background: '#18191b', // dark brand background
           border: '1px solid rgba(255,255,255,0.06)',
-          boxShadow: hovered
+          boxShadow: hovered && !isMobile
             ? '0 30px 60px -20px rgba(0,0,0,0.55), 0 0 0 2px #f58220'
             : '0 20px 45px -25px rgba(0,0,0,0.35)',
-          cursor: 'pointer',
+          cursor: isMobile ? 'default' : 'pointer',
           padding: 0, // removed general card padding for edge-to-edge canvas visual
           marginTop: 40,
           marginBottom: 60,
           transition: 'all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1)',
-          transform: hovered && !isExpanded ? 'translateY(-6px)' : 'translateY(0)',
+          transform: hovered && !isExpanded && !isMobile ? 'translateY(-6px)' : 'translateY(0)',
           overflow: 'visible', // allow mockups to stick out of the top
         }}
       >
@@ -223,18 +243,18 @@ export default function Projects({ language }: ProjectsProps) {
 
         {/* Right Side: Dark glowing dot mesh canvas containing floating mockups */}
         <div
-          className="desktop-only"
           style={{
             position: 'relative',
             height: '100%',
             minHeight: 320,
             background: '#18191b', // matching dark brand background
-            borderRadius: isExpanded ? '0 24px 0 0' : '0 24px 24px 0',
+            borderRadius: isMobile ? '0 0 24px 24px' : (isExpanded ? '0 24px 0 0' : '0 24px 24px 0'),
             overflow: 'visible',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            borderLeft: '1px solid rgba(255,255,255,0.06)',
+            borderLeft: isMobile ? 'none' : '1px solid rgba(255,255,255,0.06)',
+            borderTop: isMobile ? '1px solid rgba(255,255,255,0.06)' : 'none',
             zIndex: 2,
           }}
         >
@@ -246,7 +266,7 @@ export default function Projects({ language }: ProjectsProps) {
               backgroundImage: 'radial-gradient(rgba(255,255,255,0.06) 1px, transparent 0)',
               backgroundSize: '16px 16px',
               backgroundPosition: 'center',
-              borderRadius: isExpanded ? '0 23px 0 0' : '0 23px 23px 0',
+              borderRadius: isMobile ? '0 0 23px 23px' : (isExpanded ? '0 23px 0 0' : '0 23px 23px 0'),
               overflow: 'hidden',
             }}
           >
