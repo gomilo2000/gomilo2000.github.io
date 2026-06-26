@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from 'react'
+import { useState, type CSSProperties, type ReactNode } from 'react'
 
 interface ProjectData {
   id: string
@@ -53,6 +53,50 @@ const ASKIM_PROJECT: ProjectData = {
       no: 'Repositoriet for dette prosjektet er privat, men kan oppgis på forespørsel.',
     },
   },
+}
+
+interface DetailCardProps {
+  num: string
+  title: string
+  icon: ReactNode
+  content: ReactNode
+}
+
+function DetailCard({ num, title, icon, content }: DetailCardProps) {
+  return (
+    <div style={{
+      background: '#1d1e22',
+      borderRadius: 16,
+      border: '1px solid rgba(255,255,255,0.06)',
+      padding: '24px 20px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 16,
+    }}>
+      {/* Header Row */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div style={{ width: 26, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <span style={{ fontSize: 20, fontWeight: 700, color: '#f58220', fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}>{num}</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          {icon}
+          <span style={{ fontSize: 16, fontWeight: 700, color: '#fff' }}>{title}</span>
+        </div>
+      </div>
+      
+      {/* Content Row */}
+      <div style={{ display: 'flex', gap: 16 }}>
+        {/* Left vertical line container */}
+        <div style={{ width: 26, display: 'flex', justifyContent: 'center', paddingBlock: 4 }}>
+          <div style={{ width: 1, background: 'rgba(255,255,255,0.15)', height: '100%' }} />
+        </div>
+        {/* Content Container */}
+        <div style={{ flex: 1 }}>
+          {content}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 interface ProjectsProps {
@@ -315,7 +359,7 @@ export default function Projects({ language }: ProjectsProps) {
               paddingTop: 48,
               paddingBottom: 56, // padding at the bottom to prevent card shape cut-off
               paddingInline: 'clamp(24px, 4vw, 48px)',
-              background: '#282b30', // matching gym project alt card background
+              background: '#14161a', // matching gym project alt card background
               borderRadius: '0 0 24px 24px',
               borderTop: '1px solid rgba(255,255,255,0.06)',
               animation: 'fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
@@ -334,7 +378,8 @@ export default function Projects({ language }: ProjectsProps) {
                   flexDirection: 'column',
                   position: 'relative',
                   overflow: 'hidden',
-                  height: 520,
+                  height: '100%',
+                  minHeight: 360,
                   boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
                 }}
               >
@@ -379,9 +424,10 @@ export default function Projects({ language }: ProjectsProps) {
                       marginBottom: 16,
                       color: '#f58220'
                     }}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                        <circle cx="9" cy="9" r="2" />
+                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
                       </svg>
                     </div>
                     <p style={{
@@ -391,106 +437,190 @@ export default function Projects({ language }: ProjectsProps) {
                       color: '#ffffff',
                       letterSpacing: '-.01em',
                     }}>
-                      {language === 'en' ? 'Video preview coming soon' : 'Videoforhåndsvisning kommer snart'}
+                      {language === 'en' ? 'Image preview coming soon' : 'Bildeforhåndsvisning kommer snart'}
                     </p>
                     <p style={{
                       margin: '6px 0 0',
                       fontSize: 14,
                       color: 'rgba(255,255,255,0.4)',
                     }}>
-                      {language === 'en' ? 'A concept walk-through is currently being recorded.' : 'En gjennomgang av konseptet blir spilt inn.'}
+                      {language === 'en' ? 'Additional project screenshots are currently being prepared.' : 'Flere skjermbilder av prosjektet blir klargjort.'}
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Right Column: Information Pane */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: '12px 0' }}>
-                {/* Overview */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '12px 0' }}>
+                {/* Overview Card */}
                 {ASKIM_PROJECT.details.overview[language] && (
-                  <div>
-                    <h5 style={{ margin: '0 0 8px', fontSize: 13, fontWeight: 700, textTransform: 'uppercase', color: '#f58220', letterSpacing: '.06em' }}>
-                      {t.overviewTitle}
-                    </h5>
-                    <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.75)' }}>
-                      {ASKIM_PROJECT.details.overview[language]}
-                    </p>
-                  </div>
+                  <DetailCard
+                    num="01"
+                    title={t.overviewTitle}
+                    icon={
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f58220" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                      </svg>
+                    }
+                    content={
+                      <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.7)' }}>
+                        {ASKIM_PROJECT.details.overview[language]}
+                      </p>
+                    }
+                  />
                 )}
 
-                {/* Features */}
+                {/* Features Card */}
                 {ASKIM_PROJECT.details.features[language] && ASKIM_PROJECT.details.features[language].length > 0 && (
-                  <div>
-                    <h5 style={{ margin: '0 0 8px', fontSize: 13, fontWeight: 700, textTransform: 'uppercase', color: '#f58220', letterSpacing: '.06em' }}>
-                      {t.featuresTitle}
-                    </h5>
-                    <ul style={{ margin: 0, paddingLeft: 20, fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.75)', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                      {ASKIM_PROJECT.details.features[language].map((feat, idx) => (
-                        <li key={idx}>{feat}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  <DetailCard
+                    num="02"
+                    title={t.featuresTitle}
+                    icon={
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f58220" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m3 17 2 2 4-4" />
+                        <path d="m3 7 2 2 4-4" />
+                        <line x1="13" x2="21" y1="6" y2="6" />
+                        <line x1="13" x2="21" y1="12" y2="12" />
+                        <line x1="13" x2="21" y1="18" y2="18" />
+                        <path d="m3 12 2 2 4-4" />
+                      </svg>
+                    }
+                    content={
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                        {ASKIM_PROJECT.details.features[language].map((feat, idx) => (
+                          <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                            <div style={{
+                              flexShrink: 0,
+                              width: 18,
+                              height: 18,
+                              borderRadius: 5,
+                              background: 'rgba(245, 130, 32, 0.15)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              marginTop: 2,
+                            }}>
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#f58220" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                              </svg>
+                            </div>
+                            <span style={{ fontSize: 14, lineHeight: 1.5, color: 'rgba(255,255,255,0.75)' }}>{feat}</span>
+                          </div>
+                        ))}
+                      </div>
+                    }
+                  />
                 )}
 
-                {/* Challenges & Solutions */}
+                {/* Challenges & Solutions Card */}
                 {ASKIM_PROJECT.details.challenges[language] && (
-                  <div>
-                    <h5 style={{ margin: '0 0 8px', fontSize: 13, fontWeight: 700, textTransform: 'uppercase', color: '#f58220', letterSpacing: '.06em' }}>
-                      {t.challengesTitle}
-                    </h5>
-                    <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.75)' }}>
-                      {ASKIM_PROJECT.details.challenges[language]}
-                    </p>
-                  </div>
+                  <DetailCard
+                    num="03"
+                    title={t.challengesTitle}
+                    icon={
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f58220" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                        <path d="M9 18h6" />
+                        <path d="M10 22h4" />
+                      </svg>
+                    }
+                    content={
+                      <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.7)' }}>
+                        {ASKIM_PROJECT.details.challenges[language]}
+                      </p>
+                    }
+                  />
                 )}
 
-                {/* Repository */}
-                {ASKIM_PROJECT.details.repo && (
-                  <div>
-                    <h5 style={{ margin: '0 0 8px', fontSize: 13, fontWeight: 700, textTransform: 'uppercase', color: '#f58220', letterSpacing: '.06em' }}>
-                      {t.repoTitle}
-                    </h5>
-                    <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.75)' }}>
-                      {ASKIM_PROJECT.details.repo[language]}
-                    </p>
-                  </div>
-                )}
 
-                {/* Collapse Button */}
-                <div style={{ marginTop: 'auto', paddingTop: 16 }}>
-                  <button
-                    onClick={toggleExpanded}
-                    style={{
-                      border: '1px solid rgba(255,255,255,0.15)',
-                      background: 'transparent',
-                      color: 'rgba(255,255,255,0.75)',
-                      fontSize: 13,
-                      fontWeight: 600,
-                      padding: '10px 18px',
-                      borderRadius: 10,
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 6,
-                      transition: 'all 0.2s',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
-                      e.currentTarget.style.color = '#fff'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'transparent'
-                      e.currentTarget.style.color = 'rgba(255,255,255,0.75)'
-                    }}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: 'rotate(180deg)' }}>
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                    {language === 'en' ? 'Collapse details' : 'Skjul detaljer'}
-                  </button>
-                </div>
               </div>
             </div>
+
+            {/* Source Code / Request Access Banner */}
+            {ASKIM_PROJECT.details.repo && (
+              <div style={{
+                marginTop: 32,
+                background: 'linear-gradient(90deg, #1d1a18 0%, #15161a 100%)',
+                borderRadius: 16,
+                border: '1px solid rgba(245, 130, 32, 0.15)',
+                padding: '20px 24px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: 20,
+                flexWrap: 'wrap',
+              }}>
+                {/* Left Side: Icon & Texts */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16, minWidth: 280, flex: 1 }}>
+                  <div style={{
+                    flexShrink: 0,
+                    width: 44,
+                    height: 44,
+                    borderRadius: 10,
+                    background: 'rgba(245, 130, 32, 0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f58220" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="16 18 22 12 16 6" />
+                      <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#fff' }}>
+                      {language === 'en' ? 'Source code' : 'Kildekode'}
+                    </h4>
+                    <p style={{ margin: '4px 0 0', fontSize: 14, color: 'rgba(255,255,255,0.6)' }}>
+                      {language === 'en' 
+                        ? 'Repository is private but can be provided upon request.' 
+                        : 'Kildekoden er privat, men kan oppgis på forespørsel.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right Side: Request Access Button */}
+                <button
+                  onClick={() => {
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    background: 'transparent',
+                    color: '#fff',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    padding: '10px 20px',
+                    borderRadius: 10,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent'
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                  {language === 'en' ? 'Request access' : 'Be om tilgang'}
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
