@@ -388,19 +388,6 @@ body {
   }
 }
 
-/* Inline Expanded Project Card Details */
-.project-expanded-grid {
-  display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 40px;
-}
-
-@media (max-width: 900px) {
-  .project-expanded-grid {
-    grid-template-columns: 1fr !important;
-    gap: 28px !important;
-  }
-}
 
 /* Featured Project Card Grid Layout */
 .project-card-container {

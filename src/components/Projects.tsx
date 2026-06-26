@@ -1,4 +1,4 @@
-import { useState, type CSSProperties, type ReactNode } from 'react'
+import { useState, useEffect, type CSSProperties, type ReactNode } from 'react'
 
 interface ProjectData {
   id: string
@@ -52,7 +52,7 @@ const ASKIM_PROJECT: ProjectData = {
     },
     repo: {
       en: 'The repository for this project is private but can be provided upon request.',
-      no: 'Repositoriet for dette prosjektet er privat, men kan oppgis på forespørsel.',
+      no: 'Repositoriet for dette prosjektet er privat, men kan oppgis ved forespørsel.',
     },
   },
 }
@@ -74,6 +74,7 @@ function DetailCard({ num, title, icon, content }: DetailCardProps) {
       display: 'flex',
       flexDirection: 'column',
       gap: 16,
+      height: '100%',
     }}>
       {/* Header Row */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
@@ -85,7 +86,7 @@ function DetailCard({ num, title, icon, content }: DetailCardProps) {
           <span style={{ fontSize: 16, fontWeight: 700, color: '#fff' }}>{title}</span>
         </div>
       </div>
-      
+
       {/* Content Row */}
       <div style={{ display: 'flex', gap: 16 }}>
         {/* Left vertical line container */}
@@ -101,6 +102,17 @@ function DetailCard({ num, title, icon, content }: DetailCardProps) {
   )
 }
 
+const DESKTOP_SLIDES = [
+  '/project1/askimtreningssenter_desktop1.png',
+  '/project1/askimtreningssenter_desktop2.png',
+  '/project1/askimtreningssenter_desktop3.png',
+  '/project1/askimtreningssenter_desktop4.png',
+  '/project1/askimtreningssenter_desktop5.png',
+  '/project1/askimtreningssenter_desktop6.png',
+  '/project1/askimtreningssenter_desktop7.png',
+  '/project1/askimtreningssenter_desktop8.png',
+]
+
 interface ProjectsProps {
   language: 'en' | 'no'
 }
@@ -108,6 +120,27 @@ interface ProjectsProps {
 export default function Projects({ language }: ProjectsProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [hovered, setHovered] = useState(false)
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [isZoomed, setIsZoomed] = useState(false)
+
+  useEffect(() => {
+    if (!isZoomed) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        setActiveSlide((prev) => (prev === 0 ? DESKTOP_SLIDES.length - 1 : prev - 1))
+      } else if (e.key === 'ArrowRight') {
+        setActiveSlide((prev) => (prev === DESKTOP_SLIDES.length - 1 ? 0 : prev + 1))
+      } else if (e.key === 'Escape') {
+        setIsZoomed(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isZoomed])
 
   const t = {
     eyebrow: language === 'en' ? 'Projects' : 'Prosjekter',
@@ -154,8 +187,8 @@ export default function Projects({ language }: ProjectsProps) {
           borderRadius: 24,
           background: '#18191b', // dark brand background
           border: '1px solid rgba(255,255,255,0.06)',
-          boxShadow: hovered 
-            ? '0 30px 60px -20px rgba(0,0,0,0.55), 0 0 0 2px #f58220' 
+          boxShadow: hovered
+            ? '0 30px 60px -20px rgba(0,0,0,0.55), 0 0 0 2px #f58220'
             : '0 20px 45px -25px rgba(0,0,0,0.35)',
           cursor: 'pointer',
           padding: 0, // removed general card padding for edge-to-edge canvas visual
@@ -189,12 +222,12 @@ export default function Projects({ language }: ProjectsProps) {
         </div>
 
         {/* Right Side: Dark glowing dot mesh canvas containing floating mockups */}
-        <div 
+        <div
           className="desktop-only"
-          style={{ 
-            position: 'relative', 
-            height: '100%', 
-            minHeight: 320, 
+          style={{
+            position: 'relative',
+            height: '100%',
+            minHeight: 320,
             background: '#18191b', // matching dark brand background
             borderRadius: isExpanded ? '0 24px 0 0' : '0 24px 24px 0',
             overflow: 'visible',
@@ -332,7 +365,7 @@ export default function Projects({ language }: ProjectsProps) {
           </div>
 
           {/* Floating Askim Logo without pill, positioned to overlap desktop mockup screen */}
-          <div 
+          <div
             style={{
               position: 'absolute',
               bottom: '20px', // slightly sticks out below the bottom of the PC screen (which is at bottom: 30px)
@@ -343,11 +376,11 @@ export default function Projects({ language }: ProjectsProps) {
               transform: hovered && !isExpanded ? 'translateY(-3px)' : 'translateY(0)',
             }}
           >
-            <img 
-              src="/project1/askim_logo.png" 
-              alt="Askim Treningssenter Logo" 
+            <img
+              src="/project1/askim_logo.png"
+              alt="Askim Treningssenter Logo"
               draggable={false}
-              style={{ height: 28, width: 'auto', objectFit: 'contain' }} 
+              style={{ height: 28, width: 'auto', objectFit: 'contain' }}
             />
           </div>
         </div>
@@ -369,91 +402,16 @@ export default function Projects({ language }: ProjectsProps) {
               cursor: 'default',
             }}
           >
-            <div className="project-expanded-grid">
-              {/* Left Column: macOS Mockup for Video Preview */}
-              <div
-                style={{
-                  background: '#0a0c10',
-                  borderRadius: 20,
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  height: '100%',
-                  minHeight: 360,
-                  boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+               {/* Top Row: 3-Column Detailed Information Grid */}
+              <div 
+                style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+                  gap: 32, 
+                  alignItems: 'stretch' 
                 }}
               >
-                {/* macOS Title Bar */}
-                <div
-                  style={{
-                    height: 32,
-                    background: '#1a1c23',
-                    display: 'flex',
-                    alignItems: 'center',
-                    paddingLeft: 16,
-                    gap: 8,
-                    borderBottom: '1px solid rgba(255,255,255,0.06)',
-                  }}
-                >
-                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff5f56' }} />
-                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffbd2e' }} />
-                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#27c93f' }} />
-                </div>
-                {/* Screen Content */}
-                <div
-                  style={{
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: '#18191b',
-                    position: 'relative',
-                  }}
-                >
-                  <div style={{ textAlign: 'center', padding: 24 }}>
-                    <div style={{
-                      width: 64,
-                      height: 64,
-                      borderRadius: '50%',
-                      background: 'rgba(245, 130, 32, 0.1)',
-                      border: '2px solid #f58220',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginBottom: 16,
-                      color: '#f58220'
-                    }}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                        <circle cx="9" cy="9" r="2" />
-                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-                      </svg>
-                    </div>
-                    <p style={{
-                      margin: 0,
-                      fontSize: 18,
-                      fontWeight: 600,
-                      color: '#ffffff',
-                      letterSpacing: '-.01em',
-                    }}>
-                      {language === 'en' ? 'Image preview coming soon' : 'Bildeforhåndsvisning kommer snart'}
-                    </p>
-                    <p style={{
-                      margin: '6px 0 0',
-                      fontSize: 14,
-                      color: 'rgba(255,255,255,0.4)',
-                    }}>
-                      {language === 'en' ? 'Additional project screenshots are currently being prepared.' : 'Flere skjermbilder av prosjektet blir klargjort.'}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Information Pane */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '12px 0' }}>
                 {/* Overview Card */}
                 {ASKIM_PROJECT.details.overview[language] && (
                   <DetailCard
@@ -539,6 +497,170 @@ export default function Projects({ language }: ProjectsProps) {
 
 
               </div>
+
+
+              {/* Bottom Row: Full-width macOS Mockup Widescreen Slideshow */}
+              <div
+                style={{
+                  background: '#0a0c10',
+                  borderRadius: 20,
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  width: '100%',
+                  aspectRatio: '16/9.5',
+                  maxHeight: 580,
+                  boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+                }}
+              >
+                {/* macOS Title Bar */}
+                <div
+                  style={{
+                    height: 32,
+                    background: '#1a1c23',
+                    display: 'flex',
+                    alignItems: 'center',
+                    paddingLeft: 16,
+                    gap: 8,
+                    borderBottom: '1px solid rgba(255,255,255,0.06)',
+                  }}
+                >
+                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff5f56' }} />
+                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffbd2e' }} />
+                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#27c93f' }} />
+                </div>
+                {/* Screen Content */}
+                <div
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    background: '#18191b',
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {/* The Slide Image */}
+                  <img
+                    src={DESKTOP_SLIDES[activeSlide]}
+                    alt={`Slide ${activeSlide + 1}`}
+                    onClick={() => setIsZoomed(true)}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                      objectPosition: 'center',
+                      transition: 'opacity 0.3s ease-in-out',
+                      cursor: 'zoom-in',
+                    }}
+                  />
+
+                  {/* Left Arrow */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveSlide((prev) => (prev === 0 ? DESKTOP_SLIDES.length - 1 : prev - 1));
+                    }}
+                    style={{
+                      position: 'absolute',
+                      left: 12,
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      width: 36,
+                      height: 36,
+                      borderRadius: '50%',
+                      background: 'rgba(17, 20, 24, 0.65)',
+                      backdropFilter: 'blur(4px)',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 5,
+                      transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(17, 20, 24, 0.85)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(17, 20, 24, 0.65)'}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </button>
+
+                  {/* Right Arrow */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveSlide((prev) => (prev === DESKTOP_SLIDES.length - 1 ? 0 : prev + 1));
+                    }}
+                    style={{
+                      position: 'absolute',
+                      right: 12,
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      width: 36,
+                      height: 36,
+                      borderRadius: '50%',
+                      background: 'rgba(17, 20, 24, 0.65)',
+                      backdropFilter: 'blur(4px)',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 5,
+                      transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(17, 20, 24, 0.85)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(17, 20, 24, 0.65)'}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </button>
+
+                  {/* Slide Indicator Dots */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: 16,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    display: 'flex',
+                    gap: 6,
+                    zIndex: 5,
+                    background: 'rgba(17, 20, 24, 0.5)',
+                    backdropFilter: 'blur(4px)',
+                    padding: '6px 10px',
+                    borderRadius: 20,
+                    border: '1px solid rgba(255,255,255,0.06)',
+                  }}>
+                    {DESKTOP_SLIDES.map((_, idx) => (
+                      <span
+                        key={idx}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveSlide(idx);
+                        }}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          background: activeSlide === idx ? '#f58220' : 'rgba(255,255,255,0.4)',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                        }}
+                      />
+                    ))}
+                  </div>
+
+
+                </div>
+              </div>
+
             </div>
 
             {/* Source Code / Request Access Banner */}
@@ -577,9 +699,9 @@ export default function Projects({ language }: ProjectsProps) {
                       {language === 'en' ? 'Source code' : 'Kildekode'}
                     </h4>
                     <p style={{ margin: '4px 0 0', fontSize: 14, color: 'rgba(255,255,255,0.6)' }}>
-                      {language === 'en' 
-                        ? 'Repository is private but can be provided upon request.' 
-                        : 'Kildekoden er privat, men kan oppgis på forespørsel.'}
+                      {language === 'en'
+                        ? 'Repository is private but can be provided upon request.'
+                        : 'Kildekoden er privat, men kan oppgis ved forespørsel.'}
                     </p>
                   </div>
                 </div>
@@ -676,7 +798,7 @@ export default function Projects({ language }: ProjectsProps) {
           <p style={{ margin: '16px 0 0', maxWidth: 460, fontSize: 17, lineHeight: 1.6, color: '#5b6068' }}>
             {t.dustText}
           </p>
- 
+
           <div style={{ width: '100%', maxWidth: 380, marginTop: 34 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 9 }}>
               <span style={{ fontSize: 13, fontWeight: 600, color: '#3c434c' }}>{t.buildingTitle}</span>
@@ -688,6 +810,167 @@ export default function Projects({ language }: ProjectsProps) {
           </div>
         </div>
       </div>
+      {/* Lightbox Modal Zoom for Slideshow */}
+      {isZoomed && (
+        <div
+          onClick={() => setIsZoomed(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(10, 12, 22, 0.94)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'zoom-out',
+            padding: '24px',
+            animation: 'fade-in 0.25s ease-out forwards',
+          }}
+        >
+          {/* Zoomed Image */}
+          <img
+            src={DESKTOP_SLIDES[activeSlide]}
+            alt="Project screenshot zoomed"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: '90%',
+              maxHeight: '90%',
+              objectFit: 'contain',
+              borderRadius: '12px',
+              boxShadow: '0 30px 90px rgba(0,0,0,0.85)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              cursor: 'default',
+            }}
+          />
+
+          {/* Lightbox Left Arrow */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveSlide((prev) => (prev === 0 ? DESKTOP_SLIDES.length - 1 : prev - 1));
+            }}
+            style={{
+              position: 'absolute',
+              left: 'clamp(12px, 3vw, 40px)',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 52,
+              height: 52,
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: 'none',
+              color: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10000,
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          {/* Lightbox Right Arrow */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveSlide((prev) => (prev === DESKTOP_SLIDES.length - 1 ? 0 : prev + 1));
+            }}
+            style={{
+              position: 'absolute',
+              right: 'clamp(12px, 3vw, 40px)',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 52,
+              height: 52,
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: 'none',
+              color: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10000,
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+          {/* Lightbox Slide Indicator Dots */}
+          <div style={{
+            position: 'absolute',
+            bottom: 32,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            gap: 8,
+            zIndex: 10000,
+            background: 'rgba(17, 20, 24, 0.75)',
+            backdropFilter: 'blur(8px)',
+            padding: '8px 14px',
+            borderRadius: 20,
+            border: '1px solid rgba(255,255,255,0.08)',
+          }}>
+            {DESKTOP_SLIDES.map((_, idx) => (
+              <span
+                key={idx}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveSlide(idx);
+                }}
+                style={{
+                  width: 7,
+                  height: 7,
+                  borderRadius: '50%',
+                  background: activeSlide === idx ? '#f58220' : 'rgba(255,255,255,0.35)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Close button */}
+          <button
+            onClick={() => setIsZoomed(false)}
+            style={{
+              position: 'absolute',
+              top: 24,
+              right: 24,
+              background: 'rgba(255,255,255,0.1)',
+              border: 'none',
+              color: '#fff',
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 20,
+              fontWeight: 'bold',
+              transition: 'background 0.2s',
+              zIndex: 10001,
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+          >
+            ✕
+          </button>
+        </div>
+      )}
     </section>
   )
 }
