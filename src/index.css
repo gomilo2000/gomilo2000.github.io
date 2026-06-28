@@ -12,7 +12,6 @@ body {
 /* ---- keyframes ---- */
 @keyframes cc-ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
 @keyframes cc-glow { 0%, 100% { opacity: .85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
-@keyframes cc-build { 0% { width: 18%; } 50% { width: 68%; } 100% { width: 18%; } }
 
 @keyframes toast-enter {
   0% { transform: translate(-50%, -20px); opacity: 0; }
@@ -400,7 +399,5 @@ body {
     grid-template-columns: 1fr !important;
   }
 }
-
-
 
 

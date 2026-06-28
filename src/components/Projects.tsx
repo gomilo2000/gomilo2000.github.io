@@ -162,11 +162,6 @@ export default function Projects({ language }: ProjectsProps) {
     eyebrow: language === 'en' ? 'Projects' : 'Prosjekter',
     heading: language === 'en' ? 'Selected projects' : 'Utvalgte prosjekter',
     sideText: language === 'en' ? 'Here are some of the projects I have worked on.' : 'Her er noen av prosjektene jeg har jobbet med.',
-    underConstruction: language === 'en' ? 'Under construction' : 'Under konstruksjon',
-    dustTitle: language === 'en' ? 'Pardon the dust' : 'Beklager rotet',
-    dustText: language === 'en' ? "I'm wrapping up a few fresh projects right now. Check back soon." : 'Jeg ferdigstiller noen spennende prosjekter akkurat nå. Kom innom igjen snart.',
-    buildingTitle: language === 'en' ? 'Building case studies' : 'Bygger prosjekter',
-    progressStatus: language === 'en' ? 'in progress' : 'pågår',
     viewProject: language === 'en' ? 'View project details' : 'Se detaljer om prosjektet',
     hideProject: language === 'en' ? 'Hide project details' : 'Skjul detaljer',
     techTitle: language === 'en' ? 'Technologies used' : 'Teknologier brukt',
@@ -769,67 +764,7 @@ export default function Projects({ language }: ProjectsProps) {
         )}
       </div>
 
-      {/* Under Construction taped card */}
-      <div style={{ position: 'relative', borderRadius: 22, overflow: 'hidden', border: '1px solid rgba(15,20,40,.08)', background: '#fff', boxShadow: '0 30px 60px -38px rgba(20,30,70,.30)' }}>
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            width: 16,
-            background: 'repeating-linear-gradient(135deg, #f6c700, #f6c700 10px, #1b1b1b 10px, #1b1b1b 20px)',
-            zIndex: 10,
-            boxShadow: '2px 0 8px rgba(0,0,0,0.15)',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            right: 0,
-            width: 16,
-            background: 'repeating-linear-gradient(135deg, #f6c700, #f6c700 10px, #1b1b1b 10px, #1b1b1b 20px)',
-            zIndex: 10,
-            boxShadow: '-2px 0 8px rgba(0,0,0,0.15)',
-          }}
-        />
-        <div style={{ padding: '72px 40px 76px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', background: 'radial-gradient(circle at 50% -10%, #fafafb, #fff 70%)' }}>
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 26 }}>
-            <div style={{ position: 'absolute', width: 132, height: 132, borderRadius: '50%', background: 'radial-gradient(circle, rgba(246,199,0,.20), rgba(246,199,0,0) 70%)' }} />
-            <div style={{ position: 'relative', width: 128, height: 128, borderRadius: '50%', background: '#fff', border: '1px solid #ededf0', boxShadow: '0 14px 30px -16px rgba(20,30,70,.30)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <svg width={84} height={66} viewBox="0 0 118 92" fill="none">
-                <ellipse cx={59} cy={80} rx={50} ry={9} fill="#f6c700" />
-                <path d="M9 80c0-3 3-6 8-7 8-2 24-3 42-3s34 1 42 3c5 1 8 4 8 7" fill="#ffd21a" />
-                <path d="M20 72c0-22 16-40 39-40s39 18 39 40c0 2-1 3-3 3H23c-2 0-3-1-3-3Z" fill="#ffce0a" />
-                <path d="M52 33c2-1 5-1 7-1v40H45V72c0-19 3-33 7-39Z" fill="#ffd84d" />
-                <path d="M59 32c2 0 5 0 7 1 4 6 7 20 7 39v3H59V32Z" fill="#f0bd00" />
-                <rect x={22} y={68} width={74} height={9} rx={4} fill="#222" />
-                <rect x={55} y={24} width={8} height={12} rx={3} fill="#222" />
-              </svg>
-            </div>
-          </div>
 
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12, fontWeight: 700, letterSpacing: '.16em', textTransform: 'uppercase', color: '#a07c00', background: '#fef6d6', border: '1px solid #f3e4a8', padding: '7px 15px', borderRadius: 999 }}>
-            {t.underConstruction}
-          </span>
-          <h3 style={{ margin: '18px 0 0', fontSize: 'clamp(26px,3vw,36px)', fontWeight: 800, letterSpacing: '-.02em', color: '#14161a' }}>{t.dustTitle}</h3>
-          <p style={{ margin: '16px 0 0', maxWidth: 460, fontSize: 17, lineHeight: 1.6, color: '#5b6068' }}>
-            {t.dustText}
-          </p>
-
-          <div style={{ width: '100%', maxWidth: 380, marginTop: 34 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 9 }}>
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#3c434c' }}>{t.buildingTitle}</span>
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#9aa0a6', fontFamily: "ui-monospace,'SF Mono',Menlo,monospace" }}>{t.progressStatus}</span>
-            </div>
-            <div style={{ position: 'relative', height: 9, borderRadius: 999, background: '#ececed', overflow: 'hidden' }}>
-              <div style={{ position: 'absolute', inset: '0 auto 0 0', height: '100%', borderRadius: 999, background: 'linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #fff))', animation: 'cc-build 2.6s ease-in-out infinite' }} />
-            </div>
-          </div>
-        </div>
-      </div>
       {/* Lightbox Modal Zoom for Slideshow */}
       {isZoomed && (
         <div
