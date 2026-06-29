@@ -234,6 +234,34 @@ export default function Projects({ language }: ProjectsProps) {
               </span>
             ))}
           </div>
+
+          {/* Action indicator (Desktop only) */}
+          {!isMobile && (
+            <div style={{ marginTop: 24, display: 'flex', alignItems: 'center', gap: 8, color: hovered ? '#f58220' : 'rgba(255,255,255,0.45)', transition: 'color 0.25s ease' }}>
+              <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase' }}>
+                {isExpanded 
+                  ? (language === 'en' ? 'Click to show less' : 'Klikk for å lukke')
+                  : (language === 'en' ? 'Click to view details' : 'Klikk for detaljer')
+                }
+              </span>
+              <svg 
+                width="14" 
+                height="14" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                style={{ 
+                  transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)', 
+                  transition: 'transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1)' 
+                }}
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+          )}
         </div>
 
         {/* Right Side: Dark glowing dot mesh canvas containing floating mockups */}
