@@ -1,148 +1,186 @@
-import { useState, type CSSProperties } from 'react'
+import { useState } from 'react'
 
 interface SkillDetail {
   title: string
-  level: string
-  verified: boolean
   description: string
-  checklist: string[]
+  rating: number
+  useCase: { en: string; no: string }
 }
 
 const SKILL_DETAILS: Record<string, SkillDetail> = {
   'JavaScript': {
     title: 'JavaScript',
-    level: 'Advanced / Core',
-    verified: true,
-    description: 'Expert in modern JavaScript (ES6+), asynchronous patterns, DOM manipulation, and browser execution lifecycle.',
-    checklist: ['Asynchronous & Promises (Async/Await)', 'Functional Programming & Closures', 'Event Loop & Performance Optimization']
+    description: 'Comfortable building applications using modern JavaScript (ES6+), async patterns, and DOM manipulation.',
+    rating: 4,
+    useCase: {
+      en: 'It used to be my primary scripting language for building web features, but I have recently started switching over to TypeScript more frequently.',
+      no: 'Det pleide å være mitt primære skriptspråk for å bygge webfunksjoner, men jeg har nylig begynt å gå mer over til TypeScript.'
+    }
   },
   'TypeScript': {
     title: 'TypeScript',
-    level: 'Advanced',
-    verified: true,
-    description: 'Strong type safety design patterns. Proficient in configuring compiler settings, structural typing, generics, and custom utilities.',
-    checklist: ['Advanced Generics & Mapped Types', 'Strict Type Checking Configurations', 'Webpack & Vite Bundle Integrations']
+    description: 'Proficient in adding type safety to codebases, working with interfaces, compiler settings, and basic generics.',
+    rating: 5,
+    useCase: {
+      en: 'Used to add strict type-safety, improving code readability and catching bugs early.',
+      no: 'Brukt for å legge til strikt typesikkerhet, noe som forbedrer koden og fanger opp feil tidlig.'
+    }
   },
   'React': {
     title: 'React',
-    level: 'Advanced / Primary',
-    verified: true,
-    description: 'Developed numerous React web applications with global state, responsive layouts, and performance tracking hooks.',
-    checklist: ['Custom Hooks & Context APIs', 'Virtual DOM Performance Tuning', 'Component Componentization Design']
+    description: 'Familiar with structuring component-driven layouts, managing state with hooks, and using React context.',
+    rating: 5,
+    useCase: {
+      en: 'My absolute favorite library for structuring component-driven web applications.',
+      no: 'Mitt absolutte favorittbibliotek for strukturering av komponentdrevne webapplikasjoner.'
+    }
   },
   'Vue': {
     title: 'Vue',
-    level: 'Intermediate',
-    verified: true,
-    description: 'Experienced in developing interactive web layouts using Vue 3 Composition API, Vuex, and Vue Router.',
-    checklist: ['Vue 3 Composition API', 'SFC (Single File Components)', 'State Management via Pinia']
+    description: 'Familiar with Vue 3 Composition API, reactive state, and single-file components for simple apps.',
+    rating: 3,
+    useCase: {
+      en: 'Used for smaller reactive layouts and fast prototypes.',
+      no: 'Brukt til mindre reaktive layouter og raske prototyper.'
+    }
   },
   'React Native': {
     title: 'React Native',
-    level: 'Advanced / Specialization',
-    verified: true,
-    description: 'Deep knowledge of cross-platform mobile development for iOS and Android. Experienced with Expo, native modules, and UI layout.',
-    checklist: ['Cross-Platform UI Alignment', 'Expo & Native Builds Management', 'Device Sensors & Storage Integrations']
+    description: 'Experienced in building cross-platform layouts for iOS and Android, and managing builds via Expo.',
+    rating: 5,
+    useCase: {
+      en: 'Applied in building cross-platform native iOS and Android apps with a shared codebase.',
+      no: 'Brukt til å bygge kryssplattform native iOS- og Android-apper med en delt kodebase.'
+    }
   },
   'Swift': {
     title: 'Swift',
-    level: 'Proficient',
-    verified: true,
-    description: 'Experienced with native iOS programming using Swift and SwiftUI. Understands Apple Human Interface Guidelines and App Store deployment.',
-    checklist: ['SwiftUI Declarative Layouts', 'MVC & MVVM Design Patterns', 'CoreData & URLSession Networking']
+    description: 'Familiar with native iOS app development using Swift and SwiftUI declarative layouts.',
+    rating: 3,
+    useCase: {
+      en: 'Native iOS app development using Swift and SwiftUI during college projects.',
+      no: 'Nativ iOS-apputvikling med Swift og SwiftUI under skoleprosjekter.'
+    }
   },
   'Kotlin': {
     title: 'Kotlin',
-    level: 'Proficient',
-    verified: true,
-    description: 'Developed native Android applications using Kotlin and Jetpack Compose. Proficient in Coroutines and material design elements.',
-    checklist: ['Jetpack Compose UIs', 'Kotlin Coroutines for Async Tasks', 'Android SDK & Gradle Builds']
+    description: 'Familiar with native Android app layouts using Kotlin, Jetpack Compose, and basic coroutines.',
+    rating: 3,
+    useCase: {
+      en: 'Native Android app development using Jetpack Compose and coroutines.',
+      no: 'Nativ Android-apputvikling med Jetpack Compose og coroutines.'
+    }
   },
   'Ionic': {
     title: 'Ionic',
-    level: 'Intermediate',
-    verified: true,
-    description: 'Hybrid mobile app development using Capacitor and web technologies (React/Vue) wrapper configs.',
-    checklist: ['Capacitor Runtime Configs', 'Hybrid Native Device Bridges', 'Ionic UI Web Component layouts']
+    description: 'Familiar with hybrid app setups, bridging web layouts to mobile devices via Capacitor.',
+    rating: 3,
+    useCase: {
+      en: 'Hybrid mobile app wrappers, bridging web code to native phone APIs.',
+      no: 'Hybride mobilapp-wrappers, som brobygger webkode til enhetens egne API-er.'
+    }
   },
   'Java': {
     title: 'Java',
-    level: 'Proficient',
-    verified: true,
-    description: 'Academic and project experience in enterprise backend structures using Java, OOP patterns, and Spring Boot.',
-    checklist: ['Object-Oriented Programming (OOP)', 'Spring Boot REST Controllers', 'Unit Testing with JUnit']
+    description: 'Familiar with Java basics, OOP design patterns, and building simple REST endpoints with Spring Boot.',
+    rating: 3,
+    useCase: {
+      en: 'Used for back-end system components, REST APIs, and database configurations.',
+      no: 'Brukt til backend-systemkomponenter, REST-API-er og databasekonfigurasjoner.'
+    }
   },
   'C#': {
     title: 'C#',
-    level: 'Proficient',
-    verified: true,
-    description: 'Developed backend APIs and lightweight games using C#, .NET Framework, and Unity engine structures.',
-    checklist: ['.NET Core API Handlers', 'Entity Framework (EF Core) database management', 'Asynchronous Task Programming']
+    description: 'Familiar with C# programming, .NET core API structures, and light scripting in Unity game engine.',
+    rating: 4,
+    useCase: {
+      en: 'Used in lightweight game projects using Unity and back-end API development.',
+      no: 'Brukt i enkle spillprosjekter med Unity og backend-API-utvikling.'
+    }
   },
   'Python': {
     title: 'Python',
-    level: 'Proficient',
-    verified: true,
-    description: 'Built data scripts, scraping engines, and lightweight backend routing using Flask, Django, and script routines.',
-    checklist: ['Scripting & Web Scraping (BeautifulSoup)', 'Flask API Development', 'Data Processing via Pandas']
+    description: 'Comfortable writing scripts for automation, data scraping, and basic routing using Flask.',
+    rating: 4,
+    useCase: {
+      en: 'Writing automation scripts, web scrapers, and quick data parsing utilities.',
+      no: 'Skriving av automatiseringsskript, web-scrapers og kjappe verktøy for datatolkning.'
+    }
   },
   'SQL': {
     title: 'SQL',
-    level: 'Advanced',
-    verified: true,
-    description: 'Proficient in relational databases, writing optimized complex queries, joins, and schemas in PostgreSQL and MySQL.',
-    checklist: ['Database Schema & Normalization', 'Complex Joins & Stored Procedures', 'Indexes & Query Performance Tuning']
+    description: 'Familiar with writing queries, executing joins, and designing simple relational schemas in PostgreSQL.',
+    rating: 4,
+    useCase: {
+      en: 'Relational database schema modeling, writing queries, and managing Postgres/MySQL.',
+      no: 'Relasjonell databaseskjemamodellering, skriving av spørringer og håndtering av Postgres/MySQL.'
+    }
   },
   'HTML5': {
     title: 'HTML5 & CSS3',
-    level: 'Expert',
-    verified: true,
-    description: 'Master of semantic markup and responsive layouts. Extensive knowledge in Flexbox, CSS Grid, and custom animations.',
-    checklist: ['Semantic Web & accessibility standards', 'Flexbox & CSS Grid designs', 'Responsive Media Queries']
+    description: 'Proficient in writing clean, semantic HTML templates coupled with modern CSS structures.',
+    rating: 5,
+    useCase: {
+      en: 'Crafting semantic, accessible HTML templates combined with modern CSS layouts.',
+      no: 'Utforming av semantiske, universelt utformede HTML-maler koblet med moderne CSS-layouter.'
+    }
   },
   'Tailwind': {
     title: 'Tailwind CSS',
-    level: 'Advanced',
-    verified: true,
-    description: 'Highly efficient with utility-first layouts, custom configurations, variants, and responsive layout styling.',
-    checklist: ['Tailwind Config Customization', 'Responsive Utility Classes', 'Dark Mode & Custom Theme configs']
+    description: 'Experienced with utility-first layouts, responsive grids, and custom color configuration themes.',
+    rating: 5,
+    useCase: {
+      en: 'Utility-first CSS styling for rapid UI development and prototyping.',
+      no: 'Utility-first CSS-styling for rask UI-utvikling og prototyping.'
+    }
   },
   'Figma': {
     title: 'Figma',
-    level: 'Proficient',
-    verified: false,
-    description: 'Used Figma to prototype web layouts, mobile wireframes, and design interactive visual flow mappings.',
-    checklist: ['UI Mockup & Prototyping', 'Component Library usage', 'Vector Assets creation']
+    description: 'Familiar with wireframing layouts, creating visual interactive prototypes, and using component libraries.',
+    rating: 5,
+    useCase: {
+      en: 'Designing user interfaces, wireframes, and vector layouts before writing any code.',
+      no: 'Design av brukergrensesnitt, wireframes og vektorlayouter før jeg skriver kode.'
+    }
   },
   'Canva': {
     title: 'Canva',
-    level: 'Proficient',
-    verified: false,
-    description: 'Created social media visual graphics, resume PDFs, and marketing assets for web page layouts.',
-    checklist: ['Social Media Banners', 'Vector Layout & Assets', 'Presentation Designs']
+    description: 'Experienced in creating presentation slides, marketing assets, and social media visual graphics.',
+    rating: 5,
+    useCase: {
+      en: 'Creating presentation slides, promotional graphics, and asset design.',
+      no: 'Oppretting av presentasjonsfoiler, kampanjegrafikk og ressursdesign.'
+    }
   },
   'Git / GitHub': {
     title: 'Git / GitHub',
-    level: 'Advanced',
-    verified: true,
-    description: 'Experienced in collaborative git workflows, pull requests, resolving merge conflicts, and publishing GitHub Pages.',
-    checklist: ['Git Rebase & Branching strategies', 'GitHub Actions CI/CD workflows', 'Conflict Resolution & Code Reviews']
+    description: 'Comfortable with version control workflows, tracking changes, branch management, and submitting PRs.',
+    rating: 5,
+    useCase: {
+      en: 'Managing code versions, branch strategies, collaborative PRs, and hosting sites.',
+      no: 'Håndtering av kodeversjoner, forgreningsstrategier, pull requests og hosting av nettsider.'
+    }
   },
   'REST APIs': {
     title: 'REST APIs',
-    level: 'Advanced',
-    verified: true,
-    description: 'Designed and consumed RESTful APIs. Proficient in JSON data payloads, custom routing, query parameters, and CORS configurations.',
-    checklist: ['API Endpoint Routing & JSON mapping', 'Token-based authentication (JWT)', 'Axios & Fetch Clients customization']
+    description: 'Experienced in designing clean endpoints, mapping JSON payloads, and connecting frontend clients.',
+    rating: 4,
+    useCase: {
+      en: 'Designing routes, mapping JSON payloads, and connecting frontend clients to backends.',
+      no: 'Design av ruter, kartlegging av JSON-data og tilkobling av frontend-klienter til backend.'
+    }
   },
   'Agile': {
     title: 'Agile Methodologies',
-    level: 'Proficient',
-    verified: true,
-    description: 'Participated in Scrum sprints, daily standups, backlog grooming, and collaborated using Jira boards.',
-    checklist: ['Scrum Framework & Sprint planning', 'Jira / Trello board coordination', 'Peer review & Continuous Delivery']
+    description: 'Familiar with collaborative workflows, participating in sprint reviews, standups, and tracking tickets.',
+    rating: 5,
+    useCase: {
+      en: 'Collaborating with teammates in Scrum-like sprints, tracking tasks on digital boards.',
+      no: 'Samarbeid med teammedlemmer i Scrum-lignende sprinter, og sporing av oppgaver på digitale tavler.'
+    }
   }
 }
+
 const SKILL_THEME: Record<string, { color: string; icon: React.ReactNode }> = {
   'JavaScript': {
     color: '#f7df1e',
@@ -332,101 +370,63 @@ const SKILL_THEME: Record<string, { color: string; icon: React.ReactNode }> = {
   }
 }
 
-const SKILL_DETAILS_NO: Record<string, Partial<SkillDetail>> = {
+const SKILL_DETAILS_NO: Record<string, { description: string }> = {
   'JavaScript': {
-    level: 'Avansert / Kjerne',
-    description: 'Ekspert på moderne JavaScript (ES6+), asynkrone mønstre, DOM-manipulering og nettleserens livssyklus.',
-    checklist: ['Asynkront & Promises (Async/Await)', 'Funksjonell programmering & closures', 'Event Loop & ytelsesoptimalisering']
+    description: 'Komfortabel med å bygge applikasjoner ved bruk av moderne JavaScript (ES6+), asynkrone mønstre og DOM-manipulering.'
   },
   'TypeScript': {
-    level: 'Avansert',
-    description: 'Sterk forståelse for typesikkerhet og designmønstre. Erfaren med konfigurasjon av compiler-innstillinger, strukturell typing, generics og egne utility-typer.',
-    checklist: ['Avanserte Generics & Mapped Types', 'Strikte innstillinger for type-checking', 'Integrasjon med Webpack & Vite']
+    description: 'Erfaren med å legge til typesikkerhet i kodebaser, jobbe med interfaces, compiler-innstillinger og grunnleggende generics.'
   },
   'React': {
-    level: 'Avansert / Hovedfokus',
-    description: 'Utviklet en rekke React-webapplikasjoner med global tilstandshåndtering, responsive layouter og ytelsesoptimalisering.',
-    checklist: ['Egendefinerte Hooks & Context API', 'Virtual DOM Ytelsesoptimalisering', 'Komponentbasert design & arkitektur']
+    description: 'Kjent med å strukturere komponentdrevne layouter, håndtere tilstand med hooks og bruke React context.'
   },
   'Vue': {
-    level: 'Middels',
-    description: 'Erfaring med å utvikle interaktive weblayouter ved bruk av Vue 3 Composition API, Vuex og Vue Router.',
-    checklist: ['Vue 3 Composition API', 'SFC (Single File Components)', 'Tilstandshåndtering med Pinia']
+    description: 'Kjent med Vue 3 Composition API, reaktiv tilstand og single-file komponenter for enkle apper.'
   },
   'React Native': {
-    level: 'Avansert / Spesialisering',
-    description: 'Dyp kunnskap om kryssplattform mobilutvikling for iOS og Android. Erfaring med Expo, native moduler og UI-layouter.',
-    checklist: ['Kryssplattform UI-tilpasning', 'Håndtering av Expo & Native bygg', 'Integrasjon av enhetssensorer og lagring']
+    description: 'Erfaring med å bygge kryssplattform-layouter for iOS og Android, samt administrere bygg via Expo.'
   },
   'Swift': {
-    level: 'Kompetent',
-    description: 'Erfaring med native iOS-utvikling ved bruk av Swift og SwiftUI. Forstår Apples Human Interface Guidelines og publisering i App Store.',
-    checklist: ['SwiftUI Deklarative layouter', 'MVC & MVVM Designmønstre', 'Nettverk med CoreData & URLSession']
+    description: 'Kjent med nativ iOS-apputvikling ved bruk av Swift og deklarative layouter i SwiftUI.'
   },
   'Kotlin': {
-    level: 'Kompetent',
-    description: 'Utviklet native Android-applikasjoner med Kotlin og Jetpack Compose. God forståelse for Coroutines og Material Design-elementer.',
-    checklist: ['Jetpack Compose UI', 'Kotlin Coroutines for asynkroen oppgaver', 'Android SDK & Gradle bygg']
+    description: 'Kjent med nativ Android-apputvikling ved bruk av Kotlin, Jetpack Compose og grunnleggende coroutines.'
   },
   'Ionic': {
-    level: 'Middels',
-    description: 'Utvikling av hybride mobilapper ved bruk av Capacitor og webteknologi (React/Vue) wrapper-konfigurasjoner.',
-    checklist: ['Capacitor Runtime-konfigurasjon', 'Hybride Native enhetsbroer', 'Ionic UI Webkomponent-layouter']
+    description: 'Kjent med oppsett av hybride apper, og brobygging av weblayouter til mobil via Capacitor.'
   },
   'Java': {
-    level: 'Kompetent',
-    description: 'Akademisk og prosjekterfaring med backend-utvikling ved bruk av Java, OOP-mønstre og Spring Boot.',
-    checklist: ['Objektorientert programmering (OOP)', 'Spring Boot REST-kontrollere', 'Enhetstesting med JUnit']
+    description: 'Kjent med grunnleggende Java, OOP-designmønstre og bygge enkle REST-endepunkter med Spring Boot.'
   },
   'C#': {
-    level: 'Kompetent',
-    description: 'Utviklet backend-API-er og enkle spill ved bruk av C#, .NET Framework og Unity.',
-    checklist: ['.NET Core API-håndtering', 'Entity Framework (EF Core) databasehåndtering', 'Asynkron programmering']
+    description: 'Kjent med programmering i C#, .NET core API-strukturer og enkel skriving av skript i spillmotoren Unity.'
   },
   'Python': {
-    level: 'Kompetent',
-    description: 'Bygd dataskript, web-scraping motorer og enkel backend-routing ved bruk av Flask, Django og skriptrutiner.',
-    checklist: ['Skripting & Web-scraping (BeautifulSoup)', 'Flask API-utvikling', 'Dataprosessering med Pandas']
+    description: 'Komfortabel med å skrive skript for automatisering, datainnsamling og enkel ruting med Flask.'
   },
   'SQL': {
-    level: 'Avansert',
-    description: 'Erfaren med relasjonsdatabaser, optimalisering av komplekse spørringer, joins og databaseskjemaer i PostgreSQL og MySQL.',
-    checklist: ['Databaseskjema & normalisering', 'Komplekse Joins & prosedyrer', 'Indeksering & ytelsesoptimalisering av spørringer']
+    description: 'Kjent med å skrive spørringer, utføre joins og designe enkle relasjonelle skjemaer i PostgreSQL.'
   },
   'HTML5': {
-    level: 'Ekspert',
-    description: 'Svært god kontroll på semantisk koding og responsivt design. Omfattende kunnskap om Flexbox, CSS Grid og egne animasjoner.',
-    checklist: ['Semantisk web & universell utforming', 'Flexbox & CSS Grid design', 'Responsive Media Queries']
+    description: 'Erfaren med å skrive ryddige, semantiske HTML-maler koblet med moderne CSS-strukturer.'
   },
   'Tailwind': {
-    level: 'Avansert',
-    description: 'Svært effektiv med utility-first layouter, egendefinert konfigurasjon, varianter og responsiv styling.',
-    checklist: ['Tilpasning av Tailwind-konfig', 'Responsive Utility-klasser', 'Mørk modus & egne temaer']
+    description: 'Erfaring med utility-first layouter, responsive nett og egendefinerte fargetemaer.'
   },
   'Figma': {
-    level: 'Kompetent',
-    description: 'Brukt Figma til prototyping av nettsidelayouter, mobile wireframes og interaktive designskisser.',
-    checklist: ['UI-skisser & prototyping', 'Bruk av komponentbiblioteker', 'Oppretting av vektorressurser']
+    description: 'Kjent med wireframing, oppretting av visuelle interaktive prototyper og bruk av komponentbiblioteker.'
   },
   'Canva': {
-    level: 'Kompetent',
-    description: 'Laget grafikk for sosiale medier, CV-er og markedsføringsmateriell for nettsider.',
-    checklist: ['Bannere til sosiale medier', 'Vektorlayouter & ressurser', 'Presentasjonsdesign']
+    description: 'Erfaring med å lage presentasjonsfoiler, markedsføringsmateriell og grafikk til sosiale medier.'
   },
   'Git / GitHub': {
-    level: 'Avansert',
-    description: 'Erfaring med samarbeid via Git, pull requests, løsing av merge-konflikter og publisering av GitHub Pages.',
-    checklist: ['Git Rebase & forgreningsstrategier', 'GitHub Actions CI/CD-arbeidsflyt', 'Konflikthåndtering & kodeomtaler']
+    description: 'Komfortabel med versjonskontroll, sporing av endringer, grenhåndtering og innsending av PR-er.'
   },
   'REST APIs': {
-    level: 'Avansert',
-    description: 'Designet og integrert RESTful API-er. Erfaren med JSON-data, egne ruter, parametere og CORS-konfigurasjoner.',
-    checklist: ['API Endpoint-routing & JSON-mapping', 'Token-basert autentisering (JWT)', 'Tilpasning av Axios & Fetch-klienter']
+    description: 'Erfaring med å designe ryddige endepunkter, kartlegge JSON-data og koble til frontend-klienter.'
   },
   'Agile': {
-    level: 'Kompetent',
-    description: 'Erfaring med Scrum-sprints, daglige standups, backlog-prioritering og samarbeid på Jira-tavler.',
-    checklist: ['Scrum rammeverk & sprintplanlegging', 'Koordinering på Jira / Trello-tavler', 'Kodeomtaler & kontinuerlig leveranse']
+    description: 'Kjent med samarbeid i team, deltakelse i standups, sprint-evalueringer og sporing av oppgaver.'
   }
 }
 
@@ -439,12 +439,12 @@ export default function Skills({ language }: SkillsProps) {
   const [activeTab, setActiveTab] = useState<string>('Frontend')
 
   const baseDetail = SKILL_DETAILS[selectedSkill] || SKILL_DETAILS['React']
-  const activeDetail = language === 'en' 
-    ? baseDetail 
-    : {
-        ...baseDetail,
-        ...(SKILL_DETAILS_NO[selectedSkill] || {})
-      }
+  const activeDetail = {
+    ...baseDetail,
+    description: language === 'en'
+      ? baseDetail.description
+      : (SKILL_DETAILS_NO[selectedSkill]?.description || baseDetail.description)
+  }
 
   const activeSkillColor = SKILL_THEME[selectedSkill]?.color || '#1a73ff'
 
@@ -457,12 +457,8 @@ export default function Skills({ language }: SkillsProps) {
 
   const t = {
     eyebrow: language === 'en' ? 'Skills' : 'Ferdigheter',
-    heading: language === 'en' ? 'What I work with' : 'Hva jeg jobber med',
+    heading: language === 'en' ? 'Tech I have experience with' : 'Teknologi jeg har erfaring med',
     sidebarProfile: language === 'en' ? 'Skill Profile' : 'Kompetanseprofil',
-    sidebarVerified: language === 'en' ? 'Verified' : 'Verifisert',
-    sidebarDesignTool: language === 'en' ? 'Design Tool' : 'Designverktøy',
-    sidebarLevel: language === 'en' ? 'Level:' : 'Nivå:',
-    sidebarKeyCompetencies: language === 'en' ? 'Key Competencies' : 'Kjernekompetanse',
   }
 
   return (
@@ -644,91 +640,84 @@ export default function Skills({ language }: SkillsProps) {
             </svg>
 
             {/* Key prop triggers re-mount on change, re-running the entry animation */}
-            <div key={activeDetail.title} className="skills-sidebar-fade" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    background: `color-mix(in srgb, ${activeSkillColor} 11%, #fff)`,
-                    color: activeSkillColor,
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: '.1em',
-                    textTransform: 'uppercase',
-                    padding: '6px 12px',
-                    borderRadius: 99,
-                  }}
-                >
-                  {t.sidebarProfile}
-                </span>
-                
-                {activeDetail.verified ? (
-                  <span
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 4,
-                      background: '#e6f4ea',
-                      color: '#137333',
-                      fontSize: 11,
-                      fontWeight: 700,
-                      padding: '6px 12px',
-                      borderRadius: 99,
-                    }}
-                  >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    {t.sidebarVerified}
-                  </span>
-                ) : (
-                  <span
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      background: '#f1f3f4',
-                      color: '#5f6368',
-                      fontSize: 11,
-                      fontWeight: 700,
-                      padding: '6px 12px',
-                      borderRadius: 99,
-                    }}
-                  >
-                    {t.sidebarDesignTool}
-                  </span>
-                )}
-              </div>
+            <div key={activeDetail.title} className="skills-sidebar-fade" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 20 }}>
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  background: `color-mix(in srgb, ${activeSkillColor} 11%, #fff)`,
+                  color: activeSkillColor,
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: '.1em',
+                  textTransform: 'uppercase',
+                  padding: '6px 12px',
+                  borderRadius: 99,
+                  width: 'fit-content'
+                }}
+              >
+                {t.sidebarProfile}
+              </span>
 
               <div>
                 <h3 style={{ margin: '8px 0 2px', fontSize: 24, fontWeight: 800, color: '#111418' }}>
                   {activeDetail.title}
                 </h3>
-                <div style={{ fontSize: 13, color: '#9aa0a6', fontWeight: 600 }}>
-                  {t.sidebarLevel} {activeDetail.level}
-                </div>
               </div>
 
               <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#56606c' }}>
                 {activeDetail.description}
               </p>
 
-              <div style={{ marginTop: 8 }}>
-                <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#9aa0a6', marginBottom: 12 }}>
-                  {t.sidebarKeyCompetencies}
+              {/* Enjoyment Level */}
+              <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#9aa0a6' }}>
+                  {language === 'en' ? 'Enjoyment Level' : 'Trivsel & Interesse'}
+                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  {Array.from({ length: 5 }).map((_, idx) => {
+                    const rating = baseDetail.rating || 5
+                    const active = idx < rating
+                    return (
+                      <svg
+                        key={idx}
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill={active ? activeSkillColor : 'rgba(15,20,40,.08)'}
+                        stroke={active ? activeSkillColor : 'rgba(15,20,40,.12)'}
+                        strokeWidth="1.5"
+                        style={{ transition: 'all 0.3s ease', transform: active ? 'scale(1.08)' : 'scale(1)' }}
+                      >
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                      </svg>
+                    )
+                  })}
+                  <span style={{ fontSize: 13, color: '#56606c', fontWeight: 600, marginLeft: 8 }}>
+                    {baseDetail.rating || 5}/5
+                  </span>
                 </div>
-                <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {activeDetail.checklist.map((item) => (
-                    <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14.5, color: '#3c434c', lineHeight: 1.4 }}>
-                      <span style={{ display: 'inline-flex', marginTop: 3, color: activeSkillColor }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+              </div>
+
+              {/* Usage & Context Box */}
+              <div
+                style={{
+                  marginTop: 12,
+                  padding: '16px 20px',
+                  borderRadius: 14,
+                  background: 'rgba(15,20,40,0.02)',
+                  border: '1.5px solid rgba(15,20,40,0.04)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 6,
+                }}
+              >
+                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#9aa0a6' }}>
+                  {language === 'en' ? 'Usage & Context' : 'Bruk og Kontekst'}
+                </span>
+                <span style={{ fontSize: 14.5, color: '#3c434c', lineHeight: 1.45 }}>
+                  {baseDetail.useCase[language]}
+                </span>
               </div>
             </div>
           </div>

@@ -37,17 +37,6 @@ const TECH_BADGES = [
     )
   },
   {
-    name: 'C#',
-    color: '#854cc7',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <rect x="2" y="2" width="20" height="20" rx="4" fill="#854cc7" />
-        <path d="M11 8c-2 0-3.5 1.5-3.5 4s1.5 4 3.5 4c1.2 0 2.2-.6 2.8-1.5l-1.5-1c-.3.5-.7.7-1.3.7-1 0-1.7-.8-1.7-2.2s.7-2.2 1.7-2.2c.6 0 1 .2 1.3.7l1.5-1C13.2 8.6 12.2 8 11 8Z" fill="#fff" />
-        <path d="M14 9.5h5v1h-5v-1ZM14 12.5h5v1h-5v-1ZM15.5 8.5h1v6h-1v-6ZM17.5 8.5h1v6h-1v-6Z" fill="#fff" />
-      </svg>
-    )
-  },
-  {
     name: 'Swift',
     color: '#f05138',
     icon: (
@@ -69,24 +58,6 @@ const TECH_BADGES = [
           </linearGradient>
         </defs>
         <path d="M24 0H0v24h24L12 12Z" fill="url(#kotlin-grad)" />
-      </svg>
-    )
-  },
-  {
-    name: 'Tailwind',
-    color: '#06b6d4',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M12 6c-2.4 0-3.6 1.2-3.6 3.6 0 2.4 1.2 3.6 3.6 3.6 2.4 0 3.6-1.2 3.6-3.6C15.6 7.2 14.4 6 12 6ZM6 12c-2.4 0-3.6 1.2-3.6 3.6 0 2.4 1.2 3.6 3.6 3.6 2.4 0 3.6-1.2 3.6-3.6C9.6 13.2 8.4 12 6 12Z" fill="#06b6d4" />
-      </svg>
-    )
-  },
-  {
-    name: 'Git',
-    color: '#f05032',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path d="M2.3 10.7l9 9c.4.4 1 .4 1.4 0l9-9c.4-.4.4-1 0-1.4l-9-9c-.4-.4-1-.4-1.4 0l-9 9c-.4.4-.4 1 0 1.4zm9.3-5.3h1v5.1c.5.3.9.8.9 1.4 0 1-.8 1.8-1.8 1.8s-1.8-.8-1.8-1.8c0-.6.3-1.1.9-1.4V5.4z" fill="#f05032" />
       </svg>
     )
   }
