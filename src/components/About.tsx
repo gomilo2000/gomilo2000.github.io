@@ -94,8 +94,8 @@ export default function About({ language }: AboutProps) {
     : ['Norsk · Morsmål', 'Engelsk · Flytende', 'Serbisk', 'Kroatisk', 'Bosnisk']
 
   const localizedRoles = language === 'en'
-    ? ['Frontend Developer', 'Fullstack Developer', 'App Developer', 'Software Developer', 'IT Consultant']
-    : ['Frontend-utvikler', 'Fullstack-utvikler', 'App-utvikler', 'Programvareutvikler', 'IT-konsulent']
+    ? ['Frontend Developer', 'Fullstack Developer', 'App Developer', 'Software Developer']
+    : ['Frontend-utvikler', 'Fullstack-utvikler', 'App-utvikler', 'Programvareutvikler']
 
   return (
     <section
