@@ -400,4 +400,34 @@ body {
   }
 }
 
+/* Skill Item Buttons */
+.skill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1.5px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #56606c;
+  background: #f4f4f6;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.skill-btn:hover {
+  background: #e9e9eb;
+  color: #14161a;
+  transform: translateY(-1.5px);
+}
+.skill-btn.active {
+  background: #fff;
+  border-color: var(--accent, #1a73ff);
+  color: #14161a;
+  transform: scale(1.04) translateY(-1.5px);
+  box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--accent, #1a73ff) 40%, transparent), 
+              0 0 12px color-mix(in srgb, var(--accent, #1a73ff) 10%, transparent);
+}
+
+
 

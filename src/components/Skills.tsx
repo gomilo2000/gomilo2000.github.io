@@ -446,8 +446,6 @@ export default function Skills({ language }: SkillsProps) {
       : (SKILL_DETAILS_NO[selectedSkill]?.description || baseDetail.description)
   }
 
-  const activeSkillColor = SKILL_THEME[selectedSkill]?.color || '#1a73ff'
-
   const categories = [
     { id: 'Frontend', title: 'Frontend', items: ['JavaScript', 'TypeScript', 'React', 'Vue'] },
     { id: 'Mobile', title: language === 'en' ? 'Mobile' : 'Mobil', items: ['React Native', 'Swift', 'Kotlin', 'Ionic'] },
@@ -489,9 +487,9 @@ export default function Skills({ language }: SkillsProps) {
                     className="skills-mobile-tab-btn"
                     style={{
                       borderColor: isActive ? 'transparent' : 'rgba(15,20,40,.06)',
-                      background: isActive ? activeSkillColor : '#f4f4f6',
+                      background: isActive ? 'var(--accent, #1a73ff)' : '#f4f4f6',
                       color: isActive ? '#fff' : '#56606c',
-                      boxShadow: isActive ? `0 8px 16px -6px ${activeSkillColor}60` : 'none',
+                      boxShadow: isActive ? '0 8px 16px -6px color-mix(in srgb, var(--accent, #1a73ff) 60%, transparent)' : 'none',
                     }}
                   >
                     {cat.title}
@@ -500,102 +498,84 @@ export default function Skills({ language }: SkillsProps) {
               })}
             </div>
 
-            {categories.map((cat) => (
-              <div
-                key={cat.id}
-                className={`skills-category-card ${activeTab === cat.id ? 'active' : ''}`}
-                style={{
-                  border: '1px solid rgba(15,20,40,.07)',
-                  borderRadius: 18,
-                  padding: '24px 24px 28px',
-                  background: '#fff',
-                  boxShadow: '0 4px 14px -10px rgba(0,0,0,0.05)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-              >
-                {/* Dynamic SVG Tech Arcs matching active color (Concentric Rings style) */}
-                <svg
+            {categories.map((cat) => {
+              const isCategoryActive = cat.items.includes(selectedSkill)
+              return (
+                <div
+                  key={cat.id}
+                  className={`skills-category-card ${activeTab === cat.id ? 'active' : ''}`}
                   style={{
-                    position: 'absolute',
-                    bottom: -20,
-                    right: -20,
-                    width: 140,
-                    height: 140,
-                    zIndex: 0,
-                    pointerEvents: 'none',
+                    border: '1px solid rgba(15,20,40,.07)',
+                    borderLeft: `4px solid ${isCategoryActive ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.08)'}`,
+                    borderRadius: 18,
+                    padding: '24px 24px 28px',
+                    background: '#fff',
+                    boxShadow: '0 4px 14px -10px rgba(0,0,0,0.05)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    transition: 'border-left-color 0.3s ease',
                   }}
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <circle
-                    cx="100"
-                    cy="100"
-                    r="80"
-                    stroke={activeSkillColor}
-                    strokeWidth="2"
-                    style={{ opacity: 0.08, transition: 'stroke 0.4s ease' }}
-                  />
-                  <circle
-                    cx="100"
-                    cy="100"
-                    r="55"
-                    stroke={activeSkillColor}
-                    strokeWidth="2"
-                    style={{ opacity: 0.05, transition: 'stroke 0.4s ease' }}
-                  />
-                  <circle
-                    cx="100"
-                    cy="100"
-                    r="30"
-                    stroke={activeSkillColor}
-                    strokeWidth="2"
-                    style={{ opacity: 0.03, transition: 'stroke 0.4s ease' }}
-                  />
-                </svg>
+                  {/* Dynamic SVG Tech Arcs matching active color (Concentric Rings style) */}
+                  <svg
+                    style={{
+                      position: 'absolute',
+                      bottom: -20,
+                      right: -20,
+                      width: 140,
+                      height: 140,
+                      zIndex: 0,
+                      pointerEvents: 'none',
+                    }}
+                    viewBox="0 0 100 100"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="100"
+                      cy="100"
+                      r="80"
+                      stroke="var(--accent, #1a73ff)"
+                      strokeWidth="2"
+                      style={{ opacity: 0.08, transition: 'stroke 0.4s ease' }}
+                    />
+                    <circle
+                      cx="100"
+                      cy="100"
+                      r="55"
+                      stroke="var(--accent, #1a73ff)"
+                      strokeWidth="2"
+                      style={{ opacity: 0.05, transition: 'stroke 0.4s ease' }}
+                    />
+                    <circle
+                      cx="100"
+                      cy="100"
+                      r="30"
+                      stroke="var(--accent, #1a73ff)"
+                      strokeWidth="2"
+                      style={{ opacity: 0.03, transition: 'stroke 0.4s ease' }}
+                    />
+                  </svg>
 
-                <h3 style={{ margin: '0 0 16px', fontSize: 16, fontWeight: 700, color: '#14161a', position: 'relative', zIndex: 1 }}>{cat.title}</h3>
-                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
-                  {cat.items.map((item) => {
-                    const isActive = selectedSkill === item
-                    const brandColor = SKILL_THEME[item]?.color || '#1a73ff'
-                    return (
-                      <button
-                        key={item}
-                        onClick={() => setSelectedSkill(item)}
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 10,
-                          border: '1.5px solid',
-                          fontSize: 14,
-                          fontWeight: 600,
-                          color: '#3c434c',
-                          background: isActive ? '#fff' : '#f4f4f6',
-                          borderColor: isActive ? brandColor : 'transparent',
-                          padding: '10px 16px',
-                          borderRadius: 12,
-                          cursor: 'pointer',
-                          transform: isActive ? 'scale(1.04) translateY(-1px)' : 'scale(1)',
-                          boxShadow: isActive ? `0 8px 20px -8px ${brandColor}80, 0 0 12px ${brandColor}20` : 'none',
-                          transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-                        }}
-                        onMouseEnter={(e) => {
-                          if (!isActive) e.currentTarget.style.background = '#e9e9eb'
-                        }}
-                        onMouseLeave={(e) => {
-                          if (!isActive) e.currentTarget.style.background = '#f4f4f6'
-                        }}
-                      >
-                        {SKILL_THEME[item]?.icon}
-                        <span style={{ color: isActive ? '#14161a' : 'inherit' }}>{item}</span>
-                      </button>
-                    )
-                  })}
+                  <h3 style={{ margin: '0 0 16px', fontSize: 16, fontWeight: 700, color: '#14161a', position: 'relative', zIndex: 1 }}>{cat.title}</h3>
+                  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
+                    {cat.items.map((item) => {
+                      const isActive = selectedSkill === item
+                      return (
+                        <button
+                          key={item}
+                          onClick={() => setSelectedSkill(item)}
+                          className={`skill-btn ${isActive ? 'active' : ''}`}
+                        >
+                          {SKILL_THEME[item]?.icon}
+                          <span>{item}</span>
+                        </button>
+                      )
+                    })}
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           {/* Right column: detailed description sidebar */}
@@ -629,12 +609,12 @@ export default function Skills({ language }: SkillsProps) {
             >
               <path
                 d="M 60,200 C 110,190 130,130 160,80 C 180,47 190,20 200,0 L 200,200 Z"
-                fill={activeSkillColor}
+                fill="var(--accent, #1a73ff)"
                 style={{ opacity: 0.08, transition: 'fill 0.4s ease' }}
               />
               <path
                 d="M 90,200 C 130,195 150,150 175,110 C 190,80 195,50 200,20 L 200,200 Z"
-                fill={activeSkillColor}
+                fill="var(--accent, #1a73ff)"
                 style={{ opacity: 0.04, transition: 'fill 0.4s ease' }}
               />
             </svg>
@@ -645,8 +625,8 @@ export default function Skills({ language }: SkillsProps) {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  background: `color-mix(in srgb, ${activeSkillColor} 11%, #fff)`,
-                  color: activeSkillColor,
+                  background: 'color-mix(in srgb, var(--accent, #1a73ff) 10%, #fff)',
+                  color: 'var(--accent, #1a73ff)',
                   fontSize: 11,
                   fontWeight: 700,
                   letterSpacing: '.1em',
@@ -684,8 +664,8 @@ export default function Skills({ language }: SkillsProps) {
                         width="20"
                         height="20"
                         viewBox="0 0 24 24"
-                        fill={active ? activeSkillColor : 'rgba(15,20,40,.08)'}
-                        stroke={active ? activeSkillColor : 'rgba(15,20,40,.12)'}
+                        fill={active ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.08)'}
+                        stroke={active ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.12)'}
                         strokeWidth="1.5"
                         style={{ transition: 'all 0.3s ease', transform: active ? 'scale(1.08)' : 'scale(1)' }}
                       >
@@ -705,8 +685,11 @@ export default function Skills({ language }: SkillsProps) {
                   marginTop: 12,
                   padding: '16px 20px',
                   borderRadius: 14,
-                  background: 'rgba(15,20,40,0.02)',
-                  border: '1.5px solid rgba(15,20,40,0.04)',
+                  borderLeft: '4px solid var(--accent, #1a73ff)',
+                  background: 'color-mix(in srgb, var(--accent, #1a73ff) 3%, rgba(15,20,40,0.015))',
+                  borderTop: '1px solid rgba(15,20,40,0.04)',
+                  borderRight: '1px solid rgba(15,20,40,0.04)',
+                  borderBottom: '1px solid rgba(15,20,40,0.04)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 6,
@@ -726,3 +709,4 @@ export default function Skills({ language }: SkillsProps) {
     </section>
   )
 }
+
