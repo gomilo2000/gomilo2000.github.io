@@ -440,6 +440,15 @@ body {
   border-color: color-mix(in srgb, var(--accent, #1a73ff) 18%, transparent);
 }
 
+/* Footer Link Hover styling */
+.footer-link {
+  transition: color 0.2s ease;
+}
+.footer-link:hover {
+  color: #ffffff !important;
+}
+
+
 
 
 

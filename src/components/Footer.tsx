@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 
-const link: CSSProperties = { fontSize: 14, color: '#56606c', textDecoration: 'none' }
+const link: CSSProperties = { fontSize: 14, color: '#a5a8be', textDecoration: 'none', transition: 'color 0.2s ease' }
 
 interface FooterProps {
   language: 'en' | 'no'
@@ -16,9 +16,9 @@ export default function Footer({ language }: FooterProps) {
   }
 
   return (
-    <footer style={{ padding: '60px clamp(48px, 8vw, 160px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', borderTop: '1px solid rgba(15,20,40,.06)' }}>
+    <footer style={{ padding: '60px clamp(48px, 8vw, 160px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', background: '#110e28', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
       <div>
-        <span style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 16, fontWeight: 600, color: '#14161a' }}>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 16, fontWeight: 600, color: '#ffffff' }}>
           Goran Milosevic
           <span style={{ 
             display: 'inline-flex', 
@@ -41,7 +41,7 @@ export default function Footer({ language }: FooterProps) {
             {language === 'en' ? 'Open to work' : 'Åpen for arbeid'}
           </span>
         </span>
-        <p style={{ margin: '8px 0 0', fontSize: 14, color: '#9aa0a6' }}>{t.desc}</p>
+        <p style={{ margin: '8px 0 0', fontSize: 14, color: '#a5a8be' }}>{t.desc}</p>
       </div>
       <div style={{ display: 'flex', gap: 26, alignItems: 'center' }}>
         <a href="#about" className="footer-link" style={link}>{t.about}</a>
@@ -49,7 +49,7 @@ export default function Footer({ language }: FooterProps) {
         <a href="#skills" className="footer-link" style={link}>{t.skills}</a>
         <a href="#contact" className="footer-link" style={link}>{t.contact}</a>
       </div>
-      <p style={{ margin: 0, fontSize: 14, color: '#b0b3b8' }}>© 2026 Goran Milosevic</p>
+      <p style={{ margin: 0, fontSize: 14, color: '#7f8c9d' }}>© 2026 Goran Milosevic</p>
     </footer>
   )
 }
