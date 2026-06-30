@@ -65,6 +65,7 @@ interface AboutProps {
 export default function About({ language }: AboutProps) {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null)
   const [confettiTrigger, setConfettiTrigger] = useState(0)
+  const [hoveredRole, setHoveredRole] = useState<number | null>(null)
 
   const t = {
     eyebrow: language === 'en' ? 'About' : 'Om meg',
@@ -78,6 +79,7 @@ export default function About({ language }: AboutProps) {
     gradLabel: language === 'en' ? 'IT Bachelor, graduated' : 'IT-bachelor, uteksaminert',
     langLabel: language === 'en' ? 'languages spoken' : 'språk',
     languagesTitle: language === 'en' ? 'Languages' : 'Språk',
+    rolesTitle: language === 'en' ? 'Target Roles' : 'Ønsker å jobbe som',
   }
 
   const localizedFacts: [string, string][] = [
@@ -90,6 +92,10 @@ export default function About({ language }: AboutProps) {
   const localizedLanguages = language === 'en' 
     ? ['Norwegian · Native', 'English · Fluent', 'Serbian', 'Croatian', 'Bosnian']
     : ['Norsk · Morsmål', 'Engelsk · Flytende', 'Serbisk', 'Kroatisk', 'Bosnisk']
+
+  const localizedRoles = language === 'en'
+    ? ['Frontend Developer', 'Fullstack Developer', 'App Developer', 'Software Developer', 'IT Consultant']
+    : ['Frontend-utvikler', 'Fullstack-utvikler', 'App-utvikler', 'Programvareutvikler', 'IT-konsulent']
 
   return (
     <section
@@ -340,6 +346,42 @@ export default function About({ language }: AboutProps) {
                 )}
               </div>
             ))}
+          </div>
+
+          <div
+            style={{
+              border: '1px solid rgba(15,20,40,.08)',
+              borderRadius: 18,
+              padding: '22px 22px 24px',
+              background: '#fff',
+              transition: 'all 0.25s ease',
+              borderColor: hoveredRole !== null ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.08)',
+              boxShadow: hoveredRole !== null ? '0 12px 28px -12px rgba(26,115,255,0.12)' : 'none',
+            }}
+          >
+            <p style={{ margin: '0 0 14px', fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#9aa0a6' }}>{t.rolesTitle}</p>
+            <div style={{ display: 'flex', gap: 9, flexWrap: 'wrap' }}>
+              {localizedRoles.map((role, idx) => {
+                const isHovered = hoveredRole === idx
+                return (
+                  <span
+                    key={role}
+                    onMouseEnter={() => setHoveredRole(idx)}
+                    onMouseLeave={() => setHoveredRole(null)}
+                    style={{
+                      ...chip,
+                      cursor: 'default',
+                      transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                      background: isHovered ? 'var(--accent, #1a73ff)' : '#f4f4f6',
+                      color: isHovered ? '#fff' : '#3c434c',
+                      transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+                    }}
+                  >
+                    {role}
+                  </span>
+                )
+              })}
+            </div>
           </div>
 
           <div
