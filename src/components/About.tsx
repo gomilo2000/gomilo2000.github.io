@@ -303,7 +303,41 @@ export default function About({ language }: AboutProps) {
                 }}
               >
                 <span style={{ fontSize: 14, color: '#9aa0a6' }}>{label}</span>
-                <span style={{ fontSize: 14.5, fontWeight: 600, color: '#14161a' }}>{value}</span>
+                {i === 3 ? (
+                  <a
+                    href="#contact"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      const el = document.getElementById('contact')
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth' })
+                      }
+                    }}
+                    className="about-status-link"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      fontSize: 14.5,
+                      fontWeight: 600,
+                      color: 'var(--accent, #1a73ff)',
+                      textDecoration: 'none',
+                      padding: '4px 8px',
+                      borderRadius: 20,
+                      marginLeft: -8,
+                      transition: 'all 0.25s ease',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span style={{ position: 'relative', display: 'flex', width: 6, height: 6, flexShrink: 0 }}>
+                      <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'var(--accent, #1a73ff)', opacity: 0.6, animation: 'cc-ping 1.6s cubic-bezier(0,0,.2,1) infinite' }} />
+                      <span style={{ position: 'relative', width: 6, height: 6, borderRadius: '50%', background: 'var(--accent, #1a73ff)' }} />
+                    </span>
+                    {value}
+                  </a>
+                ) : (
+                  <span style={{ fontSize: 14.5, fontWeight: 600, color: '#14161a' }}>{value}</span>
+                )}
               </div>
             ))}
           </div>

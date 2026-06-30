@@ -429,5 +429,18 @@ body {
               0 0 12px color-mix(in srgb, var(--accent, #1a73ff) 10%, transparent);
 }
 
+/* About Section Status Link */
+.about-status-link {
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.about-status-link:hover {
+  background: color-mix(in srgb, var(--accent, #1a73ff) 8%, #fff);
+  border-color: color-mix(in srgb, var(--accent, #1a73ff) 18%, transparent);
+}
+
+
+
 
 

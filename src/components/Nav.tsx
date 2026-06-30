@@ -87,7 +87,26 @@ export default function Nav({ language }: NavProps) {
         />
         <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 17, fontWeight: 600, color: '#14161a', letterSpacing: '-.01em' }}>
           Goran Milosevic
-          <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)' }} />
+          <span style={{ 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: 6, 
+            background: 'color-mix(in srgb, var(--accent) 10%, #fff)',
+            border: '1px solid color-mix(in srgb, var(--accent) 20%, transparent)',
+            borderRadius: 20, 
+            padding: '2px 8px', 
+            fontSize: 11, 
+            fontWeight: 600, 
+            color: 'var(--accent)',
+            marginLeft: 4,
+            transform: 'translateY(0.5px)',
+          }}>
+            <span style={{ position: 'relative', display: 'flex', width: 6, height: 6 }}>
+              <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'var(--accent)', opacity: 0.6, animation: 'cc-ping 1.6s cubic-bezier(0,0,.2,1) infinite' }} />
+              <span style={{ position: 'relative', width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)' }} />
+            </span>
+            {language === 'en' ? 'Open to work' : 'Åpen for arbeid'}
+          </span>
         </span>
       </a>
 
