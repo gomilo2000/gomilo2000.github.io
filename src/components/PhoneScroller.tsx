@@ -170,34 +170,6 @@ export default function PhoneScroller({ language = 'en', activeColor }: PhoneScr
           </div>
         </div>
       </div>
-
-      {/* status pill */}
-      <span
-        style={{
-          position: 'absolute',
-          top: 6,
-          right: 6,
-          zIndex: 5,
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 8,
-          background: '#14161f',
-          color: '#fff',
-          fontSize: 11,
-          fontWeight: 700,
-          letterSpacing: '.1em',
-          textTransform: 'uppercase',
-          padding: '9px 15px',
-          borderRadius: 999,
-          boxShadow: '0 8px 20px -8px rgba(0,0,0,.5)',
-        }}
-      >
-        <span style={{ position: 'relative', display: 'flex', width: 8, height: 8 }}>
-          <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: '#f6c700', opacity: 0.6, animation: 'cc-ping 1.6s cubic-bezier(0,0,.2,1) infinite' }} />
-          <span style={{ position: 'relative', width: 8, height: 8, borderRadius: '50%', background: '#e6b800' }} />
-        </span>
-        {language === 'en' ? 'More previews coming soon' : 'Flere forhåndsvisninger kommer snart'}
-      </span>
     </div>
   )
 }
