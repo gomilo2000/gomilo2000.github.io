@@ -161,7 +161,6 @@ export default function Projects({ language }: ProjectsProps) {
   const t = {
     eyebrow: language === 'en' ? 'Projects' : 'Prosjekter',
     heading: language === 'en' ? 'Selected projects' : 'Utvalgte prosjekter',
-    sideText: language === 'en' ? 'Here are some of the projects I have worked on.' : 'Her er noen av prosjektene jeg har jobbet med.',
     viewProject: language === 'en' ? 'View project details' : 'Se detaljer om prosjektet',
     hideProject: language === 'en' ? 'Hide project details' : 'Skjul detaljer',
     techTitle: language === 'en' ? 'Technologies used' : 'Teknologier brukt',
@@ -184,7 +183,6 @@ export default function Projects({ language }: ProjectsProps) {
           <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>{t.eyebrow}</p>
           <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>{t.heading}</h2>
         </div>
-        <p style={{ margin: 0, fontSize: 17, color: '#5b6068', maxWidth: 480 }}>{t.sideText}</p>
       </div>
 
       {/* Featured Project Card (Askim Treningssenter) */}
