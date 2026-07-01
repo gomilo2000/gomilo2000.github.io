@@ -10,6 +10,7 @@ body {
 ::selection { background: #1a73ff; color: #fff; }
 
 /* ---- keyframes ---- */
+
 @keyframes cc-ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
 @keyframes cc-glow { 0%, 100% { opacity: .85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
 
@@ -102,13 +103,7 @@ body {
 
 /* Custom styles for tech badges, tooltips and sidebar */
 .tech-badge {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-@media (max-width: 1023px) {
-  .tech-badge-indicator {
-    display: none !important;
-  }
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
 }
 
 .skills-icon-card {

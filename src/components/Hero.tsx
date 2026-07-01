@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { ArrowRight } from '../theme'
 import PhoneScroller from './PhoneScroller'
 
@@ -78,44 +78,10 @@ export default function Hero({ language, accentColor, setAccentColor }: HeroProp
       : 'Junior fullstack-utvikler fra Norge, som bygger intuitive produkter for web og mobil.',
     projectsBtn: language === 'en' ? 'View my projects' : 'Se mine prosjekter',
     contactBtn: language === 'en' ? 'Get in touch' : 'Ta kontakt',
-    techTitle: language === 'en' ? 'Tech I work with' : 'Teknologi jeg bruker',
-    clickMe: language === 'en' ? 'click me' : 'klikk meg'
+    techTitle: language === 'en' ? 'Tech I work with' : 'Teknologi jeg bruker'
   }
 
   const [hoveredBadge, setHoveredBadge] = useState<number | null>(null)
-  const [topRowLastIdx, setTopRowLastIdx] = useState<number | null>(null)
-  const badgeRefs = useRef<(HTMLDivElement | null)[]>([])
-
-  useEffect(() => {
-    const updateTopRowLast = () => {
-      const validRefs = badgeRefs.current.filter((ref): ref is HTMLDivElement => ref !== null)
-      if (validRefs.length === 0) return
-      
-      let minTop = Infinity
-      validRefs.forEach(ref => {
-        if (ref.offsetTop < minTop) {
-          minTop = ref.offsetTop
-        }
-      })
-
-      let lastIdx = 0
-      for (let i = 0; i < badgeRefs.current.length; i++) {
-        const ref = badgeRefs.current[i]
-        if (ref && Math.abs(ref.offsetTop - minTop) < 5) {
-          lastIdx = i
-        }
-      }
-      setTopRowLastIdx(lastIdx)
-    }
-
-    updateTopRowLast()
-    const timer = setTimeout(updateTopRowLast, 100)
-    window.addEventListener('resize', updateTopRowLast)
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener('resize', updateTopRowLast)
-    }
-  }, [])
 
   const activeBadgeIndex = accentColor 
     ? TECH_BADGES.findIndex(b => b.color === accentColor) 
@@ -207,7 +173,6 @@ export default function Hero({ language, accentColor, setAccentColor }: HeroProp
             return (
               <div
                 key={badge.name}
-                ref={(el) => { badgeRefs.current[idx] = el }}
                 className="tech-badge"
                 onMouseEnter={() => setHoveredBadge(idx)}
                 onMouseLeave={() => setHoveredBadge(null)}
@@ -224,68 +189,35 @@ export default function Hero({ language, accentColor, setAccentColor }: HeroProp
                   gap: 8,
                   padding: '10px 16px',
                   borderRadius: 12,
-                  background: '#fff',
-                  border: '1.5px solid rgba(15,20,40,.06)',
-                  color: '#1c1e21',
+                  background: isActive
+                    ? '#ffffff'
+                    : isHovered
+                      ? `color-mix(in srgb, ${badge.color} 18%, #ffffff)` 
+                      : `color-mix(in srgb, ${badge.color} 8%, #ffffff)`,
+                  border: '1.5px solid',
+                  color: showGlow 
+                    ? `color-mix(in srgb, ${badge.color} 50%, #080c14)` 
+                    : `color-mix(in srgb, ${badge.color} 30%, #1c1e21)`,
                   fontSize: 14,
                   fontWeight: 600,
                   cursor: 'pointer',
-                  transform: showGlow ? 'scale(1.15) translateY(-4px)' : 'scale(1)',
-                  borderColor: showGlow ? badge.color : 'rgba(15,20,40,.06)',
-                  boxShadow: showGlow 
-                    ? `0 12px 24px -10px ${badge.color}80, 0 0 20px ${badge.color}35`
-                    : '0 4px 12px -8px rgba(20,24,50,.15)',
-                  position: idx === topRowLastIdx ? 'relative' : undefined,
+                  transform: isActive 
+                    ? 'scale(1.06) translateY(-3px)' 
+                    : isHovered 
+                      ? 'scale(1.12) translateY(-6px)' 
+                      : 'scale(1)',
+                  borderColor: showGlow 
+                    ? badge.color 
+                    : `color-mix(in srgb, ${badge.color} 24%, #ffffff)`,
+                  boxShadow: isActive
+                    ? `0 12px 24px -10px ${badge.color}60, 0 4px 12px -6px ${badge.color}20, inset 0 -2.5px 0 color-mix(in srgb, ${badge.color} 40%, #ffffff)`
+                    : isHovered
+                      ? `0 16px 28px -10px ${badge.color}50, 0 4px 12px -6px ${badge.color}20, inset 0 -2.5px 0 color-mix(in srgb, ${badge.color} 40%, rgba(0,0,0,0.08))`
+                      : `0 6px 16px -8px rgba(15,20,40,0.12), 0 1px 3px rgba(15,20,40,0.04), inset 0 -2.5px 0 color-mix(in srgb, ${badge.color} 20%, rgba(0,0,0,0.05))`,
                 }}
               >
                 {badge.icon}
                 <span>{badge.name}</span>
-                {idx === topRowLastIdx && (
-                  <div
-                    className="tech-badge-indicator"
-                    style={{
-                      position: 'absolute',
-                      left: '50%',
-                      bottom: '105%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      pointerEvents: 'none',
-                      transform: 'translateX(-50%) translateY(-2px)',
-                      zIndex: 10,
-                    }}
-                  >
-                    <svg width="120" height="65" viewBox="0 0 120 65" fill="none" style={{ overflow: 'visible' }}>
-                      <path
-                        d="M 105 10 C 70 8, 60 15, 60 55"
-                        stroke="#000"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M 50 45 L 60 55 L 70 45"
-                        stroke="#000"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <span
-                      style={{
-                        fontFamily: "'Caveat', cursive",
-                        fontSize: '22px',
-                        fontWeight: 'bold',
-                        color: '#000',
-                        marginLeft: '8px',
-                        marginTop: '-35px',
-                        transform: 'rotate(-5deg)',
-                        display: 'inline-block',
-                      }}
-                    >
-                      {t.clickMe}
-                    </span>
-                  </div>
-                )}
               </div>
             )
           })}
