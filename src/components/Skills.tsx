@@ -460,8 +460,56 @@ export default function Skills({ language }: SkillsProps) {
   }
 
   return (
-    <section id="skills" style={{ scrollMarginTop: 90, padding: '130px clamp(48px, 8vw, 160px)' }}>
-      <div style={{ marginBottom: 44 }}>
+    <section
+      id="skills"
+      style={{
+        scrollMarginTop: 90,
+        position: 'relative',
+      }}
+    >
+      {/* Background container that clips the blurred image and prevents overflow issues with position: sticky */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          overflow: 'hidden',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        {/* Blurred background image container scaled to prevent edge artifacts */}
+        <div
+          style={{
+            position: 'absolute',
+            top: -10,
+            left: -10,
+            right: -10,
+            bottom: -10,
+            backgroundImage: 'url(/skills-bg.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'blur(10px)',
+            transform: 'scale(1.08)',
+          }}
+        />
+        {/* Semi-transparent tint overlay on top of the blur */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'rgba(252, 252, 254, 0.86)',
+          }}
+        />
+      </div>
+
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 2,
+          padding: '130px clamp(48px, 8vw, 160px)',
+        }}
+      >
+        <div style={{ marginBottom: 44 }}>
           <p style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>{t.eyebrow}</p>
           <h2 style={{ margin: 0, fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 700, letterSpacing: '-.025em', color: '#14161a', lineHeight: 1.08 }}>{t.heading}</h2>
         </div>
@@ -706,6 +754,7 @@ export default function Skills({ language }: SkillsProps) {
           </div>
 
         </div>
+      </div>
     </section>
   )
 }
