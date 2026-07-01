@@ -178,6 +178,42 @@ const SKILL_DETAILS: Record<string, SkillDetail> = {
       en: 'Collaborating with teammates in Scrum-like sprints, tracking tasks on digital boards.',
       no: 'Samarbeid med teammedlemmer i Scrum-lignende sprinter, og sporing av oppgaver på digitale tavler.'
     }
+  },
+  'Claude': {
+    title: 'Claude',
+    description: 'Experienced in leveraging Anthropic Claude models for coding, text generation, and prompt engineering workflows.',
+    rating: 5,
+    useCase: {
+      en: 'Using Claude for code generation, architectural design, and complex problem-solving.',
+      no: 'Brukt til kodegenerering, arkitekturdesign og kompleks problemløsning.'
+    }
+  },
+  'Google AI Studio': {
+    title: 'Google AI Studio',
+    description: 'Experienced in prompt engineering, system instructions, and integrating Gemini APIs into web applications.',
+    rating: 5,
+    useCase: {
+      en: 'Designing structured prompts, configuring system instructions, and integrating Gemini model endpoints.',
+      no: 'Design av strukturerte ledetekster, konfigurering av systeminstruksjoner og integrering av Gemini-endepunkter.'
+    }
+  },
+  'Antigravity': {
+    title: 'Antigravity',
+    description: 'Familiar with using the Antigravity coding assistant for rapid development and pair programming.',
+    rating: 5,
+    useCase: {
+      en: 'Leveraging workflows for editing codebases, running tasks, and speeding up development cycles.',
+      no: 'Utnyttelse av arbeidsflyter for redigering av kodebaser, kjøring av oppgaver og raskere utvikling.'
+    }
+  },
+  'Kling': {
+    title: 'Kling',
+    description: 'Experienced in generating high-quality AI video assets and cinematic animations using Kling AI.',
+    rating: 4,
+    useCase: {
+      en: 'Generating custom video graphics and visual assets for creative projects.',
+      no: 'Generering av skreddersydd videografikk og visuelle elementer til kreative prosjekter.'
+    }
   }
 }
 
@@ -367,6 +403,41 @@ const SKILL_THEME: Record<string, { color: string; icon: React.ReactNode }> = {
         <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
       </svg>
     )
+  },
+  'Claude': {
+    color: '#cc7a66',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cc7a66" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 3v18M3 12h18M12 12l6.36-6.36M12 12L5.64 17.64M12 12l6.36 6.36M12 12L5.64 6.36" />
+      </svg>
+    )
+  },
+  'Google AI Studio': {
+    color: '#4285f4',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+        <path d="M12 2C12 2 12.5 8 16 10c-3.5 2-4 8-4 8s-.5-6-4-8c3.5-2 4-8 4-8Z" fill="#4285f4" />
+        <path d="M18 14c0 0 .3 2.5 1.7 3.3-.8.4-1.7 2.3-1.7 2.3s-.3-2.5-1.7-3.3c.8-.4 1.7-2.3 1.7-2.3Z" fill="#34a853" />
+      </svg>
+    )
+  },
+  'Antigravity': {
+    color: '#8b5cf6',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+        <path d="M12 17V3M12 3L7 8M12 3l5 5M4 21h16" />
+      </svg>
+    )
+  },
+  'Kling': {
+    color: '#ff4757',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff4757" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+        <rect x="2" y="4" width="14" height="16" rx="2" fill="none" />
+        <path d="M16 8l6-4v16l-6-4" fill="#ff4757" />
+      </svg>
+    )
   }
 }
 
@@ -427,6 +498,18 @@ const SKILL_DETAILS_NO: Record<string, { description: string }> = {
   },
   'Agile': {
     description: 'Kjent med samarbeid i team, deltakelse i standups, sprint-evalueringer og sporing av oppgaver.'
+  },
+  'Claude': {
+    description: 'Erfaren med å utnytte Anthropic Claude-modeller til koding, tekstgenerering og prompt-engineering-arbeidsflyter.'
+  },
+  'Google AI Studio': {
+    description: 'Erfaren med prompt engineering, systeminstruksjoner og integrering av Gemini-API-er i webapplikasjoner.'
+  },
+  'Antigravity': {
+    description: 'Kjent med bruk av kodeassistenten Antigravity for rask utvikling og parprogrammering.'
+  },
+  'Kling': {
+    description: 'Erfaren med å skape videoer og animasjoner av høy kvalitet ved hjelp av Kling AI.'
   }
 }
 
@@ -450,7 +533,7 @@ export default function Skills({ language }: SkillsProps) {
     { id: 'Frontend', title: 'Frontend', items: ['JavaScript', 'TypeScript', 'React', 'Vue'] },
     { id: 'Mobile', title: language === 'en' ? 'Mobile' : 'Mobil', items: ['React Native', 'Swift', 'Kotlin', 'Ionic'] },
     { id: 'Backend & DB', title: 'Backend & DB', items: ['Java', 'C#', 'Python', 'SQL'] },
-    { id: 'Tools & Styling', title: language === 'en' ? 'Tools & Styling' : 'Verktøy & Styling', items: ['HTML5', 'Tailwind', 'Figma', 'Canva', 'Git / GitHub', 'REST APIs', 'Agile'] },
+    { id: 'Tools & Styling', title: language === 'en' ? 'Tools & Styling' : 'Verktøy & Styling', items: ['Claude', 'Google AI Studio', 'Antigravity', 'Kling', 'HTML5', 'Tailwind', 'Figma', 'Canva', 'Git / GitHub', 'REST APIs', 'Agile'] },
   ]
 
   const t = {
