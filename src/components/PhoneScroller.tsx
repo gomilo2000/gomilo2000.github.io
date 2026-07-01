@@ -43,7 +43,7 @@ function EmptyPhone({ imageSrc }: { imageSrc?: string }) {
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
+              objectFit: 'fill',
               objectPosition: 'top',
               display: 'block',
             }}
@@ -72,7 +72,7 @@ const col1Images: (string | undefined)[] = [
 ]
 
 const col2Images: (string | undefined)[] = [
-  undefined,
+  '/project2/angerman_phone1.png',
   undefined,
 ]
 
