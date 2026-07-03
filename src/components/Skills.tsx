@@ -116,6 +116,24 @@ const SKILL_DETAILS: Record<string, SkillDetail> = {
       no: 'Relasjonell databaseskjemamodellering, skriving av spørringer og håndtering av Postgres/MySQL.'
     }
   },
+  'MongoDB': {
+    title: 'MongoDB',
+    description: 'Familiar with NoSQL database concepts, document schemas, aggregation pipelines, and integration with Node.js/Mongoose.',
+    rating: 3,
+    useCase: {
+      en: 'Used as a flexible document store for modern web applications and backend APIs.',
+      no: 'Brukt som et fleksibelt dokumentlager for moderne webapplikasjoner og backend-API-er.'
+    }
+  },
+  'Firebase': {
+    title: 'Firebase',
+    description: 'Experienced with Firebase services including Firestore, Authentication, Cloud Functions, and Hosting.',
+    rating: 3,
+    useCase: {
+      en: 'Used for rapid backend prototyping, user authentication, and real-time database syncing.',
+      no: 'Brukt til rask backend-prototyping, brukerautentisering og synkronisering av sanntidsdatabaser.'
+    }
+  },
   'HTML5': {
     title: 'HTML5 & CSS3',
     description: 'Proficient in writing clean, semantic HTML templates coupled with modern CSS structures.',
@@ -337,6 +355,25 @@ const SKILL_THEME: Record<string, { color: string; icon: React.ReactNode }> = {
       </svg>
     )
   },
+  'MongoDB': {
+    color: '#47a248',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+        <path d="M12 2C12 2 6 8.5 6 13.5C6 17 8.5 20 12 20C15.5 20 18 17 18 13.5C18 8.5 12 2 12 2Z" fill="#47a248" />
+        <path d="M12 2V20" stroke="#fff" strokeWidth="1" />
+      </svg>
+    )
+  },
+  'Firebase': {
+    color: '#ffca28',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+        <path d="M3.89 15.67L12.5 1.5c.1-.16.34-.16.44 0l1.83 3.01-10.88 11.16z" fill="#FFC228" />
+        <path d="M15.82 7.6L12.94 2.87c-.1-.17-.35-.17-.45 0l-9.15 15c-.1.17 0 .41.2.45l9.28 1.63L20.46 9.6c.14-.24-.13-.5-.35-.39L15.82 7.6z" fill="#F57C00" />
+        <path d="M3.54 18.23l8.96 1.77 8.12-10.23c.15-.19.46-.04.4.21l-2.02 8.7c-.05.2-.23.33-.44.33H3.97c-.28 0-.44-.32-.24-.51l-.19-.27z" fill="#FF9100" />
+      </svg>
+    )
+  },
   'HTML5': {
     color: '#e34f26',
     icon: (
@@ -478,6 +515,12 @@ const SKILL_DETAILS_NO: Record<string, { description: string }> = {
   'SQL': {
     description: 'Kjent med å skrive spørringer, utføre joins og designe enkle relasjonelle skjemaer i PostgreSQL.'
   },
+  'MongoDB': {
+    description: 'Kjent med NoSQL-databasekonsepter, dokumentskjemaer, aggregerings-pipelines og integrasjon med Node.js/Mongoose.'
+  },
+  'Firebase': {
+    description: 'Erfaren med Firebase-tjenester inkludert Firestore, Authentication, Cloud Functions og Hosting.'
+  },
   'HTML5': {
     description: 'Erfaren med å skrive ryddige, semantiske HTML-maler koblet med moderne CSS-strukturer.'
   },
@@ -532,7 +575,7 @@ export default function Skills({ language }: SkillsProps) {
   const categories = [
     { id: 'Frontend', title: 'Frontend', items: ['JavaScript', 'TypeScript', 'React', 'Vue'] },
     { id: 'Mobile', title: language === 'en' ? 'Mobile' : 'Mobil', items: ['React Native', 'Swift', 'Kotlin', 'Ionic'] },
-    { id: 'Backend & DB', title: 'Backend & DB', items: ['Java', 'C#', 'Python', 'SQL'] },
+    { id: 'Backend & DB', title: 'Backend & DB', items: ['Java', 'C#', 'Python', 'SQL', 'MongoDB', 'Firebase'] },
     { id: 'Tools & Styling', title: language === 'en' ? 'Tools & Styling' : 'Verktøy & Styling', items: ['Claude', 'Google AI Studio', 'Antigravity', 'Kling', 'HTML5', 'Tailwind', 'Figma', 'Canva', 'Git / GitHub', 'REST APIs', 'Agile'] },
   ]
 
