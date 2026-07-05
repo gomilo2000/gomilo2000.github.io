@@ -57,6 +57,52 @@ const ASKIM_PROJECT: ProjectData = {
   },
 }
 
+const ANGERMAN_PROJECT: ProjectData = {
+  id: 'angerman-as',
+  title: 'Angerman AS',
+  category: {
+    en: 'Featured Project · Bachelor Thesis',
+    no: 'Utvalgt prosjekt · Bacheloroppgave',
+  },
+  desc: {
+    en: 'A cross-platform React Native app digitalizing Angerman\'s physical training manuals for heavy machinery certification, streamlining hour logging and mentor approvals.',
+    no: 'En tverrplattform React Native-app som digitaliserer Angermans fysiske opplæringsbøker for maskinførere, og forenkler timeregistrering og faddergodkjenning.',
+  },
+  tech: ['React Native', 'Expo', 'Tailwind CSS', 'Firebase'],
+  details: {
+    overview: {
+      en: 'Developed as a bachelor project for Angerman AS, this cross-platform mobile application digitalizes physical safety training logbooks used by students seeking heavy machinery certifications (trucks, cranes, excavation vehicles). Working in an agile Scrum team (where I served as ScrumMaster), we built an intuitive mobile portal that connects Students, Mentors (Fadder), and Instructors. The system replaces manual paper workflows with a real-time database, enabling instant training hour tracking and automated document uploading.',
+      no: 'Utviklet som et bachelorprosjekt for Angerman AS. Denne tverrplattform mobilapplikasjonen digitaliserer de fysiske opplæringsbøkene for elever som tar kompetansebevis på tunge maskiner (truck, kran og gravemaskiner). Gjennom smidig prosjektmetodikk (hvor jeg fungerte som ScrumMaster) utviklet vi en mobilportal som kobler sammen elever, faddere og instruktører. Systemet erstatter manuelle papirrutiner med en sanntidsdatabase for enkel sporing av timer og automatisk dokumentopplasting.',
+    },
+    features: {
+      en: [
+        'Multi-Role Authorization: Distinct user levels and custom dashboards for Students, Mentors, and Instructors.',
+        'Smarter Module Hour Logger: Log practical hours easily for specific machinery modules (e.g., forklift, mobile crane, tower crane).',
+        'Direct Mentor Verification: Push notification workflow allowing mentors to review and instantly approve logged hours.',
+        'Digital Certificate Vault: Secure image and PDF uploading of licenses and qualifications powered by Cloud Firestore.',
+        'Accessible Design System: High-contrast, large touch-target layouts built for a wide age demographic (18 to 78+ years old).',
+        'Built-in Multi-Language Support: Seamless translation options between English, Norwegian, and Polish.'
+      ],
+      no: [
+        'Flerrolle-autorisasjon: Egne tilgangsnivåer og tilpassede dashbord for elever, faddere og instruktører.',
+        'Smidig timeregistrering: Loggføring av praktiske kjøretimer spesifisert per maskinklasse (f.eks. truck, mobilkran, tårnkran).',
+        'Direkte faddergodkjenning: Varslingsflyt der faddere kan sjekke og umiddelbart godkjenne elevenes registrerte timer.',
+        'Sikkert dokumentarkiv: Opplasting og lagring av kompetansebevis og sertifikater i Firebase og Cloud Firestore.',
+        'Universelt utformet design (UU): Grensesnitt med høy kontrast og store berøringsflater, tilpasset alle aldersgrupper (18–78+ år).',
+        'Integrert flerspråklighet: Enkelt bytte av språk i appen mellom norsk, engelsk og polsk.'
+      ],
+    },
+    challenges: {
+      en: 'User testing revealed two key accessibility and schema challenges. First, older users (up to 78 years old) struggled with standard mobile layouts. We resolved this by implementing oversized universal button components, simplifying navigation paths, and converting document upload zones into single broad touch targets. Second, mentors (faddere) frequently needed to enroll as students in other courses. We redesigned the Firebase database schemas and application state to support a dual-role interface, allowing users to switch seamlessly between logging hours as a student and approving hours as a mentor.',
+      no: 'Brukertesting avdekket to kritiske utfordringer knyttet til universell utforming og databasearkitektur. For det første slet eldre brukere (opptil 78 år) med vanlige mobilknapper og rulling. Vi løste dette ved å designe store "universal-knapper", forenkle menyene og gjøre hele dokumentfeltet til én stor trykkflate. For det andre måtte faddere ofte registrere seg som elever på nye kurs. Vi redesignet Firebase-strukturen og appens state-håndtering for å støtte en flerrolle-profil, slik at man sømløst kan veksle mellom egne timelister og godkjenning av andres timer.',
+    },
+    repo: {
+      en: 'The repository for this project is private but can be provided upon request.',
+      no: 'Repositoriet for dette prosjektet er privat, men kan oppgis ved forespørsel.',
+    },
+  },
+}
+
 interface DetailCardProps {
   num: string
   title: string
@@ -102,7 +148,7 @@ function DetailCard({ num, title, icon, content }: DetailCardProps) {
   )
 }
 
-const DESKTOP_SLIDES = [
+const ASKIMTRENINGSSENTER_SLIDES = [
   '/project1/askimtreningssenter_desktop1.png',
   '/project1/askimtreningssenter_desktop2.png',
   '/project1/askimtreningssenter_desktop3.png',
@@ -111,6 +157,13 @@ const DESKTOP_SLIDES = [
   '/project1/askimtreningssenter_desktop6.png',
   '/project1/askimtreningssenter_desktop7.png',
   '/project1/askimtreningssenter_desktop8.png',
+]
+
+const ANGERMAN_SLIDES = [
+  '/project2/project2_phone1.png',
+  '/project2/project2_phone2.png',
+  '/project2/project2_phone3.png',
+  '/project2/project2_phone4.png',
 ]
 
 interface ProjectsProps {
@@ -122,6 +175,12 @@ export default function Projects({ language }: ProjectsProps) {
   const [hovered, setHovered] = useState(false)
   const [activeSlide, setActiveSlide] = useState(0)
   const [isZoomed, setIsZoomed] = useState(false)
+  
+  const [isExpanded2, setIsExpanded2] = useState(false)
+  const [hovered2, setHovered2] = useState(false)
+  const [activeSlide2, setActiveSlide2] = useState(0)
+  const [isZoomed2, setIsZoomed2] = useState(false)
+  
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -130,6 +189,7 @@ export default function Projects({ language }: ProjectsProps) {
       setIsMobile(mobile)
       if (mobile) {
         setIsExpanded(false)
+        setIsExpanded2(false)
       }
     }
     handleResize()
@@ -140,13 +200,32 @@ export default function Projects({ language }: ProjectsProps) {
   }, [])
 
   useEffect(() => {
+    if (!isZoomed2) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        setActiveSlide2((prev) => (prev === 0 ? ANGERMAN_SLIDES.length - 1 : prev - 1))
+      } else if (e.key === 'ArrowRight') {
+        setActiveSlide2((prev) => (prev === ANGERMAN_SLIDES.length - 1 ? 0 : prev + 1))
+      } else if (e.key === 'Escape') {
+        setIsZoomed2(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isZoomed2])
+
+  useEffect(() => {
     if (!isZoomed) return
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
-        setActiveSlide((prev) => (prev === 0 ? DESKTOP_SLIDES.length - 1 : prev - 1))
+        setActiveSlide((prev) => (prev === 0 ? ASKIMTRENINGSSENTER_SLIDES.length - 1 : prev - 1))
       } else if (e.key === 'ArrowRight') {
-        setActiveSlide((prev) => (prev === DESKTOP_SLIDES.length - 1 ? 0 : prev + 1))
+        setActiveSlide((prev) => (prev === ASKIMTRENINGSSENTER_SLIDES.length - 1 ? 0 : prev + 1))
       } else if (e.key === 'Escape') {
         setIsZoomed(false)
       }
@@ -585,7 +664,7 @@ export default function Projects({ language }: ProjectsProps) {
                 >
                   {/* The Slide Image */}
                   <img
-                    src={DESKTOP_SLIDES[activeSlide]}
+                    src={ASKIMTRENINGSSENTER_SLIDES[activeSlide]}
                     alt={`Slide ${activeSlide + 1}`}
                     onClick={() => setIsZoomed(true)}
                     style={{
@@ -602,7 +681,7 @@ export default function Projects({ language }: ProjectsProps) {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      setActiveSlide((prev) => (prev === 0 ? DESKTOP_SLIDES.length - 1 : prev - 1));
+                      setActiveSlide((prev) => (prev === 0 ? ASKIMTRENINGSSENTER_SLIDES.length - 1 : prev - 1));
                     }}
                     style={{
                       position: 'absolute',
@@ -635,7 +714,7 @@ export default function Projects({ language }: ProjectsProps) {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      setActiveSlide((prev) => (prev === DESKTOP_SLIDES.length - 1 ? 0 : prev + 1));
+                      setActiveSlide((prev) => (prev === ASKIMTRENINGSSENTER_SLIDES.length - 1 ? 0 : prev + 1));
                     }}
                     style={{
                       position: 'absolute',
@@ -679,7 +758,7 @@ export default function Projects({ language }: ProjectsProps) {
                     borderRadius: 20,
                     border: '1px solid rgba(255,255,255,0.06)',
                   }}>
-                    {DESKTOP_SLIDES.map((_, idx) => (
+                    {ASKIMTRENINGSSENTER_SLIDES.map((_, idx) => (
                       <span
                         key={idx}
                         onClick={(e) => {
@@ -790,6 +869,684 @@ export default function Projects({ language }: ProjectsProps) {
         )}
       </div>
 
+      {/* Featured Project Card 2 (Angerman AS) */}
+      <div
+        onClick={() => {
+          if (!isMobile) {
+            setIsExpanded2((prev) => !prev)
+          }
+        }}
+        onMouseEnter={() => setHovered2(true)}
+        onMouseLeave={() => setHovered2(false)}
+        className="project-card-container"
+        style={{
+          position: 'relative',
+          borderRadius: 24,
+          background: '#ffffff', // premium light theme background
+          border: '1px solid #e2e8f0', // soft border
+          boxShadow: hovered2 && !isMobile
+            ? '0 30px 60px -20px rgba(0,0,0,0.12), 0 0 0 2.5px #ffd000' // yellow outline glow
+            : '0 20px 45px -25px rgba(0,0,0,0.06)',
+          cursor: isMobile ? 'default' : 'pointer',
+          padding: 0,
+          marginTop: 60,
+          marginBottom: 60,
+          transition: 'all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1)',
+          transform: hovered2 && !isExpanded2 && !isMobile ? 'translateY(-6px)' : 'translateY(0)',
+          overflow: 'visible',
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 0.85fr) minmax(0, 1.15fr)',
+        }}
+      >
+        {/* Left Side (Desktop): Visual Mockups (3 Phones) */}
+        <div
+          style={{
+            position: 'relative',
+            height: '100%',
+            minHeight: 320, // same height as the previous card
+            background: '#ffd000', // vibrant yellow brand background
+            borderRadius: isMobile ? (isExpanded2 ? '0' : '0 0 24px 24px') : (isExpanded2 ? '24px 0 0 0' : '24px 0 0 24px'),
+            overflow: 'visible',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRight: isMobile ? 'none' : '1px solid rgba(0,0,0,0.06)',
+            borderBottom: isMobile ? '1px solid rgba(0,0,0,0.06)' : 'none',
+            zIndex: 2,
+            order: isMobile ? 2 : 1, // display on the left (first) on desktop
+          }}
+        >
+          {/* Dot Grid and Glow Backdrop */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage: 'radial-gradient(rgba(0,0,0,0.05) 1px, transparent 0)',
+              backgroundSize: '16px 16px',
+              backgroundPosition: 'center',
+              borderRadius: isMobile ? '0 0 23px 23px' : (isExpanded2 ? '23px 0 0 0' : '23px 0 0 23px'),
+              overflow: 'hidden',
+            }}
+          >
+            {/* Ambient Glossy Highlights */}
+            <div
+              style={{
+                position: 'absolute',
+                width: '320px',
+                height: '320px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%)',
+                top: '-60px',
+                left: '-40px',
+                filter: 'blur(20px)',
+                pointerEvents: 'none',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                width: '280px',
+                height: '280px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, transparent 70%)',
+                bottom: '-40px',
+                right: '-20px',
+                filter: 'blur(20px)',
+                pointerEvents: 'none',
+              }}
+            />
+          </div>
+
+          {/* 3 Phones Stack Layout - Anchored to center with translateX for perfect tight spacing */}
+          <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {/* Phone 1 (Left, Tilted) */}
+            <div
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: 'calc(50% - 110px)', // centered vertically for 220px height
+                height: '220px',
+                aspectRatio: '9/19.5', // standard taller smartphone aspect ratio
+                background: '#090a0f',
+                borderRadius: '16px',
+                padding: '2px', // ultra-thin bezel padding
+                border: '1px solid #2e3039', // sleek bezel line
+                boxShadow: '0 15px 30px rgba(0,0,0,0.3)',
+                zIndex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                transform: hovered2 && !isExpanded2 ? 'translateX(-115%) translateY(4px) rotate(-10deg) scale(1.02)' : 'translateX(-100%) rotate(-6deg)',
+              }}
+            >
+              <div style={{ flex: 1, background: '#000', borderRadius: '13px', overflow: 'hidden' }}>
+                <img
+                  src="/project2/project2_phone2.png"
+                  alt="Angerman Screen Left"
+                  draggable={false}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+                />
+              </div>
+            </div>
+
+            {/* Phone 2 (Center, Main) */}
+            <div
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: 'calc(50% - 130px)', // centered vertically for 260px height
+                height: '260px',
+                aspectRatio: '9/19.5', // standard taller smartphone aspect ratio
+                background: '#090a0f',
+                borderRadius: '20px',
+                padding: '3px', // sleek bezel padding
+                border: '1.5px solid #2e3039', // sleek bezel line
+                boxShadow: '0 25px 45px -12px rgba(0,0,0,0.45)',
+                zIndex: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                transform: hovered2 && !isExpanded2 ? 'translateX(-50%) translateY(-6px) scale(1.04)' : 'translateX(-50%)',
+              }}
+            >
+              <div style={{ flex: 1, background: '#000', borderRadius: '16px', overflow: 'hidden' }}>
+                <img
+                  src="/project2/project2_phone1.png"
+                  alt="Angerman Screen Center"
+                  draggable={false}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+                />
+              </div>
+            </div>
+
+            {/* Phone 3 (Right, Tilted) */}
+            <div
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: 'calc(50% - 110px)', // centered vertically for 220px height
+                height: '220px',
+                aspectRatio: '9/19.5', // standard taller smartphone aspect ratio
+                background: '#090a0f',
+                borderRadius: '16px',
+                padding: '2px', // ultra-thin bezel padding
+                border: '1px solid #2e3039', // sleek bezel line
+                boxShadow: '0 15px 30px rgba(0,0,0,0.3)',
+                zIndex: 2,
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                transform: hovered2 && !isExpanded2 ? 'translateX(15%) translateY(4px) rotate(10deg) scale(1.02)' : 'translateX(0%) rotate(6deg)',
+              }}
+            >
+              <div style={{ flex: 1, background: '#000', borderRadius: '13px', overflow: 'hidden' }}>
+                <img
+                  src="/project2/project2_phone3.png"
+                  alt="Angerman Screen Right"
+                  draggable={false}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Floating Angerman Logo - Scaled up on the bottom */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '20px',
+              right: '20px',
+              zIndex: 4,
+              pointerEvents: 'none',
+              transition: 'all 0.35s ease',
+              transform: hovered2 && !isExpanded2 ? 'translateY(-3px)' : 'translateY(0)',
+              filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.18))',
+            }}
+          >
+            <img
+              src="/project2/angerman_logo.png"
+              alt="Angerman AS Logo"
+              draggable={false}
+              style={{ height: 56, width: 'auto', objectFit: 'contain' }}
+            />
+          </div>
+        </div>
+
+        {/* Right Side (Desktop): Details (Light Themed) */}
+        <div
+          style={{
+            zIndex: 2,
+            padding: '40px clamp(24px, 4vw, 44px)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            order: isMobile ? 1 : 2, // display on the right (second) on desktop
+          }}
+        >
+          <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: '#b27a00' }}>
+            {ANGERMAN_PROJECT.category[language]}
+          </span>
+          <h3 style={{ margin: '8px 0 12px', fontSize: 'clamp(24px, 2.5vw, 32px)', fontWeight: 800, color: '#0f1115', letterSpacing: '-.02em' }}>
+            Angerman AS
+          </h3>
+          <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: '#4b5563', marginBottom: 24 }}>
+            {ANGERMAN_PROJECT.desc[language]}
+          </p>
+
+          {/* Tech Badges */}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 0 }}>
+            {ANGERMAN_PROJECT.tech.map((tech) => (
+              <span 
+                key={tech} 
+                style={{ 
+                  fontSize: 12, 
+                  fontWeight: 600, 
+                  color: '#374151', 
+                  background: '#f1f5f9', 
+                  border: '1px solid #e2e8f0', 
+                  padding: '6px 12px', 
+                  borderRadius: 8 
+                }}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* Action indicator (Desktop only) */}
+          {!isMobile && (
+            <div style={{ marginTop: 28, display: 'flex', alignItems: 'center', gap: 8, color: hovered2 ? '#b27a00' : '#6b7280', transition: 'color 0.25s ease' }}>
+              <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase' }}>
+                {isExpanded2 
+                  ? (language === 'en' ? 'Click to show less' : 'Klikk for å lukke')
+                  : (language === 'en' ? 'Click to view details' : 'Klikk for detaljer')
+                }
+              </span>
+              <svg 
+                width="14" 
+                height="14" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                style={{ 
+                  transform: isExpanded2 ? 'rotate(180deg)' : 'rotate(0deg)', 
+                  transition: 'transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1)' 
+                }}
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+          )}
+        </div>
+
+        {/* Row 2: Expanded Inline Details (Light Themed) */}
+        {isExpanded2 && (
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              gridColumn: 'span 2',
+              order: 3, // keeps this drawer at the bottom of the grid
+              paddingTop: 48,
+              paddingBottom: 56,
+              paddingInline: 'clamp(24px, 4vw, 48px)',
+              background: '#f8fafc',
+              borderRadius: '0 0 24px 24px',
+              borderTop: '1px solid #e2e8f0',
+              animation: 'fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              zIndex: 2,
+              cursor: 'default',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+              {/* Detailed Cards Grid */}
+              <div 
+                style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+                  gap: 32, 
+                  alignItems: 'stretch' 
+                }}
+              >
+                {/* Overview Card */}
+                {ANGERMAN_PROJECT.details.overview[language] && (
+                  <div style={{
+                    background: '#ffffff',
+                    borderRadius: 16,
+                    border: '1px solid #e2e8f0',
+                    padding: '24px 20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 16,
+                    height: '100%',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.02)',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                      <div style={{ width: 26, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <span style={{ fontSize: 20, fontWeight: 700, color: '#b27a00', fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}>01</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b27a00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="3" y="3" width="7" height="7" />
+                          <rect x="14" y="3" width="7" height="7" />
+                          <rect x="14" y="14" width="7" height="7" />
+                          <rect x="3" y="14" width="7" height="7" />
+                        </svg>
+                        <span style={{ fontSize: 16, fontWeight: 700, color: '#0f1115' }}>{t.overviewTitle}</span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: 16 }}>
+                      <div style={{ width: 26, display: 'flex', justifyContent: 'center', paddingBlock: 4 }}>
+                        <div style={{ width: 1, background: '#e2e8f0', height: '100%' }} />
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: '#4b5563' }}>
+                          {ANGERMAN_PROJECT.details.overview[language]}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Features Card */}
+                {ANGERMAN_PROJECT.details.features[language] && ANGERMAN_PROJECT.details.features[language].length > 0 && (
+                  <div style={{
+                    background: '#ffffff',
+                    borderRadius: 16,
+                    border: '1px solid #e2e8f0',
+                    padding: '24px 20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 16,
+                    height: '100%',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.02)',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                      <div style={{ width: 26, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <span style={{ fontSize: 20, fontWeight: 700, color: '#b27a00', fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}>02</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b27a00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="m3 17 2 2 4-4" />
+                          <path d="m3 7 2 2 4-4" />
+                          <line x1="13" x2="21" y1="6" y2="6" />
+                          <line x1="13" x2="21" y1="12" y2="12" />
+                          <line x1="13" x2="21" y1="18" y2="18" />
+                          <path d="m3 12 2 2 4-4" />
+                        </svg>
+                        <span style={{ fontSize: 16, fontWeight: 700, color: '#0f1115' }}>{t.featuresTitle}</span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: 16 }}>
+                      <div style={{ width: 26, display: 'flex', justifyContent: 'center', paddingBlock: 4 }}>
+                        <div style={{ width: 1, background: '#e2e8f0', height: '100%' }} />
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                          {ANGERMAN_PROJECT.details.features[language].map((feat, idx) => (
+                            <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                              <div style={{
+                                flexShrink: 0,
+                                width: 18,
+                                height: 18,
+                                borderRadius: 5,
+                                background: 'rgba(255, 179, 0, 0.15)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginTop: 2,
+                              }}>
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#b27a00" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                                  <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                              </div>
+                              <span style={{ fontSize: 14, lineHeight: 1.5, color: '#4b5563' }}>{feat}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Challenges & Solutions Card */}
+                {ANGERMAN_PROJECT.details.challenges[language] && (
+                  <div style={{
+                    background: '#ffffff',
+                    borderRadius: 16,
+                    border: '1px solid #e2e8f0',
+                    padding: '24px 20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 16,
+                    height: '100%',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.02)',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                      <div style={{ width: 26, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <span style={{ fontSize: 20, fontWeight: 700, color: '#b27a00', fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}>03</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b27a00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                          <path d="M9 18h6" />
+                          <path d="M10 22h4" />
+                        </svg>
+                        <span style={{ fontSize: 16, fontWeight: 700, color: '#0f1115' }}>{t.challengesTitle}</span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: 16 }}>
+                      <div style={{ width: 26, display: 'flex', justifyContent: 'center', paddingBlock: 4 }}>
+                        <div style={{ width: 1, background: '#e2e8f0', height: '100%' }} />
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: '#4b5563' }}>
+                          {ANGERMAN_PROJECT.details.challenges[language]}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Center mobile app mockup slider - Keeps dark theme to highlight screenshots */}
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  position: 'relative',
+                  width: '100%',
+                  minHeight: 480,
+                  background: '#090a0f',
+                  borderRadius: 20,
+                  border: '1px solid #1e293b',
+                  padding: '40px 20px',
+                  boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15)',
+                }}
+              >
+                {/* Left Arrow */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveSlide2((prev) => (prev === 0 ? ANGERMAN_SLIDES.length - 1 : prev - 1));
+                  }}
+                  style={{
+                    position: 'absolute',
+                    left: 'clamp(12px, 5vw, 60px)',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: 44,
+                    height: 44,
+                    borderRadius: '50%',
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    backdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    color: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    zIndex: 5,
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </button>
+
+                {/* Center Phone Mockup */}
+                <div
+                  onClick={() => setIsZoomed2(true)}
+                  style={{
+                    height: '380px',
+                    aspectRatio: '9/19.5', // standard taller smartphone aspect ratio
+                    background: '#090a0f',
+                    borderRadius: '24px',
+                    padding: '3px', // reduced padding bezel
+                    border: '1.5px solid #2e3039', // thin sleek bezel border
+                    boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    cursor: 'zoom-in',
+                    transition: 'transform 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                  <div style={{ flex: 1, background: '#000', borderRadius: '20px', overflow: 'hidden', position: 'relative', height: '100%' }}>
+                    <img
+                      src={ANGERMAN_SLIDES[activeSlide2]}
+                      alt={`Angerman Slide ${activeSlide2 + 1}`}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'top',
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Right Arrow */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveSlide2((prev) => (prev === ANGERMAN_SLIDES.length - 1 ? 0 : prev + 1));
+                  }}
+                  style={{
+                    position: 'absolute',
+                    right: 'clamp(12px, 5vw, 60px)',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: 44,
+                    height: 44,
+                    borderRadius: '50%',
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    backdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    color: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    zIndex: 5,
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+
+                {/* Indicator Dots */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 16,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  display: 'flex',
+                  gap: 6,
+                  zIndex: 5,
+                  background: 'rgba(0, 0, 0, 0.4)',
+                  backdropFilter: 'blur(4px)',
+                  padding: '6px 10px',
+                  borderRadius: 20,
+                  border: '1px solid rgba(255,255,255,0.06)',
+                }}>
+                  {ANGERMAN_SLIDES.map((_, idx) => (
+                    <span
+                      key={idx}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveSlide2(idx);
+                      }}
+                      style={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: '50%',
+                        background: activeSlide2 === idx ? '#ffd000' : 'rgba(255,255,255,0.4)',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Source Code Banner (Light Themed) */}
+              {ANGERMAN_PROJECT.details.repo && (
+                <div style={{
+                  marginTop: 32,
+                  background: 'linear-gradient(90deg, #fffbeb 0%, #ffffff 100%)',
+                  borderRadius: 16,
+                  border: '1px solid rgba(255, 208, 0, 0.3)',
+                  padding: '20px 24px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  gap: 20,
+                  flexWrap: 'wrap',
+                  boxShadow: '0 4px 12px rgba(255, 208, 0, 0.04)',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, minWidth: 280, flex: 1 }}>
+                    <div style={{
+                      flexShrink: 0,
+                      width: 44,
+                      height: 44,
+                      borderRadius: 10,
+                      background: 'rgba(255, 208, 0, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b27a00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#0f1115' }}>
+                        {language === 'en' ? 'Source code' : 'Kildekode'}
+                      </h4>
+                      <p style={{ margin: '4px 0 0', fontSize: 14, color: '#4b5563' }}>
+                        {language === 'en'
+                          ? 'Repository is private but can be provided upon request.'
+                          : 'Kildekoden er privat, men kan oppgis ved forespørsel.'}
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      const contactSection = document.getElementById('contact');
+                      if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      border: '1px solid #cbd5e1',
+                      background: 'transparent',
+                      color: '#334155',
+                      fontSize: 14,
+                      fontWeight: 600,
+                      padding: '10px 20px',
+                      borderRadius: 10,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#f8fafc'
+                      e.currentTarget.style.borderColor = '#94a3b8'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent'
+                      e.currentTarget.style.borderColor = '#cbd5e1'
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                    {language === 'en' ? 'Request access' : 'Be om tilgang'}
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
 
       {/* Lightbox Modal Zoom for Slideshow */}
       {isZoomed && (
@@ -812,7 +1569,7 @@ export default function Projects({ language }: ProjectsProps) {
         >
           {/* Zoomed Image */}
           <img
-            src={DESKTOP_SLIDES[activeSlide]}
+            src={ASKIMTRENINGSSENTER_SLIDES[activeSlide]}
             alt="Project screenshot zoomed"
             onClick={(e) => e.stopPropagation()}
             style={{
@@ -830,7 +1587,7 @@ export default function Projects({ language }: ProjectsProps) {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              setActiveSlide((prev) => (prev === 0 ? DESKTOP_SLIDES.length - 1 : prev - 1));
+              setActiveSlide((prev) => (prev === 0 ? ASKIMTRENINGSSENTER_SLIDES.length - 1 : prev - 1));
             }}
             style={{
               position: 'absolute',
@@ -862,7 +1619,7 @@ export default function Projects({ language }: ProjectsProps) {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              setActiveSlide((prev) => (prev === DESKTOP_SLIDES.length - 1 ? 0 : prev + 1));
+              setActiveSlide((prev) => (prev === ASKIMTRENINGSSENTER_SLIDES.length - 1 ? 0 : prev + 1));
             }}
             style={{
               position: 'absolute',
@@ -904,7 +1661,7 @@ export default function Projects({ language }: ProjectsProps) {
             borderRadius: 20,
             border: '1px solid rgba(255,255,255,0.08)',
           }}>
-            {DESKTOP_SLIDES.map((_, idx) => (
+            {ASKIMTRENINGSSENTER_SLIDES.map((_, idx) => (
               <span
                 key={idx}
                 onClick={(e) => {
@@ -926,6 +1683,170 @@ export default function Projects({ language }: ProjectsProps) {
           {/* Close button */}
           <button
             onClick={() => setIsZoomed(false)}
+            style={{
+              position: 'absolute',
+              top: 24,
+              right: 24,
+              background: 'rgba(255,255,255,0.1)',
+              border: 'none',
+              color: '#fff',
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 20,
+              fontWeight: 'bold',
+              transition: 'background 0.2s',
+              zIndex: 10001,
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
+      {/* Lightbox Modal Zoom for Slideshow 2 */}
+      {isZoomed2 && (
+        <div
+          onClick={() => setIsZoomed2(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(10, 12, 22, 0.94)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'zoom-out',
+            padding: '24px',
+            animation: 'fade-in 0.25s ease-out forwards',
+          }}
+        >
+          {/* Zoomed Image */}
+          <img
+            src={ANGERMAN_SLIDES[activeSlide2]}
+            alt="Project screenshot zoomed"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxHeight: '90%',
+              maxWidth: '90%',
+              objectFit: 'contain',
+              borderRadius: '24px',
+              boxShadow: '0 30px 90px rgba(0,0,0,0.85)',
+              border: '3px solid #1f2026',
+              cursor: 'default',
+            }}
+          />
+
+          {/* Lightbox Left Arrow */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveSlide2((prev) => (prev === 0 ? ANGERMAN_SLIDES.length - 1 : prev - 1));
+            }}
+            style={{
+              position: 'absolute',
+              left: 'clamp(12px, 3vw, 40px)',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 52,
+              height: 52,
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: 'none',
+              color: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10000,
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          {/* Lightbox Right Arrow */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveSlide2((prev) => (prev === ANGERMAN_SLIDES.length - 1 ? 0 : prev + 1));
+            }}
+            style={{
+              position: 'absolute',
+              right: 'clamp(12px, 3vw, 40px)',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 52,
+              height: 52,
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: 'none',
+              color: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10000,
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+
+          {/* Lightbox Slide Indicator Dots */}
+          <div style={{
+            position: 'absolute',
+            bottom: 32,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            gap: 8,
+            zIndex: 10000,
+            background: 'rgba(17, 20, 24, 0.75)',
+            backdropFilter: 'blur(8px)',
+            padding: '8px 14px',
+            borderRadius: 20,
+            border: '1px solid rgba(255,255,255,0.08)',
+          }}>
+            {ANGERMAN_SLIDES.map((_, idx) => (
+              <span
+                key={idx}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveSlide2(idx);
+                }}
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: '50%',
+                  background: activeSlide2 === idx ? '#ffd000' : 'rgba(255,255,255,0.3)',
+                  cursor: 'pointer',
+                  transition: 'all 0.25s ease',
+                  transform: activeSlide2 === idx ? 'scale(1.3)' : 'scale(1)',
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Close button */}
+          <button
+            onClick={() => setIsZoomed2(false)}
             style={{
               position: 'absolute',
               top: 24,

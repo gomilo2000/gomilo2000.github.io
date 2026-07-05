@@ -74,6 +74,7 @@ const col1Images: (string | undefined)[] = [
 const col2Images: (string | undefined)[] = [
   '/project2/project2_phone1.png',
   '/project4/project4_phone1.png',
+  '/project5/project5_phone1.png',
 ]
 
 const col1Track = [...col1Images, ...col1Images]
