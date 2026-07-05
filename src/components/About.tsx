@@ -363,6 +363,7 @@ export default function About({ language }: AboutProps) {
             <div style={{ display: 'flex', gap: 9, flexWrap: 'wrap' }}>
               {localizedRoles.map((role, idx) => {
                 const isHovered = hoveredRole === idx
+                const roleIcons = ['💻', '🌐', '📱', '⚙️']
                 return (
                   <span
                     key={role}
@@ -370,13 +371,32 @@ export default function About({ language }: AboutProps) {
                     onMouseLeave={() => setHoveredRole(null)}
                     style={{
                       ...chip,
+                      display: 'inline-flex',
+                      alignItems: 'center',
                       cursor: 'default',
-                      transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                      transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, color 0.2s ease',
                       background: isHovered ? 'var(--accent, #1a73ff)' : '#f4f4f6',
                       color: isHovered ? '#fff' : '#3c434c',
                       transform: isHovered ? 'scale(1.05)' : 'scale(1)',
                     }}
                   >
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: 13,
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap',
+                        transition: 'max-width 0.25s ease, opacity 0.25s ease, margin-right 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        maxWidth: isHovered ? '22px' : '0px',
+                        opacity: isHovered ? 1 : 0,
+                        marginRight: isHovered ? '8px' : '0px',
+                        transform: isHovered ? 'scale(1.1) rotate(360deg)' : 'scale(0) rotate(0deg)',
+                      }}
+                    >
+                      {roleIcons[idx]}
+                    </span>
                     {role}
                   </span>
                 )
