@@ -164,6 +164,8 @@ const ANGERMAN_SLIDES = [
   '/project2/project2_phone2.png',
   '/project2/project2_phone3.png',
   '/project2/project2_phone4.png',
+  '/project2/project2_figma1.png',
+  '/project2/project2_figma2.png',
 ]
 
 interface ProjectsProps {
