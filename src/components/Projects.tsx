@@ -185,6 +185,9 @@ export default function Projects({ language }: ProjectsProps) {
   
   const [isMobile, setIsMobile] = useState(false)
 
+  const currentSlide2 = ANGERMAN_SLIDES[activeSlide2]
+  const isFigmaSlide2 = !!(currentSlide2 && currentSlide2.includes('figma'))
+
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth <= 860
@@ -1313,153 +1316,164 @@ export default function Projects({ language }: ProjectsProps) {
                 )}
               </div>
 
-              {/* Center mobile app mockup slider - Keeps dark theme to highlight screenshots */}
+              {/* Bottom Row: Full-width macOS Mockup Widescreen Slideshow */}
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  position: 'relative',
-                  width: '100%',
-                  minHeight: 480,
-                  background: '#090a0f',
+                  background: '#0a0c10',
                   borderRadius: 20,
-                  border: '1px solid #1e293b',
-                  padding: '40px 20px',
-                  boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  width: '100%',
+                  aspectRatio: '16/9.5',
+                  maxHeight: 580,
+                  boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
                 }}
               >
-                {/* Left Arrow */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveSlide2((prev) => (prev === 0 ? ANGERMAN_SLIDES.length - 1 : prev - 1));
-                  }}
+                {/* macOS Title Bar */}
+                <div
                   style={{
-                    position: 'absolute',
-                    left: 'clamp(12px, 5vw, 60px)',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    width: 44,
-                    height: 44,
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    backdropFilter: 'blur(8px)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    color: '#fff',
+                    height: 32,
+                    background: '#1a1c23',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    zIndex: 5,
-                    transition: 'all 0.2s ease',
+                    paddingLeft: 16,
+                    gap: 8,
+                    borderBottom: '1px solid rgba(255,255,255,0.06)',
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="15 18 9 12 15 6" />
-                  </svg>
-                </button>
-
-                {/* Center Phone Mockup */}
+                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff5f56' }} />
+                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffbd2e' }} />
+                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#27c93f' }} />
+                </div>
+                
+                {/* Screen Content */}
                 <div
-                  onClick={() => setIsZoomed2(true)}
                   style={{
-                    height: '380px',
-                    aspectRatio: '9/19.5', // standard taller smartphone aspect ratio
-                    background: '#090a0f',
-                    borderRadius: '24px',
-                    padding: '3px', // reduced padding bezel
-                    border: '1.5px solid #2e3039', // thin sleek bezel border
-                    boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7)',
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    background: '#18191b',
                     position: 'relative',
                     overflow: 'hidden',
-                    cursor: 'zoom-in',
-                    transition: 'transform 0.3s ease',
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-                  onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 >
-                  <div style={{ flex: 1, background: '#000', borderRadius: '20px', overflow: 'hidden', position: 'relative', height: '100%' }}>
-                    <img
-                      src={ANGERMAN_SLIDES[activeSlide2]}
-                      alt={`Angerman Slide ${activeSlide2 + 1}`}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        objectPosition: 'top',
-                      }}
-                    />
-                  </div>
-                </div>
+                  {/* The Slide Image */}
+                  <img
+                    src={currentSlide2}
+                    alt={`Slide ${activeSlide2 + 1}`}
+                    onClick={() => setIsZoomed2(true)}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                      objectPosition: 'center',
+                      transition: 'opacity 0.3s ease-in-out',
+                      cursor: 'zoom-in',
+                    }}
+                  />
 
-                {/* Right Arrow */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveSlide2((prev) => (prev === ANGERMAN_SLIDES.length - 1 ? 0 : prev + 1));
-                  }}
-                  style={{
+                  {/* Left Arrow */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveSlide2((prev) => (prev === 0 ? ANGERMAN_SLIDES.length - 1 : prev - 1));
+                    }}
+                    style={{
+                      position: 'absolute',
+                      left: 12,
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      width: 36,
+                      height: 36,
+                      borderRadius: '50%',
+                      background: 'rgba(17, 20, 24, 0.65)',
+                      backdropFilter: 'blur(4px)',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 5,
+                      transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(17, 20, 24, 0.85)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(17, 20, 24, 0.65)'}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </button>
+
+                  {/* Right Arrow */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveSlide2((prev) => (prev === ANGERMAN_SLIDES.length - 1 ? 0 : prev + 1));
+                    }}
+                    style={{
+                      position: 'absolute',
+                      right: 12,
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      width: 36,
+                      height: 36,
+                      borderRadius: '50%',
+                      background: 'rgba(17, 20, 24, 0.65)',
+                      backdropFilter: 'blur(4px)',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 5,
+                      transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(17, 20, 24, 0.85)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(17, 20, 24, 0.65)'}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </button>
+
+                  {/* Slide Indicator Dots */}
+                  <div style={{
                     position: 'absolute',
-                    right: 'clamp(12px, 5vw, 60px)',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    width: 44,
-                    height: 44,
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    backdropFilter: 'blur(8px)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    color: '#fff',
+                    bottom: 16,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
+                    gap: 6,
                     zIndex: 5,
-                    transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </button>
-
-                {/* Indicator Dots */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: 16,
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  display: 'flex',
-                  gap: 6,
-                  zIndex: 5,
-                  background: 'rgba(0, 0, 0, 0.4)',
-                  backdropFilter: 'blur(4px)',
-                  padding: '6px 10px',
-                  borderRadius: 20,
-                  border: '1px solid rgba(255,255,255,0.06)',
-                }}>
-                  {ANGERMAN_SLIDES.map((_, idx) => (
-                    <span
-                      key={idx}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setActiveSlide2(idx);
-                      }}
-                      style={{
-                        width: 6,
-                        height: 6,
-                        borderRadius: '50%',
-                        background: activeSlide2 === idx ? '#ffd000' : 'rgba(255,255,255,0.4)',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                    />
-                  ))}
+                    background: 'rgba(17, 20, 24, 0.5)',
+                    backdropFilter: 'blur(4px)',
+                    padding: '6px 10px',
+                    borderRadius: 20,
+                    border: '1px solid rgba(255,255,255,0.06)',
+                  }}>
+                    {ANGERMAN_SLIDES.map((_, idx) => (
+                      <span
+                        key={idx}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveSlide2(idx);
+                        }}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          background: activeSlide2 === idx ? '#ffd000' : 'rgba(255,255,255,0.4)',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                        }}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
 
