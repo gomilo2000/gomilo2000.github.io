@@ -643,7 +643,7 @@ export default function Skills({ language }: SkillsProps) {
         <div className="skills-layout" style={{ display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 32, alignItems: 'start' }}>
           
           {/* Left column: categories grid */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, minWidth: 0 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minWidth: 0 }}>
             {/* Mobile Category Tabs */}
             <div className="skills-mobile-tabs">
               {categories.map((cat) => {
@@ -682,7 +682,7 @@ export default function Skills({ language }: SkillsProps) {
                     border: '1px solid rgba(15,20,40,.07)',
                     borderLeft: `4px solid ${isCategoryActive ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.08)'}`,
                     borderRadius: 18,
-                    padding: '24px 24px 28px',
+                    padding: '20px 22px',
                     background: '#fff',
                     boxShadow: '0 4px 14px -10px rgba(0,0,0,0.05)',
                     position: 'relative',
@@ -690,47 +690,6 @@ export default function Skills({ language }: SkillsProps) {
                     transition: 'border-left-color 0.3s ease',
                   }}
                 >
-                  {/* Dynamic SVG Tech Arcs matching active color (Concentric Rings style) */}
-                  <svg
-                    style={{
-                      position: 'absolute',
-                      bottom: -20,
-                      right: -20,
-                      width: 140,
-                      height: 140,
-                      zIndex: 0,
-                      pointerEvents: 'none',
-                    }}
-                    viewBox="0 0 100 100"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="100"
-                      cy="100"
-                      r="80"
-                      stroke="var(--accent, #1a73ff)"
-                      strokeWidth="2"
-                      style={{ opacity: 0.08, transition: 'stroke 0.4s ease' }}
-                    />
-                    <circle
-                      cx="100"
-                      cy="100"
-                      r="55"
-                      stroke="var(--accent, #1a73ff)"
-                      strokeWidth="2"
-                      style={{ opacity: 0.05, transition: 'stroke 0.4s ease' }}
-                    />
-                    <circle
-                      cx="100"
-                      cy="100"
-                      r="30"
-                      stroke="var(--accent, #1a73ff)"
-                      strokeWidth="2"
-                      style={{ opacity: 0.03, transition: 'stroke 0.4s ease' }}
-                    />
-                  </svg>
-
                   <h3 style={{ margin: '0 0 16px', fontSize: 16, fontWeight: 700, color: '#14161a', position: 'relative', zIndex: 1 }}>{cat.title}</h3>
                   <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
                     {cat.items.map((item) => {
@@ -766,35 +725,8 @@ export default function Skills({ language }: SkillsProps) {
               overflow: 'hidden',
             }}
           >
-            {/* Dynamic SVG Wave Background matching active color */}
-            <svg
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                right: 0,
-                width: 240,
-                height: 240,
-                zIndex: 0,
-                pointerEvents: 'none',
-              }}
-              viewBox="0 0 200 200"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M 60,200 C 110,190 130,130 160,80 C 180,47 190,20 200,0 L 200,200 Z"
-                fill="var(--accent, #1a73ff)"
-                style={{ opacity: 0.08, transition: 'fill 0.4s ease' }}
-              />
-              <path
-                d="M 90,200 C 130,195 150,150 175,110 C 190,80 195,50 200,20 L 200,200 Z"
-                fill="var(--accent, #1a73ff)"
-                style={{ opacity: 0.04, transition: 'fill 0.4s ease' }}
-              />
-            </svg>
-
             {/* Key prop triggers re-mount on change, re-running the entry animation */}
-            <div key={activeDetail.title} className="skills-sidebar-fade" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 20 }}>
+            <div key={activeDetail.title} className="skills-sidebar-fade" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 16 }}>
               <span
                 style={{
                   display: 'inline-flex',
@@ -828,23 +760,21 @@ export default function Skills({ language }: SkillsProps) {
                 <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#9aa0a6' }}>
                   {language === 'en' ? 'Enjoyment Level' : 'Trivsel & Interesse'}
                 </span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                   {Array.from({ length: 5 }).map((_, idx) => {
                     const rating = baseDetail.rating || 5
                     const active = idx < rating
                     return (
-                      <svg
+                      <div
                         key={idx}
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill={active ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.08)'}
-                        stroke={active ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.12)'}
-                        strokeWidth="1.5"
-                        style={{ transition: 'all 0.3s ease', transform: active ? 'scale(1.08)' : 'scale(1)' }}
-                      >
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                      </svg>
+                        style={{
+                          width: 24,
+                          height: 4,
+                          borderRadius: 2,
+                          background: active ? 'var(--accent, #1a73ff)' : 'rgba(15,20,40,.08)',
+                          transition: 'background 0.3s ease',
+                        }}
+                      />
                     )
                   })}
                   <span style={{ fontSize: 13, color: '#56606c', fontWeight: 600, marginLeft: 8 }}>
