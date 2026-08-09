@@ -134,6 +134,15 @@ const SKILL_DETAILS: Record<string, SkillDetail> = {
       no: 'Brukt til rask backend-prototyping, brukerautentisering og synkronisering av sanntidsdatabaser.'
     }
   },
+  'Supabase': {
+    title: 'Supabase',
+    description: 'Comfortable using Supabase for database management, user authentication, real-time listeners, and relational schemas.',
+    rating: 4,
+    useCase: {
+      en: 'Used as an open-source Firebase alternative, leveraging Postgres for database, authentication, and API endpoints.',
+      no: 'Brukt som et open-source Firebase-alternativ, med Postgres for database, autentisering og API-endepunkter.'
+    }
+  },
   'HTML5': {
     title: 'HTML5 & CSS3',
     description: 'Proficient in writing clean, semantic HTML templates coupled with modern CSS structures.',
@@ -374,6 +383,14 @@ const SKILL_THEME: Record<string, { color: string; icon: React.ReactNode }> = {
       </svg>
     )
   },
+  'Supabase': {
+    color: '#3ecf8e',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+        <path d="M21.362 10.404L12.39 1.48C11.96 1.05 11.24 1.35 11.24 1.96v7.35H3.638c-.6 0-.9.73-.48 1.15l8.97 8.93c.43.43 1.15.13 1.15-.48v-7.35h7.6c.6 0 .9-.73.48-1.16z" fill="#3ecf8e" />
+      </svg>
+    )
+  },
   'HTML5': {
     color: '#e34f26',
     icon: (
@@ -521,6 +538,9 @@ const SKILL_DETAILS_NO: Record<string, { description: string }> = {
   'Firebase': {
     description: 'Erfaren med Firebase-tjenester inkludert Firestore, Authentication, Cloud Functions og Hosting.'
   },
+  'Supabase': {
+    description: 'Komfortabel med å bruke Supabase til databasehåndtering, brukerautentisering, sanntidslyttere og relasjonelle skjemaer.'
+  },
   'HTML5': {
     description: 'Erfaren med å skrive ryddige, semantiske HTML-maler koblet med moderne CSS-strukturer.'
   },
@@ -575,7 +595,7 @@ export default function Skills({ language }: SkillsProps) {
   const categories = [
     { id: 'Frontend', title: 'Frontend', items: ['JavaScript', 'TypeScript', 'React', 'Vue'] },
     { id: 'Mobile', title: language === 'en' ? 'Mobile' : 'Mobil', items: ['React Native', 'Swift', 'Kotlin', 'Ionic'] },
-    { id: 'Backend & DB', title: 'Backend & DB', items: ['Java', 'C#', 'Python', 'SQL', 'MongoDB', 'Firebase'] },
+    { id: 'Backend & DB', title: 'Backend & DB', items: ['Java', 'C#', 'Python', 'SQL', 'MongoDB', 'Firebase', 'Supabase'] },
     { id: 'Tools & Styling', title: language === 'en' ? 'Tools & Styling' : 'Verktøy & Styling', items: ['Claude', 'Google AI Studio', 'Antigravity', 'Kling', 'HTML5', 'Tailwind', 'Figma', 'Canva', 'Git / GitHub', 'REST APIs', 'Agile'] },
   ]
 
