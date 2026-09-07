@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import AskimProject from './projects/AskimProject'
 import AngermanProject from './projects/AngermanProject'
+import RaidToolsProject from './projects/RaidToolsProject'
 
 interface ProjectsProps {
   language: 'en' | 'no'
@@ -38,6 +39,7 @@ export default function Projects({ language }: ProjectsProps) {
       {/* Projects */}
       <AskimProject language={language} isMobile={isMobile} />
       <AngermanProject language={language} isMobile={isMobile} />
+      <RaidToolsProject language={language} isMobile={isMobile} />
     </section>
   )
 }

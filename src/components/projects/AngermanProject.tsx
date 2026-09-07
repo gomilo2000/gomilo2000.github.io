@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ANGERMAN_PROJECT, ANGERMAN_SLIDES } from '../../data/projects'
 import DetailCard from './DetailCard'
 import Lightbox from './Lightbox'
+import { angermanTheme } from '../../theme'
 
 interface AngermanProjectProps {
   language: 'en' | 'no'
@@ -137,7 +138,7 @@ export default function AngermanProject({ language, isMobile }: AngermanProjectP
             >
               <div style={{ flex: 1, background: '#000', borderRadius: '13px', overflow: 'hidden' }}>
                 <img
-                  src="/project2/project2_phone2.png"
+                  src="/project2/angerman_phone2.png"
                   alt="Angerman Screen Left"
                   draggable={false}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
@@ -167,7 +168,7 @@ export default function AngermanProject({ language, isMobile }: AngermanProjectP
             >
               <div style={{ flex: 1, background: '#000', borderRadius: '16px', overflow: 'hidden' }}>
                 <img
-                  src="/project2/project2_phone1.png"
+                  src="/project2/angerman_phone1.png"
                   alt="Angerman Screen Center"
                   draggable={false}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
@@ -197,7 +198,7 @@ export default function AngermanProject({ language, isMobile }: AngermanProjectP
             >
               <div style={{ flex: 1, background: '#000', borderRadius: '13px', overflow: 'hidden' }}>
                 <img
-                  src="/project2/project2_phone3.png"
+                  src="/project2/angerman_phone3.png"
                   alt="Angerman Screen Right"
                   draggable={false}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
@@ -331,7 +332,7 @@ export default function AngermanProject({ language, isMobile }: AngermanProjectP
                   <DetailCard
                     num="01"
                     title={t.overviewTitle}
-                    theme="light"
+                    theme={angermanTheme}
                     icon={
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b27a00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3" y="3" width="7" height="7" />
@@ -353,7 +354,7 @@ export default function AngermanProject({ language, isMobile }: AngermanProjectP
                   <DetailCard
                     num="02"
                     title={t.featuresTitle}
-                    theme="light"
+                    theme={angermanTheme}
                     icon={
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b27a00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="m3 17 2 2 4-4" />
@@ -396,7 +397,7 @@ export default function AngermanProject({ language, isMobile }: AngermanProjectP
                   <DetailCard
                     num="03"
                     title={t.challengesTitle}
-                    theme="light"
+                    theme={angermanTheme}
                     icon={
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b27a00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />

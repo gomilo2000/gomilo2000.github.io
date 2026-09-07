@@ -113,10 +113,66 @@ export const ASKIMTRENINGSSENTER_SLIDES = [
 ]
 
 export const ANGERMAN_SLIDES = [
-  '/project2/project2_phone1.png',
-  '/project2/project2_phone2.png',
-  '/project2/project2_phone3.png',
-  '/project2/project2_phone4.png',
-  '/project2/project2_figma1.png',
-  '/project2/project2_figma2.png',
+  '/project2/angerman_phone1.png',
+  '/project2/angerman_phone2.png',
+  '/project2/angerman_phone3.png',
+  '/project2/angerman_phone4.png',
+  '/project2/angerman_figma1.png',
+  '/project2/angerman_figma2.png',
 ]
+
+export const RAIDTOOLS_PROJECT: ProjectData = {
+  id: 'tif-raidtools',
+  title: 'TIF RaidTools',
+  category: {
+    en: 'Featured Project · Web Application',
+    no: 'Utvalgt prosjekt · Webapplikasjon',
+  },
+  desc: {
+    en: 'A full-stack web application built for the World of Warcraft guild <this is fine>, streamlining raid lineup planning, character gear tracking, and guild bank finances.',
+    no: 'En fullstack-webapplikasjon utviklet for World of Warcraft-guildet <this is fine>, som forenkler planlegging av lagoppstillinger, utstyrssporing og guild-økonomi.',
+  },
+  tech: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Discord API', 'Vite'],
+  details: {
+    overview: {
+      en: 'Developed for <this is fine>, a competitive World of Warcraft raiding guild, this full-stack web application replaces fragmented spreadsheets with a centralized management portal. Built with React, TypeScript, and Supabase, the system connects raid leaders, officers, and team members in one place. It handles boss-by-boss lineup planning, automated gear syncing via Raider.io, instant exports into the game and Discord, and a clear treasury ledger tracking gold deposits and withdrawals across guild vaults.',
+      no: 'Utviklet for <this is fine>, et aktivt World of Warcraft raiding-guild. Denne fullstack-webapplikasjonen erstatter uoversiktlige regneark med en samlet administrasjonsportal. Bygget med React, TypeScript og Supabase, samler systemet raid-ledere, offiserer og spillere på én felles plattform. Løsningen håndterer lagoppstillinger for hver enkelt boss, automatisk synkronisering av utstyrsnivå via Raider.io, rask eksport rett inn i spillet og til Discord, samt et oversiktlig regnskap for guildens bank og felles gull.',
+    },
+    features: {
+      en: [
+        'Discord Role Authorization: Automated login via Discord that verifies guild roles (Officer vs. Raider), ensuring sensitive team plans stay secure and manageable.',
+        'Dynamic Roster Matrix: Interactive drag-and-drop grid for assigning players and alts across bosses and raid difficulties, complete with absence tracking.',
+        'Addon & Discord Export: One-click export that generates formatted text for the Method Raid Tools (MRT) in-game addon, or creates a clean image preview ready to paste into Discord.',
+        'Automated Raider.io Sync: Integrated client that fetches character classes, realms, and item levels (ilvl) directly from Raider.io with a single click.',
+        'Guild Bank Treasury: A shared financial ledger that tracks deposits, withdrawals, and balance updates across guild vaults, with support for receipt image attachments.',
+        'Raid Tier Analytics & Excel Export: Visual summaries of gold spent and earned across raid tiers, with full transaction history exportable to Excel (xlsx).',
+      ],
+      no: [
+        'Discord-autentisering: Sikker innlogging via Discord som automatisk sjekker roller (offiser vs. raider), slik at lagoppstillinger og planer holdes skjermet.',
+        'Dynamisk lagoppstilling: Interaktivt rutenett med dra-og-slipp for å fordele spillere og alts på ulike bosser og vanskelighetsgrader, med innebygd fraværssporing.',
+        'Eksport til addon og Discord: Ett-klikks eksport som genererer formatert tekst for Method Raid Tools (MRT)-tillegget i spillet, eller et ferdig bilde klart til å limes inn i Discord.',
+        'Automatisk Raider.io-synk: Integrert løsning som henter klasser, servere og utstyrsnivå (ilvl) direkte fra Raider.io med ett tastetrykk.',
+        'Guild-bank og regnskap: Felles økonomisk oversikt som sporer innskudd, uttak og saldoer på tvers av bank-karakterer, med mulighet for å laste opp kvitteringsbilder.',
+        'Sesongstatistikk og Excel-eksport: Visuell oversikt over gull brukt og tjent gjennom raid-sesongen, med mulighet til å laste ned hele transaksjonshistorikken til Excel.',
+      ],
+    },
+    challenges: {
+      en: 'Connecting web-based planning with fast-paced in-game raid nights presented two main challenges. First, roster changes during a raid needed to reach the game immediately without manual typing. We resolved this by building dual export paths: one generating structured syntax for direct import into the Method Raid Tools (MRT) addon, and another generating a clipboard-ready graphic for Discord. Second, managing guild funds across multiple bank-alt characters made it easy for numbers to drift out of sync. We engineered a ledger system with Supabase that lets officers log transactions, attach image receipts, and quickly verify balances against in-game logs.',
+      no: 'Å koble planlegging i nettleseren med hektisk spilling under raid-kvelder bød på to konkrete utfordringer. For det første krevde endringer i lagoppstillingen underveis i raidet umiddelbar oppdatering i spillet uten manuell tasting. Dette løste vi med to raske eksportløp: ett som lager formatert tekst for Method Raid Tools (MRT)-tillegget i spillet, og ett som kopierer et ferdig oppsettbilde rett til utklippstavlen for Discord. For det andre førte styring av felles midler fordelt på flere ulike bank-karakterer til at saldoer lett kom ut av synk. Vi utviklet et regnskapssystem i Supabase der offiserer enkelt kan føre innskudd og uttak, legge ved bildekvitteringer og raskt kontrollere tallene mot spillogger.',
+    },
+    repo: {
+      en: 'The repository for this project is private but can be provided upon request.',
+      no: 'Repositoriet for dette prosjektet er privat, men kan oppgis ved forespørsel.',
+    },
+  },
+}
+
+export const RAIDTOOLS_SLIDES = [
+  '/project3/raidtools_desktop1.png',
+  '/project3/raidtools_desktop2.png',
+  '/project3/raidtools_desktop3.png',
+  '/project3/raidtools_desktop4.png',
+  '/project3/raidtools_desktop5.png',
+  '/project3/raidtools_desktop6.png',
+]
+

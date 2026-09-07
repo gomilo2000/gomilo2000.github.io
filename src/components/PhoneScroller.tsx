@@ -68,13 +68,13 @@ interface PhoneScrollerProps {
 
 const col1Images: (string | undefined)[] = [
   '/project1/askimtreningssenter_phone1.png',
-  '/project3/project3_phone1.png',
+  '/carousel_phone1.png',
 ]
 
 const col2Images: (string | undefined)[] = [
-  '/project2/project2_phone1.png',
-  '/project4/project4_phone1.png',
-  '/project5/project5_phone1.png',
+  '/project2/angerman_phone1.png',
+  '/carousel_phone2.png',
+  '/carousel_phone3.png',
 ]
 
 const col1Track = [...col1Images, ...col1Images]
